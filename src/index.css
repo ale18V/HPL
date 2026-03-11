@@ -15,7 +15,9 @@ body,
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, 'PingFang SC',
     'Microsoft YaHei', sans-serif;
-  background: radial-gradient(circle at top left, #f0f7ff, #e2f3f1 40%, #fef6e9);
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 30%),
+    linear-gradient(180deg, #87d5f7 0%, #7dd3e8 24%, #6ed4c4 48%, #bde8d3 68%, #f7e1ae 88%, #f0c98a 100%);
   color: #1f2933;
   font-size: 17px;
 }
