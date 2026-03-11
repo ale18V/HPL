@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  background: radial-gradient(circle at top left, #f0f7ff, #e2f3f1 40%, #fef6e9);
+  color: #1f2933;
+  font-size: 17px;
+}

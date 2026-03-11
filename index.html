@@ -1,64 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Construction Project Choices</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <title>HPL Project</title>
   </head>
   <body>
-    <div class="app">
-      <main>
-        <div class="card app-card">
-          <header class="status-bar">
-            <div class="status-group">
-              <span class="status-label">Life</span>
-              <div id="life-container" class="icon-row"></div>
-            </div>
-            <div class="status-group">
-              <span class="status-label">Budget</span>
-              <div id="money-container" class="icon-row"></div>
-            </div>
-          </header>
-
-          <section id="screen-main" class="screen active">
-            <div class="screen-inner">
-              <h1 class="title">Construction Project Choices</h1>
-              <p class="subtitle">
-                You are leading a construction project and must balance people&apos;s
-                safety and environmental impact with a limited budget.
-              </p>
-              <button id="question-btn" class="primary-btn">
-                Start / Next decision
-              </button>
-            </div>
-          </section>
-
-          <section id="screen-question" class="screen">
-            <div class="screen-inner">
-              <h2 id="question-title">Question title</h2>
-              <p id="question-text" class="question-text"></p>
-
-              <div id="options-container" class="options"></div>
-
-              <button id="back-btn" class="secondary-btn small">
-                Back to overview (no choice)
-              </button>
-            </div>
-          </section>
-
-          <section id="screen-gameover" class="screen">
-            <div class="screen-inner">
-              <h2 id="gameover-title">Game over</h2>
-              <p id="gameover-reason"></p>
-              <button id="restart-btn" class="primary-btn">Start again</button>
-            </div>
-          </section>
-        </div>
-      </main>
-    </div>
-
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
-  </html>
-
+</html>
