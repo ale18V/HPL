@@ -28,8 +28,8 @@ const QUESTIONS = [
     options: [
       {
         text: "Approve the full training and pay overtime",
-        impact: "Life -0, Budget -2 (safer but more expensive)",
-        deltaLife: 0,
+        impact: "Life +1, Budget -2 (safer but more expensive)",
+        deltaLife: +1,
         deltaMoney: -2,
       },
       {
@@ -52,14 +52,14 @@ const QUESTIONS = [
     options: [
       {
         text: "Use high‑strength, low‑carbon materials and extra inspections",
-        impact: "Life -0, Budget -2 (high standard, higher cost)",
-        deltaLife: 0,
+        impact: "Life +1, Budget -2 (high standard, higher cost)",
+        deltaLife: +1,
         deltaMoney: -2,
       },
       {
         text: "Use standard materials at the minimum code requirement",
-        impact: "Life -1, Budget -1 (barely compliant)",
-        deltaLife: -1,
+        impact: "Life 0, Budget -1 (barely compliant)",
+        deltaLife: 0,
         deltaMoney: -1,
       },
       {
@@ -76,14 +76,14 @@ const QUESTIONS = [
     options: [
       {
         text: "Invest in noise barriers and misting systems",
-        impact: "Life -0, Budget -2 (better environment, higher cost)",
-        deltaLife: 0,
+        impact: "Life +1, Budget -2 (better environment, higher cost)",
+        deltaLife: +1,
         deltaMoney: -2,
       },
       {
         text: "Adjust work hours and slightly reduce night shifts",
-        impact: "Life -1, Budget -1 (some improvement)",
-        deltaLife: -1,
+        impact: "Life 0, Budget -1 (some improvement)",
+        deltaLife: 0,
         deltaMoney: -1,
       },
       {
@@ -100,9 +100,9 @@ const QUESTIONS = [
     options: [
       {
         text: "Negotiate for a schedule extension and keep normal workload",
-        impact: "Life -0, Budget -1 (negotiation costs time and money)",
+        impact: "Life 0, Budget +1 (you avoid penalties, keep people safe)",
         deltaLife: 0,
-        deltaMoney: -1,
+        deltaMoney: +1,
       },
       {
         text: "Add moderate overtime, slightly cutting rest time",
@@ -124,14 +124,14 @@ const QUESTIONS = [
     options: [
       {
         text: "Invest fully with regular drills and updated supplies",
-        impact: "Life -0, Budget -2 (safest but expensive)",
-        deltaLife: 0,
+        impact: "Life +1, Budget -2 (safest but expensive)",
+        deltaLife: +1,
         deltaMoney: -2,
       },
       {
         text: "Keep only the most critical drills and supplies",
-        impact: "Life -1, Budget -1 (basically sufficient)",
-        deltaLife: -1,
+        impact: "Life 0, Budget -1 (basically sufficient)",
+        deltaLife: 0,
         deltaMoney: -1,
       },
       {
