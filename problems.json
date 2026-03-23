@@ -1,0 +1,450 @@
+[
+  {
+    "id": 1,
+    "category": "Scope",
+    "title": "Prevent dependence early",
+    "question": "When defining what tasks the robot should help users with, you do a basic survey to list the tasks users struggle with the most often. Do you:",
+    "options": {
+      "A": "invest extra in a team of mental health specialists to assess how much this robot should help users to prevent them becoming completely dependent on it",
+      "B": "train the user to complete all the tasks as best as it can, without considering how it affects patients’ motivation to regain their motor functionalities in the long run"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": -1 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You treated the robot as a support tool for recovery instead of a way to lock users into dependence.",
+        "whyItMatters": "Assistive technology should expand a patient’s autonomy and long-term capability, not quietly undermine rehabilitation for business reasons."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You prioritized convenience over the user’s chance to regain independence.",
+        "whyItMatters": "When a product is designed around dependence, the business wins at the expense of the patient’s long-term interests."
+      }
+    },
+    "realExample": {
+      "title": "Ekso Bionics and Shepherd Center rehabilitation partnership",
+      "summary": "In 2024, Ekso Bionics announced a research partnership with Shepherd Center to study exoskeleton use in rehabilitation and community settings, explicitly tying the technology to recovery and patient quality of life.",
+      "source": "Ekso Bionics",
+      "url": "https://ir.eksobionics.com/press-releases/detail/761/ekso-bionics-announces-research-partnership-with-shepherd"
+    }
+  },
+  {
+    "id": 2,
+    "category": "Scope",
+    "title": "Encourage rehabilitation",
+    "question": "While scoping the project you realise that if the users regain their motor functionalities and are able to move around on their own, they will not need your robot anymore. Do you want to:",
+    "options": {
+      "A": "remind and encourage your users to go to rehabilitation therapy",
+      "B": "let users stay dependent on the robot for all their daily movement needs for better sales"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": -1 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You treated the robot as a support tool for recovery instead of a way to lock users into dependence.",
+        "whyItMatters": "Assistive technology should expand a patient’s autonomy and long-term capability, not quietly undermine rehabilitation for business reasons."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You prioritized retention or convenience over the user’s chance to regain independence.",
+        "whyItMatters": "When a product is designed around dependence, the business wins at the expense of the patient’s long-term interests."
+      }
+    },
+    "realExample": {
+      "title": "Ekso Bionics and Shepherd Center rehabilitation partnership",
+      "summary": "This partnership is a concrete example of assistive robotics being adopted to support rehabilitation goals rather than long-term dependence on the device itself.",
+      "source": "Ekso Bionics",
+      "url": "https://ir.eksobionics.com/press-releases/detail/761/ekso-bionics-announces-research-partnership-with-shepherd"
+    }
+  },
+  {
+    "id": 3,
+    "category": "Planning",
+    "title": "Hiring your cousin",
+    "question": "You are assembling a team to design the robot. You have a cousin who has been searching for a job for months with no success. Do you decide to:",
+    "options": {
+      "A": "offer this cousin a spot on the team",
+      "B": "select a more skilled and experienced applicant you do not know"
+    },
+    "effects": {
+      "A": { "life": -1, "coin": 0 },
+      "B": { "life": 1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You protected a personal relationship, but weakened fairness and risked lowering the team’s competence.",
+        "whyItMatters": "Nepotism sends the message that standards can be bent when pressure or personal ties are involved."
+      },
+      "B": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You chose merit and fairness over personal loyalty, which protects team quality and trust.",
+        "whyItMatters": "In technical work, weak hiring standards can become safety, quality, and accountability problems later in the project."
+      }
+    },
+    "realExample": {
+      "title": "Cornell University anti-nepotism policy",
+      "summary": "Cornell’s policy explicitly bars family or personal relationships from influencing hiring, supervision, promotion, or performance decisions, showing how institutions formalize merit-based staffing.",
+      "source": "Cornell University",
+      "url": "https://policy.cornell.edu/policy-library/avoiding-nepotism"
+    }
+  },
+  {
+    "id": 4,
+    "category": "Planning",
+    "title": "Fair wages or outsourcing",
+    "question": "You are on a tight budget and need to demonstrate to investors that your product is profitable. Do you:",
+    "options": {
+      "A": "recruit local applicants to design the robot and pay them a fair wage",
+      "B": "outsource work to countries with less stringent labor laws"
+    },
+    "effects": {
+      "A": { "life": -1, "coin": 0 },
+      "B": { "life": 1, "coin": -1 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You accepted the higher-cost path toward fairer labor conditions, but in this scoring setup that tradeoff costs project momentum.",
+        "whyItMatters": "This scenario highlights how real projects can perversely reward cheaper, riskier labor choices even when fair pay is the more responsible decision."
+      },
+      "B": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You improved the business case on paper, but only by shifting harm and risk onto more vulnerable workers.",
+        "whyItMatters": "Cheap production is not ethically cheap if the real cost is being absorbed through poor labor conditions."
+      }
+    },
+    "realExample": {
+      "title": "Apple supplier responsibility program",
+      "summary": "Apple requires suppliers to follow a code covering labor and human rights and says it conducts regular assessments before and during production, reflecting a real-world response to outsourcing and labor-risk scrutiny.",
+      "source": "Apple",
+      "url": "https://www.apple.com/supplier-responsibility/"
+    }
+  },
+  {
+    "id": 5,
+    "category": "Planning",
+    "title": "Sustainable label, harmful source",
+    "question": "Your marketing team wants you to use a material they can advertise as being sustainable because it is biodegradable. But you are aware that the extraction of this material involves the large-scale destruction of natural resources, causes a lot of pollution which adversely affects the health of the people inhabiting the area this material is found, and often involves child labor. Do you:",
+    "options": {
+      "A": "go for a more ethically available non-biodegradable material of the same market price",
+      "B": "use the material recommended by marketing"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": 0 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You looked beyond the marketing label and judged the full supply chain impact of the material decision.",
+        "whyItMatters": "A material can sound sustainable in advertising while still causing environmental destruction or labor abuse upstream."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You chose the cleaner marketing story rather than the cleaner ethical record.",
+        "whyItMatters": "When teams optimize only for what can be advertised, real environmental and human harm becomes easier to ignore."
+      }
+    },
+    "realExample": {
+      "title": "FTC action against Kohl’s and Walmart over bamboo claims",
+      "summary": "The FTC alleged the companies falsely marketed rayon textiles as bamboo and as environmentally friendly, even though the manufacturing process involved toxic chemicals and hazardous pollutants.",
+      "source": "U.S. Federal Trade Commission",
+      "url": "https://www.ftc.gov/news-events/news/press-releases/2022/04/ftc-uses-penalty-offense-authority-seek-largest-ever-civil-penalty-bogus-bamboo-marketing-kohls"
+    }
+  },
+  {
+    "id": 6,
+    "category": "Planning",
+    "title": "Cheaper but less safe first version",
+    "question": "You are on a very tight budget. But you are confident that you will receive funding once you showcase your finished product. Do you:",
+    "options": {
+      "A": "look for more funding sources, like more sponsors or a loan, to make even the first line of finished products completely safe",
+      "B": "make an initial line of products from cheaper, less safe materials and hope to switch to safer materials when you get more funding"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": -1 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You kept safety as a launch requirement instead of treating it as something to patch later.",
+        "whyItMatters": "Early shortcuts in safety-critical products often turn into real injuries before future improvements ever arrive."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You protected short-term momentum by asking early users to absorb risks that should have been designed out first.",
+        "whyItMatters": "Budget pressure does not make preventable safety risk ethically neutral."
+      }
+    },
+    "realExample": {
+      "title": "Philips sleep apnea machine recall",
+      "summary": "The FDA says Philips recalled millions of CPAP and BiPAP devices after foam used inside the machines could break down and create serious health risks, illustrating how material safety shortcuts can trigger major harm and remediation.",
+      "source": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
+    }
+  },
+  {
+    "id": 7,
+    "category": "Development",
+    "title": "Training data diversity",
+    "question": "What data do you use to train your robot to move? The majority datasets are from able-bodied white males which may cause the robot to not be optimised for users with disabilities from other demographics. You can collect your own data from a diverse group of individuals but it will be expensive and very time intensive. Do you:",
+    "options": {
+      "A": "use commonly available dataset and risk suboptimal patient outcomes",
+      "B": "collect your own data"
+    },
+    "effects": {
+      "A": { "life": -1, "coin": 0, "skip_next_turn": false },
+      "B": { "life": 2, "coin": -1, "skip_next_turn": true }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You saved time by assuming convenience data would generalize, which pushes the error burden onto underrepresented users.",
+        "whyItMatters": "Dataset bias is not abstract: it changes who gets reliable performance and who gets exclusion or harm."
+      },
+      "B": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You invested in representativeness rather than assuming the default data would work equally well for everyone.",
+        "whyItMatters": "Biased datasets often create systems that perform best for already dominant groups and worse for the people who most need support."
+      }
+    },
+    "realExample": {
+      "title": "NIST demographic-effects study on face recognition",
+      "summary": "NIST reported that many face-recognition systems showed demographic performance differences, a concrete example of how narrow or imbalanced data can change who gets accurate results.",
+      "source": "National Institute of Standards and Technology",
+      "url": "https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software"
+    }
+  },
+  {
+    "id": 8,
+    "category": "Development",
+    "title": "Open source or black box",
+    "question": "If you make your training dataset and code free and open source, potential users will be able to go through it and critique it. This will lead to increased public trust for the robot and give you good feedback. But this would also allow your competitors to study your code and use your data for their own devices. Do you:",
+    "options": {
+      "A": "make your data and code freely available",
+      "B": "present the robot as a blackbox with no insight into how it works"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": 0 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You accepted more scrutiny in exchange for better transparency, accountability, and public trust.",
+        "whyItMatters": "For systems that affect health and autonomy, outside review can expose weaknesses that internal teams miss."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You protected competitive advantage, but made it harder for users and reviewers to question how the system behaves.",
+        "whyItMatters": "Black-box systems weaken accountability when outputs appear unfair, unsafe, or misleading."
+      }
+    },
+    "realExample": {
+      "title": "External validation of Epic’s proprietary sepsis model",
+      "summary": "A University of Michigan study found that a widely deployed proprietary Epic sepsis model had poor discrimination and calibration, strengthening the case for transparency and independent review of black-box systems.",
+      "source": "PubMed / JAMA Internal Medicine",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34152373/"
+    }
+  },
+  {
+    "id": 9,
+    "category": "Development",
+    "title": "Accent accessibility",
+    "question": "The users operate the robot with voice commands. Do you:",
+    "options": {
+      "A": "spend the time and money to train the robot’s AI algorithm on different accents to ensure accessibility",
+      "B": "train it on a generic American accent and hope it is able to extrapolate to other accents"
+    },
+    "effects": {
+      "A": { "life": 2, "coin": -1, "skip_next_turn": true },
+      "B": { "life": -1, "coin": 0, "skip_next_turn": false }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You treated accessibility as a core design requirement instead of assuming users should adapt to the model.",
+        "whyItMatters": "Voice interfaces that mainly understand dominant accents can silently exclude many legitimate users."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You reduced development effort, but only by making the system less accessible for many real users.",
+        "whyItMatters": "Accessibility failures often get misread as user error when the real problem is a narrow design assumption."
+      }
+    },
+    "realExample": {
+      "title": "Stanford study on speech recognition disparities",
+      "summary": "Stanford researchers found major automated speech-recognition systems made roughly twice as many errors for Black speakers as for white speakers, showing why accent and dialect coverage matters in voice interfaces.",
+      "source": "Stanford Report",
+      "url": "https://news.stanford.edu/stories/2020/03/automated-speech-recognition-less-accurate-blacks"
+    }
+  },
+  {
+    "id": 10,
+    "category": "Development",
+    "title": "Who gets included in testing?",
+    "question": "You need to fairly compensate people who volunteer to test your robot for their time. Do you decide to test your device:",
+    "options": {
+      "A": "only on the expected majority demographic of your user base to cut costs",
+      "B": "across demographics to provide assistance to patients across cultures"
+    },
+    "effects": {
+      "A": { "life": -1, "coin": 0 },
+      "B": { "life": 1, "coin": -1 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You lowered study cost by excluding people whose needs may differ from the assumed default user.",
+        "whyItMatters": "Under-testing does not remove risk; it simply delays when and on whom the risk appears."
+      },
+      "B": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You paid for broader evidence instead of letting the majority user stand in for everyone else.",
+        "whyItMatters": "Inclusive testing is how teams discover hidden failure modes before real users do."
+      }
+    },
+    "realExample": {
+      "title": "FDA guidance on diversity in clinical trial populations",
+      "summary": "The FDA’s guidance calls for more representative study populations so safety and effectiveness reflect the people who will actually use a product, matching the logic behind broader testing across demographics.",
+      "source": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/enhancing-diversity-clinical-trial-populations-eligibility-criteria-enrollment-practices-and-trial"
+    }
+  },
+  {
+    "id": 11,
+    "category": "Development",
+    "title": "Manual anonymisation",
+    "question": "You know that it is good practice to anonymise patient data manually to ensure their identity is protected even in case you suffer a cybersecurity attack. However you know such an attack is unlikely. Do you:",
+    "options": {
+      "A": "employ someone to anonymise patient data",
+      "B": "continue without anonymisation"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": -1 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You spent scarce resources before an incident happened instead of after the damage was already done.",
+        "whyItMatters": "Privacy protection matters most before a breach, because leaked health data is extremely hard to take back."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You treated low probability as low importance, even though the downside for patients could be severe and long-lasting.",
+        "whyItMatters": "Rare events still deserve preparation when they can expose identities, health conditions, and home information."
+      }
+    },
+    "realExample": {
+      "title": "Change Healthcare cyberattack",
+      "summary": "HHS says the Change Healthcare ransomware incident ultimately affected roughly 192.7 million individuals, a concrete reminder that health-data privacy failures can scale into national-level harm.",
+      "source": "U.S. Department of Health & Human Services",
+      "url": "https://www.hhs.gov/hipaa/for-professionals/special-topics/change-healthcare-cybersecurity-incident-frequently-asked-questions/index.html"
+    }
+  },
+  {
+    "id": 12,
+    "category": "Optimisation",
+    "title": "Disclose risks and privacy concerns",
+    "question": "Despite your best efforts you know that AI is not always accurate and your robot may make mistakes. Also for your robot to work effectively, it will need to collect sensitive data about the users’ place of residence and medical history. Do you:",
+    "options": {
+      "A": "clearly state all known risks like physical accidents when using the robot and data privacy concerns even when you know that this may make users wary of using the robot",
+      "B": "hide such risks behind legal jargon to boost sales"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": 0 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You chose informed consent over a smoother sales message, giving users a fairer basis for trust.",
+        "whyItMatters": "Users cannot meaningfully consent if safety and privacy risks are hidden, softened, or buried in unreadable language."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You reduced friction in adoption by making serious risks harder to understand.",
+        "whyItMatters": "Unreadable or incomplete warnings shift responsibility onto users without truly informing them."
+      }
+    },
+    "realExample": {
+      "title": "FDA transparency principles for machine-learning medical devices",
+      "summary": "The FDA, Health Canada, and the UK MHRA now explicitly emphasize transparency and clear user information for machine-learning medical devices, reflecting a real regulatory push against hiding meaningful risk behind opaque messaging.",
+      "source": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
+    }
+  },
+  {
+    "id": 13,
+    "category": "Optimisation",
+    "title": "Greenwash the robot?",
+    "question": "You have optimised your robot for patient safety instead of sustainability and you know that despite your best efforts, some of the materials used are not biodegradable. Do you:",
+    "options": {
+      "A": "agree to let the company engage in greenwash marketing (make it seem that the robot is made from sustainable materials and net zero pollution manufacturing)",
+      "B": "actively take a stand to prevent greenwash marketing"
+    },
+    "effects": {
+      "A": { "life": -1, "coin": 0 },
+      "B": { "life": 1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You chose a stronger marketing story than the evidence supports.",
+        "whyItMatters": "Greenwashing is harmful because it rewards image management instead of actual environmental improvement."
+      },
+      "B": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You protected honesty over short-term positioning, even though the sales story became less attractive.",
+        "whyItMatters": "Sustainability claims shape purchasing decisions, so misleading ones distort the market as well as public understanding."
+      }
+    },
+    "realExample": {
+      "title": "UK CMA greenwashing action against ASOS, Boohoo, and George at Asda",
+      "summary": "In 2024, the CMA secured formal undertakings from these brands to make environmental claims more accurate and specific, showing regulators now act when \"sustainable\" messaging outruns the evidence.",
+      "source": "UK Competition and Markets Authority",
+      "url": "https://www.gov.uk/government/news/green-claims-cma-secures-landmark-changes-from-asos-boohoo-and-asda"
+    }
+  },
+  {
+    "id": 14,
+    "category": "Optimisation",
+    "title": "Who carries the risk?",
+    "question": "There are times when your robot may make a bad decision, even after being responsibly trained and tested. These wrong decisions may lead to accidents which could adversely impact the users’ health and finances. Do you:",
+    "options": {
+      "A": "accept complete legal responsibility for accidents caused by your robot, knowing that this obligates you to compensate users whenever your robot makes wrong decisions",
+      "B": "issue a use at your own risk warning to users which absolves you of blame in case of accidents, but may leave patients in impossible medical/financial situations"
+    },
+    "effects": {
+      "A": { "life": 1, "coin": -1 },
+      "B": { "life": -1, "coin": 0 }
+    },
+    "outcomes": {
+      "A": {
+        "feedbackLabel": "Ethical choice",
+        "feedback": "You accepted accountability for foreseeable harm caused by the product, which creates pressure to build and support it more responsibly.",
+        "whyItMatters": "Teams design differently when failure has real consequences for them too, not only for the user."
+      },
+      "B": {
+        "feedbackLabel": "Unethical shortcut",
+        "feedback": "You shifted the burden of failure onto users who are least able to absorb the medical and financial consequences.",
+        "whyItMatters": "A disclaimer may reduce legal exposure, but it does not erase ethical responsibility for foreseeable damage."
+      }
+    },
+    "realExample": {
+      "title": "Philips recall and ongoing FDA oversight",
+      "summary": "The Philips CPAP/BiPAP recall shows that when a medical device causes foreseeable harm, manufacturers can face recalls, remediation obligations, and prolonged regulatory scrutiny rather than simply disclaiming responsibility.",
+      "source": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
+    }
+  }
+]
