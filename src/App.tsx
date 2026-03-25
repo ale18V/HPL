@@ -607,16 +607,16 @@ function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value))
 }
 
-function loadState(): GameState {
+function loadSavedState(): GameState | null {
   if (typeof window === 'undefined') {
-    return defaultState
+    return null
   }
 
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
 
     if (!raw) {
-      return defaultState
+      return null
     }
 
     const parsed = JSON.parse(raw) as Partial<GameState>
@@ -666,7 +666,7 @@ function loadState(): GameState {
         : [],
     }
   } catch {
-    return defaultState
+    return null
   }
 }
 
@@ -683,25 +683,26 @@ function StatusIcons({ current, max, symbol }: { current: number; max: number; s
 }
 
 function App() {
-  const initialState = useMemo(loadState, [])
-  const [phase, setPhase] = useState<Phase>(initialState.phase)
-  const [screen, setScreen] = useState<Screen>(initialState.screen)
-  const [life, setLife] = useState(initialState.life)
-  const [money, setMoney] = useState(initialState.money)
+  const [phase, setPhase] = useState<Phase>(defaultState.phase)
+  const [screen, setScreen] = useState<Screen>(defaultState.screen)
+  const [life, setLife] = useState(defaultState.life)
+  const [money, setMoney] = useState(defaultState.money)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(
-    initialState.currentQuestionIndex,
+    defaultState.currentQuestionIndex,
   )
   const [revealedOptionIndex, setRevealedOptionIndex] = useState<number | null>(
-    initialState.revealedOptionIndex,
+    defaultState.revealedOptionIndex,
   )
   const [pendingGameOverReason, setPendingGameOverReason] = useState(
-    initialState.pendingGameOverReason,
+    defaultState.pendingGameOverReason,
   )
-  const [gameOverReason, setGameOverReason] = useState(initialState.gameOverReason)
-  const [currentIslandIndex, setCurrentIslandIndex] = useState(initialState.currentIslandIndex)
-  const [islandAnswers, setIslandAnswers] = useState<IslandAnswer[]>(initialState.islandAnswers)
+  const [gameOverReason, setGameOverReason] = useState(defaultState.gameOverReason)
+  const [currentIslandIndex, setCurrentIslandIndex] = useState(defaultState.currentIslandIndex)
+  const [islandAnswers, setIslandAnswers] = useState<IslandAnswer[]>(defaultState.islandAnswers)
   const [showRealExamples, setShowRealExamples] = useState(false)
   const [bridgeSummary, setBridgeSummary] = useState<BridgeSummary | null>(null)
+  const [canContinue, setCanContinue] = useState(() => loadSavedState() !== null)
+  const [hasStartedSession, setHasStartedSession] = useState(false)
 
   const currentIsland = ISLANDS[currentIslandIndex]
   const currentIslandLabel = ISLAND_LABELS[currentIsland]
@@ -719,11 +720,45 @@ function App() {
     [currentQuestion, revealedOptionIndex],
   )
 
+  const applySavedState = (savedState: GameState) => {
+    setPhase(savedState.phase)
+    setScreen(savedState.screen)
+    setLife(savedState.life)
+    setMoney(savedState.money)
+    setCurrentQuestionIndex(savedState.currentQuestionIndex)
+    setRevealedOptionIndex(savedState.revealedOptionIndex)
+    setPendingGameOverReason(savedState.pendingGameOverReason)
+    setGameOverReason(savedState.gameOverReason)
+    setCurrentIslandIndex(savedState.currentIslandIndex)
+    setIslandAnswers(savedState.islandAnswers)
+    setShowRealExamples(false)
+    setBridgeSummary(null)
+  }
+
+  const startFreshGame = () => {
+    setPhase('game')
+    setScreen('main')
+    setLife(MAX_LIFE)
+    setMoney(MAX_MONEY)
+    setCurrentQuestionIndex(null)
+    setRevealedOptionIndex(null)
+    setPendingGameOverReason('')
+    setGameOverReason('')
+    setCurrentIslandIndex(0)
+    setIslandAnswers([])
+    setShowRealExamples(false)
+    setBridgeSummary(null)
+  }
+
   useEffect(() => {
+    if (!hasStartedSession) {
+      return
+    }
+
     window.localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
-        phase,
+        phase: phase === 'intro' ? 'game' : phase,
         screen,
         life,
         money,
@@ -735,7 +770,9 @@ function App() {
         islandAnswers,
       } satisfies GameState),
     )
+    setCanContinue(true)
   }, [
+    hasStartedSession,
     phase,
     screen,
     life,
@@ -819,10 +856,28 @@ function App() {
     setScreen('main')
   }
 
-  const startGame = () => {
-    setPhase('game')
-    setScreen('main')
-    setBridgeSummary(null)
+  const startNewGame = () => {
+    setHasStartedSession(true)
+    startFreshGame()
+  }
+
+  const continueSavedGame = () => {
+    const savedState = loadSavedState()
+
+    if (!savedState) {
+      setCanContinue(false)
+      return
+    }
+
+    setHasStartedSession(true)
+    applySavedState({
+      ...savedState,
+      phase: 'game',
+      screen:
+        savedState.screen === 'question' || savedState.screen === 'gameover'
+          ? savedState.screen
+          : 'main',
+    })
   }
 
   const openMissionScroll = () => {
@@ -851,18 +906,8 @@ function App() {
   }
 
   const resetGame = () => {
-    setLife(MAX_LIFE)
-    setMoney(MAX_MONEY)
-    setCurrentQuestionIndex(null)
-    setRevealedOptionIndex(null)
-    setPendingGameOverReason('')
-    setGameOverReason('')
-    setScreen('main')
-    setCurrentIslandIndex(0)
-    setIslandAnswers([])
-    setPhase('game')
-    setShowRealExamples(false)
-    setBridgeSummary(null)
+    setHasStartedSession(true)
+    startFreshGame()
   }
 
   return (
@@ -879,8 +924,15 @@ function App() {
                 <p className="scroll-text">{INTRO_TEXT}</p>
 
                 <div className="intro-actions">
-                  <button onClick={startGame} className="primary-btn">
-                    Play
+                  <button onClick={startNewGame} className="primary-btn">
+                    Start new game
+                  </button>
+                  <button
+                    onClick={continueSavedGame}
+                    className="secondary-btn"
+                    disabled={!canContinue}
+                  >
+                    Continue previous progress
                   </button>
                 </div>
               </div>
