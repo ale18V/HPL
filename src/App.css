@@ -424,6 +424,14 @@ main {
   box-shadow: 0 16px 30px rgba(17, 94, 89, 0.34);
 }
 
+.primary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  background: rgba(120, 168, 157, 0.9);
+}
+
 .secondary-btn {
   background: rgba(255, 250, 240, 0.86);
   color: #5f431f;

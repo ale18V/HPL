@@ -513,38 +513,30 @@ function buildFeedback(problemId: number, questionText: string, optionText: stri
       }
 }
 
-  function mapCategoryToIsland(category: string, index: number): IslandKey {
+function mapCategoryToIsland(category: string): IslandKey {
     const normalizedCategory = category.toLowerCase()
 
-    if (normalizedCategory.includes('hr') || normalizedCategory.includes('team')) {
+    if (normalizedCategory.includes('scope')) {
       return 'scope'
     }
 
-    if (normalizedCategory.includes('time budget') || normalizedCategory.includes('review')) {
+    if (normalizedCategory.includes('plan')) {
       return 'plan'
     }
 
-    if (normalizedCategory.includes('legal') || normalizedCategory.includes('corporation')) {
-      return 'plan'
-    }
-
-    if (normalizedCategory.includes('material')) {
+    if (normalizedCategory.includes('develop') || normalizedCategory.includes('design')) {
       return 'design'
     }
 
-    if (normalizedCategory.includes('algo') || normalizedCategory.includes('ml')) {
+    if (normalizedCategory.includes('optim') || normalizedCategory.includes('refin')) {
       return 'optimize'
     }
 
-    if (normalizedCategory.includes('long term')) {
-      return 'optimize'
-    }
-
-    return ISLANDS[index % ISLANDS.length]
+    return 'scope'
   }
 
 function buildQuestions(problems: RawProblem[]): Question[] {
-    return problems.map((problem, index) => {
+    return problems.map((problem) => {
       const category = problem.category ?? 'General'
     const optionAFeedback = buildFeedback(
       problem.id,
@@ -560,7 +552,7 @@ function buildQuestions(problems: RawProblem[]): Question[] {
     )
 
     return {
-      island: mapCategoryToIsland(category, index),
+      island: mapCategoryToIsland(category),
       category,
       title: problem.title ?? `Problem ${problem.id}`,
       text: problem.question,
@@ -707,6 +699,10 @@ function App() {
   const currentIsland = ISLANDS[currentIslandIndex]
   const currentIslandLabel = ISLAND_LABELS[currentIsland]
   const canCrossBridge = currentIslandIndex < ISLANDS.length - 1
+  const hasQuestionsForCurrentIsland = useMemo(
+    () => QUESTIONS.some((question) => question.island === currentIsland),
+    [currentIsland],
+  )
 
   const currentQuestion = useMemo(
     () => (currentQuestionIndex === null ? null : QUESTIONS[currentQuestionIndex]),
@@ -790,8 +786,12 @@ function App() {
       .filter(({ question }) => question.island === currentIsland)
       .map(({ index }) => index)
 
-    const candidateIndexes = islandQuestionIndexes.length > 0 ? islandQuestionIndexes : QUESTIONS.map((_, index) => index)
-    const randomIndex = candidateIndexes[Math.floor(Math.random() * candidateIndexes.length)]
+    if (islandQuestionIndexes.length === 0) {
+      return
+    }
+
+    const randomIndex =
+      islandQuestionIndexes[Math.floor(Math.random() * islandQuestionIndexes.length)]
 
     setCurrentQuestionIndex(randomIndex)
     setRevealedOptionIndex(null)
@@ -979,7 +979,11 @@ function App() {
                 </div>
 
                 <div className="main-actions">
-                  <button onClick={openRandomQuestion} className="primary-btn">
+                  <button
+                    onClick={openRandomQuestion}
+                    className="primary-btn"
+                    disabled={!hasQuestionsForCurrentIsland}
+                  >
                     Generate question
                   </button>
                   <button
