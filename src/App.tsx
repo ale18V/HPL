@@ -620,29 +620,39 @@ function loadSavedState(): GameState | null {
         ? parsed.currentQuestionIndex
         : null
 
+    const savedIslandIndex =
+      typeof parsed.currentIslandIndex === 'number' &&
+      parsed.currentIslandIndex >= 0 &&
+      parsed.currentIslandIndex < ISLANDS.length
+        ? parsed.currentIslandIndex
+        : 0
+    const savedIsland = ISLANDS[savedIslandIndex]
+    const alignedQuestionIndex =
+      savedQuestionIndex !== null && QUESTIONS[savedQuestionIndex].island === savedIsland
+        ? savedQuestionIndex
+        : null
+
     return {
       phase: parsed.phase === 'game' ? 'game' : 'intro',
       screen:
-        parsed.screen === 'question' || parsed.screen === 'gameover' ? parsed.screen : 'main',
+        (parsed.screen === 'question' && alignedQuestionIndex !== null) ||
+        parsed.screen === 'gameover'
+          ? parsed.screen
+          : 'main',
       life: clamp(Number(parsed.life ?? MAX_LIFE), 0, MAX_LIFE),
       money: clamp(Number(parsed.money ?? MAX_MONEY), 0, MAX_MONEY),
-      currentQuestionIndex: savedQuestionIndex,
+      currentQuestionIndex: alignedQuestionIndex,
       revealedOptionIndex:
         typeof parsed.revealedOptionIndex === 'number' &&
-        savedQuestionIndex !== null &&
+        alignedQuestionIndex !== null &&
         parsed.revealedOptionIndex >= 0 &&
-        parsed.revealedOptionIndex < QUESTIONS[savedQuestionIndex].options.length
+        parsed.revealedOptionIndex < QUESTIONS[alignedQuestionIndex].options.length
           ? parsed.revealedOptionIndex
           : null,
       pendingGameOverReason:
         typeof parsed.pendingGameOverReason === 'string' ? parsed.pendingGameOverReason : '',
       gameOverReason: typeof parsed.gameOverReason === 'string' ? parsed.gameOverReason : '',
-      currentIslandIndex:
-        typeof parsed.currentIslandIndex === 'number' &&
-        parsed.currentIslandIndex >= 0 &&
-        parsed.currentIslandIndex < ISLANDS.length
-          ? parsed.currentIslandIndex
-          : 0,
+      currentIslandIndex: savedIslandIndex,
       islandAnswers: Array.isArray(parsed.islandAnswers)
         ? parsed.islandAnswers.filter(
             (entry): entry is IslandAnswer =>
@@ -780,6 +790,19 @@ function App() {
     currentIslandIndex,
     islandAnswers,
   ])
+
+  useEffect(() => {
+    if (screen !== 'question' || currentQuestionIndex === null) {
+      return
+    }
+
+    if (QUESTIONS[currentQuestionIndex].island !== currentIsland) {
+      setCurrentQuestionIndex(null)
+      setRevealedOptionIndex(null)
+      setPendingGameOverReason('')
+      setScreen('main')
+    }
+  }, [screen, currentQuestionIndex, currentIsland])
 
   const openRandomQuestion = () => {
     const islandQuestionIndexes = QUESTIONS.map((question, index) => ({ question, index }))
