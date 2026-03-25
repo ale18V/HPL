@@ -8,6 +8,21 @@ const MAX_MONEY = 5
 
 type Phase = 'intro' | 'game'
 type Screen = 'main' | 'question' | 'gameover'
+type IslandKey = 'scope' | 'plan' | 'design' | 'optimize'
+
+type IslandAnswer = {
+  island: IslandKey
+  questionTitle: string
+  questionText: string
+  answerText: string
+  feedback: string
+}
+
+type BridgeSummary = {
+  fromIsland: IslandKey
+  toIsland: IslandKey
+  answers: IslandAnswer[]
+}
 
 type Option = {
   text: string
@@ -25,6 +40,7 @@ type Option = {
 }
 
 type Question = {
+  island: IslandKey
   category: string
   title: string
   text: string
@@ -40,6 +56,8 @@ type GameState = {
   revealedOptionIndex: number | null
   pendingGameOverReason: string
   gameOverReason: string
+  currentIslandIndex: number
+  islandAnswers: IslandAnswer[]
 }
 
 type RawEffect = {
@@ -82,6 +100,15 @@ type RawProblem = {
 }
 
 const INTRO_TEXT = `Welcome engineer! Your mission, should you choose to accept it, is to design a robot to assist people with motor disabilities, i.e. patients who struggle to move, with household tasks. You will be asked various questions related to ethical considerations in different parts of this design process throughout the game. For every ethical answer you choose, you will gain a life but have to pay the financial or time cost. For every unethical shortcut you take, you will lose a life but save money or time. The snakes and ladders represent the unpredictable chance which slows down or boosts real life engineering projects. You start the game with 5 lives and 5 coins. The coins represent your fixed budget for the project, once you have spent all your coins you cannot spend more. Your objective is to be the first to make it to the end of the game with at least 1 life.`
+
+const ISLANDS: IslandKey[] = ['scope', 'plan', 'design', 'optimize']
+
+const ISLAND_LABELS: Record<IslandKey, string> = {
+  scope: 'Scope',
+  plan: 'Plan',
+  design: 'Design',
+  optimize: 'Optimize',
+}
 
 function capitalizeFirstLetter(text: string) {
   if (!text) return text
@@ -486,8 +513,39 @@ function buildFeedback(problemId: number, questionText: string, optionText: stri
       }
 }
 
+  function mapCategoryToIsland(category: string, index: number): IslandKey {
+    const normalizedCategory = category.toLowerCase()
+
+    if (normalizedCategory.includes('hr') || normalizedCategory.includes('team')) {
+      return 'scope'
+    }
+
+    if (normalizedCategory.includes('time budget') || normalizedCategory.includes('review')) {
+      return 'plan'
+    }
+
+    if (normalizedCategory.includes('legal') || normalizedCategory.includes('corporation')) {
+      return 'plan'
+    }
+
+    if (normalizedCategory.includes('material')) {
+      return 'design'
+    }
+
+    if (normalizedCategory.includes('algo') || normalizedCategory.includes('ml')) {
+      return 'optimize'
+    }
+
+    if (normalizedCategory.includes('long term')) {
+      return 'optimize'
+    }
+
+    return ISLANDS[index % ISLANDS.length]
+  }
+
 function buildQuestions(problems: RawProblem[]): Question[] {
-  return problems.map((problem) => {
+    return problems.map((problem, index) => {
+      const category = problem.category ?? 'General'
     const optionAFeedback = buildFeedback(
       problem.id,
       problem.question,
@@ -502,7 +560,8 @@ function buildQuestions(problems: RawProblem[]): Question[] {
     )
 
     return {
-      category: problem.category ?? 'General',
+      island: mapCategoryToIsland(category, index),
+      category,
       title: problem.title ?? `Problem ${problem.id}`,
       text: problem.question,
       options: [
@@ -540,6 +599,8 @@ const defaultState: GameState = {
   revealedOptionIndex: null,
   pendingGameOverReason: '',
   gameOverReason: '',
+  currentIslandIndex: 0,
+  islandAnswers: [],
 }
 
 function clamp(value: number, min: number, max: number) {
@@ -584,6 +645,25 @@ function loadState(): GameState {
       pendingGameOverReason:
         typeof parsed.pendingGameOverReason === 'string' ? parsed.pendingGameOverReason : '',
       gameOverReason: typeof parsed.gameOverReason === 'string' ? parsed.gameOverReason : '',
+      currentIslandIndex:
+        typeof parsed.currentIslandIndex === 'number' &&
+        parsed.currentIslandIndex >= 0 &&
+        parsed.currentIslandIndex < ISLANDS.length
+          ? parsed.currentIslandIndex
+          : 0,
+      islandAnswers: Array.isArray(parsed.islandAnswers)
+        ? parsed.islandAnswers.filter(
+            (entry): entry is IslandAnswer =>
+              typeof entry === 'object' &&
+              entry !== null &&
+              typeof entry.island === 'string' &&
+              ISLANDS.includes(entry.island as IslandKey) &&
+              typeof entry.questionTitle === 'string' &&
+              typeof entry.questionText === 'string' &&
+              typeof entry.answerText === 'string' &&
+              typeof entry.feedback === 'string',
+          )
+        : [],
     }
   } catch {
     return defaultState
@@ -618,7 +698,14 @@ function App() {
     initialState.pendingGameOverReason,
   )
   const [gameOverReason, setGameOverReason] = useState(initialState.gameOverReason)
+  const [currentIslandIndex, setCurrentIslandIndex] = useState(initialState.currentIslandIndex)
+  const [islandAnswers, setIslandAnswers] = useState<IslandAnswer[]>(initialState.islandAnswers)
   const [showRealExamples, setShowRealExamples] = useState(false)
+  const [bridgeSummary, setBridgeSummary] = useState<BridgeSummary | null>(null)
+
+  const currentIsland = ISLANDS[currentIslandIndex]
+  const currentIslandLabel = ISLAND_LABELS[currentIsland]
+  const canCrossBridge = currentIslandIndex < ISLANDS.length - 1
 
   const currentQuestion = useMemo(
     () => (currentQuestionIndex === null ? null : QUESTIONS[currentQuestionIndex]),
@@ -644,6 +731,8 @@ function App() {
         revealedOptionIndex,
         pendingGameOverReason,
         gameOverReason,
+        currentIslandIndex,
+        islandAnswers,
       } satisfies GameState),
     )
   }, [
@@ -655,11 +744,19 @@ function App() {
     revealedOptionIndex,
     pendingGameOverReason,
     gameOverReason,
+    currentIslandIndex,
+    islandAnswers,
   ])
 
   const openRandomQuestion = () => {
-    const index = Math.floor(Math.random() * QUESTIONS.length)
-    setCurrentQuestionIndex(index)
+    const islandQuestionIndexes = QUESTIONS.map((question, index) => ({ question, index }))
+      .filter(({ question }) => question.island === currentIsland)
+      .map(({ index }) => index)
+
+    const candidateIndexes = islandQuestionIndexes.length > 0 ? islandQuestionIndexes : QUESTIONS.map((_, index) => index)
+    const randomIndex = candidateIndexes[Math.floor(Math.random() * candidateIndexes.length)]
+
+    setCurrentQuestionIndex(randomIndex)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
     setShowRealExamples(false)
@@ -679,6 +776,16 @@ function App() {
     setMoney(updatedMoney)
     setRevealedOptionIndex(optionIndex)
     setShowRealExamples(false)
+    setIslandAnswers((previous) => [
+      ...previous,
+      {
+        island: currentIsland,
+        questionTitle: currentQuestion.title,
+        questionText: currentQuestion.text,
+        answerText: option.text,
+        feedback: option.feedback,
+      },
+    ])
 
     if (updatedLife <= 0 || updatedMoney <= 0) {
       const reasons: string[] = []
@@ -715,10 +822,32 @@ function App() {
   const startGame = () => {
     setPhase('game')
     setScreen('main')
+    setBridgeSummary(null)
   }
 
   const openMissionScroll = () => {
     setPhase('intro')
+  }
+
+  const crossBridge = () => {
+    if (!canCrossBridge) {
+      return
+    }
+
+    const fromIsland = currentIsland
+    const toIsland = ISLANDS[currentIslandIndex + 1]
+    const answers = islandAnswers.filter((entry) => entry.island === fromIsland)
+
+    setCurrentIslandIndex((index) => index + 1)
+    setCurrentQuestionIndex(null)
+    setRevealedOptionIndex(null)
+    setPendingGameOverReason('')
+    setScreen('main')
+    setBridgeSummary({ fromIsland, toIsland, answers })
+  }
+
+  const closeBridgeSummary = () => {
+    setBridgeSummary(null)
   }
 
   const resetGame = () => {
@@ -729,8 +858,11 @@ function App() {
     setPendingGameOverReason('')
     setGameOverReason('')
     setScreen('main')
+    setCurrentIslandIndex(0)
+    setIslandAnswers([])
     setPhase('game')
     setShowRealExamples(false)
+    setBridgeSummary(null)
   }
 
   return (
@@ -782,14 +914,30 @@ function App() {
                   Design your household-assistance robot one ethical decision at a time.
                 </p>
 
+                <div className="island-progress">
+                  <p className="island-current">
+                    Current island: <strong>{currentIslandLabel}</strong>
+                  </p>
+                  <p className="island-sequence">Scope → Plan → Design → Optimize</p>
+                </div>
+
                 <div className="callout-box">
                   Hidden rewards and penalties are only revealed after you answer. Ethical choices
                   usually protect lives but consume time or budget.
                 </div>
 
-                <button onClick={openRandomQuestion} className="primary-btn">
-                  Generate question
-                </button>
+                <div className="main-actions">
+                  <button onClick={openRandomQuestion} className="primary-btn">
+                    Generate question
+                  </button>
+                  <button
+                    onClick={crossBridge}
+                    className="secondary-btn"
+                    disabled={!canCrossBridge}
+                  >
+                    {canCrossBridge ? 'Cross bridge' : 'Final island reached'}
+                  </button>
+                </div>
               </div>
             </section>
 
@@ -896,6 +1044,44 @@ function App() {
           </div>
         )}
       </main>
+
+      {bridgeSummary ? (
+        <div className="bridge-modal-overlay" role="dialog" aria-modal="true">
+          <div className="bridge-modal">
+            <h3 className="bridge-title">
+              Bridge crossed: {ISLAND_LABELS[bridgeSummary.fromIsland]} →{' '}
+              {ISLAND_LABELS[bridgeSummary.toIsland]}
+            </h3>
+            <p className="bridge-subtitle">
+              Reflection from {ISLAND_LABELS[bridgeSummary.fromIsland]} island answers.
+            </p>
+
+            {bridgeSummary.answers.length === 0 ? (
+              <p className="bridge-empty">
+                No answered questions were recorded for this island yet.
+              </p>
+            ) : (
+              <ul className="bridge-list">
+                {bridgeSummary.answers.map((entry, index) => (
+                  <li className="bridge-item" key={`${entry.questionTitle}-${index}`}>
+                    <p className="bridge-question">Q{index + 1}. {entry.questionTitle}</p>
+                    <p className="bridge-question-text">{entry.questionText}</p>
+                    <p className="bridge-answer">
+                      <strong>Your answer:</strong> {entry.answerText}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <div className="bridge-actions">
+              <button onClick={closeBridgeSummary} className="primary-btn">
+                Continue on {ISLAND_LABELS[bridgeSummary.toIsland]}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }
