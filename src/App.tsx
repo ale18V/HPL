@@ -5,6 +5,8 @@ import problemsJson from '../problems.json'
 const STORAGE_KEY = 'hpl-island-game-state'
 const MAX_LIFE = 5
 const MAX_MONEY = 5
+/** Lives spent to skip a snake on the physical board (Snakes & Ladders tie-in). */
+const SNAKE_PASS_LIFE_COST = 3
 
 type Phase = 'intro' | 'game'
 type Screen = 'main' | 'question' | 'gameover'
@@ -924,6 +926,22 @@ function App() {
     setBridgeSummary({ fromIsland, toIsland, answers })
   }
 
+  const useSnakePass = () => {
+    if (life < SNAKE_PASS_LIFE_COST) {
+      return
+    }
+
+    const updatedLife = clamp(life - SNAKE_PASS_LIFE_COST, 0, MAX_LIFE)
+    setLife(updatedLife)
+
+    if (updatedLife <= 0) {
+      setGameOverReason(
+        'You spent your last lives on a snake pass. With no trust left in the project, the ethics quest ends here.',
+      )
+      setScreen('gameover')
+    }
+  }
+
   const closeBridgeSummary = () => {
     setBridgeSummary(null)
   }
@@ -1016,6 +1034,29 @@ function App() {
                   >
                     {canCrossBridge ? 'Cross bridge' : 'Final island reached'}
                   </button>
+                  <div className="snake-pass-wrap">
+                    <button
+                      type="button"
+                      onClick={useSnakePass}
+                      className="snake-pass-btn"
+                      disabled={life < SNAKE_PASS_LIFE_COST}
+                      title={
+                        life < SNAKE_PASS_LIFE_COST
+                          ? `Need at least ${SNAKE_PASS_LIFE_COST} lives to use a snake pass.`
+                          : `Spend ${SNAKE_PASS_LIFE_COST} lives to skip the next snake on your board.`
+                      }
+                    >
+                      <span className="snake-pass-emoji" aria-hidden>
+                        🐍
+                      </span>
+                      <span className="snake-pass-text">
+                        <span className="snake-pass-title">Snake pass</span>
+                        <span className="snake-pass-sub">
+                          −{SNAKE_PASS_LIFE_COST} lives · skip one snake on the board
+                        </span>
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </section>
