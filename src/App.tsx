@@ -56,7 +56,6 @@ type GameState = {
   screen: Screen
   life: number
   money: number
-  pendingSkippedTurns: number
   currentQuestionIndex: number | null
   revealedOptionIndex: number | null
   pendingGameOverReason: string
@@ -235,7 +234,6 @@ const defaultState: GameState = {
   screen: 'main',
   life: MAX_LIFE,
   money: MAX_MONEY,
-  pendingSkippedTurns: 0,
   currentQuestionIndex: null,
   revealedOptionIndex: null,
   pendingGameOverReason: '',
@@ -291,7 +289,6 @@ function loadSavedState(): GameState | null {
           : 'main',
       life: clamp(Number(parsed.life ?? MAX_LIFE), 0, MAX_LIFE),
       money: clamp(Number(parsed.money ?? MAX_MONEY), 0, MAX_MONEY),
-      pendingSkippedTurns: Math.max(0, Number(parsed.pendingSkippedTurns ?? 0) || 0),
       currentQuestionIndex: alignedQuestionIndex,
       revealedOptionIndex:
         typeof parsed.revealedOptionIndex === 'number' &&
@@ -350,7 +347,6 @@ function App() {
   const [screen, setScreen] = useState<Screen>(defaultState.screen)
   const [life, setLife] = useState(defaultState.life)
   const [money, setMoney] = useState(defaultState.money)
-  const [pendingSkippedTurns, setPendingSkippedTurns] = useState(defaultState.pendingSkippedTurns)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(
     defaultState.currentQuestionIndex,
   )
@@ -370,7 +366,6 @@ function App() {
   const [bridgeSummary, setBridgeSummary] = useState<BridgeSummary | null>(null)
   const [canContinue, setCanContinue] = useState(() => loadSavedState() !== null)
   const [hasStartedSession, setHasStartedSession] = useState(false)
-  const [mainNotice, setMainNotice] = useState('')
 
   const currentIsland = ISLANDS[currentIslandIndex]
   const currentIslandLabel = ISLAND_LABELS[currentIsland]
@@ -397,7 +392,6 @@ function App() {
     setScreen(savedState.screen)
     setLife(savedState.life)
     setMoney(savedState.money)
-    setPendingSkippedTurns(savedState.pendingSkippedTurns)
     setCurrentQuestionIndex(savedState.currentQuestionIndex)
     setRevealedOptionIndex(savedState.revealedOptionIndex)
     setPendingGameOverReason(savedState.pendingGameOverReason)
@@ -414,7 +408,6 @@ function App() {
     setScreen('main')
     setLife(MAX_LIFE)
     setMoney(MAX_MONEY)
-    setPendingSkippedTurns(0)
     setCurrentQuestionIndex(null)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
@@ -438,7 +431,6 @@ function App() {
         screen,
         life,
         money,
-        pendingSkippedTurns,
         currentQuestionIndex,
         revealedOptionIndex,
         pendingGameOverReason,
@@ -455,7 +447,6 @@ function App() {
     screen,
     life,
     money,
-    pendingSkippedTurns,
     currentQuestionIndex,
     revealedOptionIndex,
     pendingGameOverReason,
@@ -479,12 +470,6 @@ function App() {
   }, [screen, currentQuestionIndex, currentIsland])
 
   const openRandomQuestion = () => {
-    if (pendingSkippedTurns > 0) {
-      setPendingSkippedTurns((current) => current - 1)
-      setMainNotice('You lost this turn because your previous ethical choice required extra time.')
-      return
-    }
-
     if (QUESTIONS.length === 0) {
       return
     }
@@ -523,7 +508,6 @@ function App() {
       previous.includes(randomIndex) ? previous : [...previous, randomIndex],
     )
 
-    setMainNotice('')
     setCurrentQuestionIndex(randomIndex)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
@@ -539,14 +523,11 @@ function App() {
     const option = currentQuestion.options[optionIndex]
     const updatedLife = clamp(life + option.deltaLife, 0, MAX_LIFE)
     const updatedMoney = clamp(money + option.deltaMoney, 0, MAX_MONEY)
-    const updatedSkippedTurns = Math.max(0, pendingSkippedTurns + Math.abs(Math.min(option.deltaTurns, 0)))
 
     setLife(updatedLife)
     setMoney(updatedMoney)
-    setPendingSkippedTurns(updatedSkippedTurns)
     setRevealedOptionIndex(optionIndex)
     setShowRealExamples(false)
-    setMainNotice('')
     setIslandAnswers((previous) => [
       ...previous,
       {
@@ -631,7 +612,6 @@ function App() {
     setCurrentQuestionIndex(null)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
-    setMainNotice('')
     setScreen('main')
     setBridgeSummary({ fromIsland, toIsland, answers })
   }
@@ -722,19 +702,12 @@ function App() {
                     Current island: <strong>{currentIslandLabel}</strong>
                   </p>
                   <p className="island-sequence">Scope → Plan → Design → Optimize</p>
-                  {pendingSkippedTurns > 0 ? (
-                    <p className="island-current">
-                      Pending skipped turn{pendingSkippedTurns > 1 ? 's' : ''}: <strong>{pendingSkippedTurns}</strong>
-                    </p>
-                  ) : null}
                 </div>
 
                 <div className="callout-box">
                   Hidden rewards and penalties are only revealed after you answer. Ethical choices
                   usually protect lives but consume time or budget.
                 </div>
-
-                {mainNotice ? <div className="callout-box">{mainNotice}</div> : null}
 
                 <div className="main-actions">
                   <button
@@ -781,13 +754,11 @@ function App() {
             <section className={`screen ${screen === 'question' ? 'active' : ''}`}>
               <div className="screen-inner">
                 <p className="question-category">{currentQuestion?.category ?? 'Question'}</p>
-                <h2>{currentQuestion?.title ?? 'Question title'}</h2>
+                {revealedOption !== null ? <h2>{currentQuestion?.title ?? 'Question title'}</h2> : null}
                 <p className="question-text">{currentQuestion?.text ?? ''}</p>
 
                 {revealedOption === null ? (
                   <>
-                    <p className="helper-text">Choose your answer before the costs and rewards are revealed.</p>
-
                     <div className="options">
                       {currentQuestion?.options.map((option, index) => (
                         <button
@@ -824,6 +795,12 @@ function App() {
                         </span>
                       ) : null}
                     </div>
+
+                    {revealedOption.deltaTurns < 0 ? (
+                      <div className="turn-warning-banner">
+                        You lose 1 turn because this ethical choice requires extra time.
+                      </div>
+                    ) : null}
 
                     <div className="real-world-note">
                       <strong>Why it matters:</strong> {revealedOption.realWorldNote}
