@@ -441,10 +441,10 @@
       "id": 12,
       "category": "Optimisation",
       "title": "Disclose risks and privacy concerns",
-      "question": "Despite your best efforts you know that AI is not always accurate and your robot may make mistakes. Also for your robot to work effectively, it will need to collect sensitive data about the users’ place of residence and medical history. Do you:",
+      "question": "Despite your best efforts, you know the robot will not always be perfectly accurate. To work effectively, it also needs sensitive data about the user’s home and medical history. Do you:",
       "options": {
-        "A": "clearly state all known risks like physical accidents when using the robot and data privacy concerns even when you know that this may make users wary of using the robot",
-        "B": "hide such risks behind legal jargon to boost sales"
+        "A": "clearly explain the known safety risks and privacy concerns, even if this makes some users more hesitant to adopt the robot",
+        "B": "keep the warnings legally compliant but bury the important risks in dense technical and legal language"
       },
       "effects": {
         "A": {
@@ -465,12 +465,12 @@
         "B": {
           "feedbackLabel": "Unethical shortcut",
           "feedback": "You reduced friction in adoption by making serious risks harder to understand.",
-          "whyItMatters": "Unreadable or incomplete warnings shift responsibility onto users without truly informing them."
+          "whyItMatters": "Warnings that are technically present but practically unreadable shift responsibility onto users without truly informing them."
         }
       },
       "realExample": {
         "title": "FDA transparency principles for machine-learning medical devices",
-        "summary": "The FDA, Health Canada, and the UK MHRA now explicitly emphasize transparency and clear user information for machine-learning medical devices, reflecting a real regulatory push against hiding meaningful risk behind opaque messaging.",
+        "summary": "The FDA, Health Canada, and the UK MHRA jointly emphasized that machine-learning medical devices should communicate performance, limits, and risks in a way users can actually understand. This directly matches the dilemma here: a company may be legally tempted to disclose risks in the narrowest possible way, but regulators increasingly expect information that supports real informed consent rather than unreadable warning language.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
       }
@@ -478,37 +478,37 @@
     {
       "id": 13,
       "category": "Optimisation",
-      "title": "Greenwash the robot?",
-      "question": "You have optimised your robot for patient safety instead of sustainability and you know that despite your best efforts, some of the materials used are not biodegradable. Do you:",
+      "title": "Misleading green claims",
+      "question": "You have optimised your robot for patient safety rather than sustainability, and you know that some of the materials used are not biodegradable. Do you:",
       "options": {
-        "A": "agree to let the company engage in greenwash marketing (make it seem that the robot is made from sustainable materials and net zero pollution manufacturing)",
-        "B": "actively take a stand to prevent greenwash marketing"
+        "A": "actively oppose marketing claims that exaggerate how sustainable the robot is",
+        "B": "allow the company to market the robot as highly sustainable even though the evidence does not fully support that message"
       },
       "effects": {
         "A": {
-          "life": -1,
-          "coin": 0
-        },
-        "B": {
           "life": 1,
           "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
         }
       },
       "outcomes": {
         "A": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You chose a stronger marketing story than the evidence supports.",
-          "whyItMatters": "Greenwashing is harmful because it rewards image management instead of actual environmental improvement."
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You protected honesty over a stronger marketing story, even though it made the product less attractive on paper.",
+          "whyItMatters": "Environmental claims shape public trust and purchasing decisions, so misleading ones distort both the market and people’s understanding of sustainability."
         },
         "B": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You protected honesty over short-term positioning, even though the sales story became less attractive.",
-          "whyItMatters": "Sustainability claims shape purchasing decisions, so misleading ones distort the market as well as public understanding."
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You chose image management over evidence by letting the product sound greener than it really is.",
+          "whyItMatters": "Greenwashing is harmful because it rewards appearances instead of genuine environmental improvement."
         }
       },
       "realExample": {
         "title": "UK CMA greenwashing action against ASOS, Boohoo, and George at Asda",
-        "summary": "In 2024, the CMA secured formal undertakings from these brands to make environmental claims more accurate and specific, showing regulators now act when \"sustainable\" messaging outruns the evidence.",
+        "summary": "In 2024, the UK Competition and Markets Authority secured formal undertakings from ASOS, Boohoo, and George at Asda after investigating environmental claims that were too broad or weakly supported. The connection to this question is direct: once a company knows its evidence does not justify a strong sustainability message, continuing to market that message turns environmental language into a sales tool rather than an honest description.",
         "source": "UK Competition and Markets Authority",
         "url": "https://www.gov.uk/government/news/green-claims-cma-secures-landmark-changes-from-asos-boohoo-and-asda"
       }
@@ -517,10 +517,10 @@
       "id": 14,
       "category": "Optimisation",
       "title": "Who carries the risk?",
-      "question": "There are times when your robot may make a bad decision, even after being responsibly trained and tested. These wrong decisions may lead to accidents which could adversely impact the users’ health and finances. Do you:",
+      "question": "Even after responsible training and testing, there may still be times when your robot makes a harmful mistake. These mistakes could seriously affect a user’s health, safety, or finances. Do you:",
       "options": {
-        "A": "accept complete legal responsibility for accidents caused by your robot, knowing that this obligates you to compensate users whenever your robot makes wrong decisions",
-        "B": "issue a use at your own risk warning to users which absolves you of blame in case of accidents, but may leave patients in impossible medical/financial situations"
+        "A": "accept responsibility for foreseeable harm caused by the robot and provide support or compensation pathways for affected users",
+        "B": "rely mainly on a use-at-your-own-risk warning that limits the company’s responsibility when accidents happen"
       },
       "effects": {
         "A": {
@@ -535,18 +535,18 @@
       "outcomes": {
         "A": {
           "feedbackLabel": "Ethical choice",
-          "feedback": "You accepted accountability for foreseeable harm caused by the product, which creates pressure to build and support it more responsibly.",
-          "whyItMatters": "Teams design differently when failure has real consequences for them too, not only for the user."
+          "feedback": "You accepted accountability for foreseeable harm caused by the product, which creates pressure to design and support it more responsibly.",
+          "whyItMatters": "Teams make safer choices when failure has real consequences for them too, not only for the user."
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You shifted the burden of failure onto users who are least able to absorb the medical and financial consequences.",
+          "feedback": "You shifted most of the burden of failure onto users who may be least able to absorb the medical and financial consequences.",
           "whyItMatters": "A disclaimer may reduce legal exposure, but it does not erase ethical responsibility for foreseeable damage."
         }
       },
       "realExample": {
         "title": "Philips recall and ongoing FDA oversight",
-        "summary": "The Philips CPAP/BiPAP recall shows that when a medical device causes foreseeable harm, manufacturers can face recalls, remediation obligations, and prolonged regulatory scrutiny rather than simply disclaiming responsibility.",
+        "summary": "The Philips CPAP and BiPAP recall showed that when a widely used health technology creates foreseeable risk, the manufacturer cannot simply point to user warnings and move on. The company faced recalls, remediation obligations, regulatory oversight, and long-running legal consequences. That is why this question matters: ethical accountability means planning for repair and support when harm occurs, not treating a disclaimer as a substitute for responsibility.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
       }
@@ -555,7 +555,7 @@
       "id": 15,
       "category": "Optimisation",
       "title": "Report failures openly",
-      "question": "After launch, you discover that the robot occasionally misidentifies obstacles in cluttered homes, creating a small but real collision risk. A public notice and temporary update pause would be expensive and damage confidence. Do you:",
+      "question": "After launch, you discover that the robot occasionally misidentifies obstacles in cluttered homes, creating a small but real collision risk. A public notice and temporary update pause would be expensive and could damage confidence. Do you:",
       "options": {
         "A": "publicly disclose the issue, warn users, and pause rollout until a safer fix is ready",
         "B": "keep the problem internal and continue deployment because only a minority of users are likely to be affected"
@@ -585,7 +585,7 @@
       },
       "realExample": {
         "title": "FDA recalls, corrections, and removals guidance",
-        "summary": "The FDA describes recalls and corrections as actions manufacturers take when a device presents a risk to health, including notifying users and correcting the product rather than quietly leaving it in circulation.",
+        "summary": "FDA recall and correction guidance exists precisely because companies sometimes discover important risks only after products are already in use. The expected response is not to quietly keep shipping while hoping the issue stays contained, but to notify users, correct the product, and reduce harm. That maps directly onto this dilemma: the ethical cost comes from admitting the failure publicly rather than letting exposed users bear the risk in silence.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/recalls-corrections-and-removals-devices"
       }
@@ -597,7 +597,7 @@
       "question": "Your engineers find a cybersecurity weakness that could let outsiders access camera feeds or household data from some robots. Fixing it quickly means delaying a profitable feature update that investors are waiting for. Do you:",
       "options": {
         "A": "prioritise the security patch and delay the commercial feature release",
-        "B": "ship the profitable update first and fold the security fix into a later patch"
+        "B": "release the investor-facing feature first and schedule the security fix for the next update cycle"
       },
       "effects": {
         "A": {
@@ -617,13 +617,13 @@
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You treated a known privacy and security risk as a scheduling inconvenience.",
+          "feedback": "You treated a known privacy and security risk as a delay problem rather than an urgent safety issue.",
           "whyItMatters": "When companies postpone security fixes for business reasons, users absorb the risk of surveillance, exposure, and misuse inside their own homes."
         }
       },
       "realExample": {
         "title": "FDA guidance on medical device cybersecurity",
-        "summary": "The FDA says manufacturers should monitor, assess, disclose, and proactively address cybersecurity vulnerabilities in connected medical devices rather than waiting until attacks or harm occur.",
+        "summary": "FDA cybersecurity guidance for connected medical devices emphasizes active monitoring, disclosure, and timely remediation of vulnerabilities rather than treating them as optional maintenance. The connection here is straightforward: once a manufacturer knows outsiders could access sensitive functions or data, delaying the fix in order to preserve a business milestone shifts real risk onto users for the sake of a roadmap.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/consumers/consumer-updates/medical-device-cybersecurity-what-you-need-know"
       }
@@ -635,7 +635,7 @@
       "question": "Months after deployment, your monitoring suggests the robot performs worse in homes where users speak with strong regional accents or switch between languages when giving commands. Fixing this requires broader testing and retraining. Do you:",
       "options": {
         "A": "invest in broader evaluation and retraining so the robot works more fairly across user groups",
-        "B": "keep the current system because the majority of users are still satisfied"
+        "B": "keep the current system because overall user satisfaction remains high"
       },
       "effects": {
         "A": {
@@ -656,13 +656,13 @@
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You hid behind majority performance and ignored the users the system serves less reliably.",
-          "whyItMatters": "A system can look successful in aggregate while still excluding particular groups. Ethical optimisation requires noticing who is being left behind."
+          "feedback": "You hid behind average performance and ignored the users the system serves less reliably.",
+          "whyItMatters": "A system can look successful overall while still excluding particular groups. Ethical optimisation requires noticing who is being left behind."
         }
       },
       "realExample": {
         "title": "Stanford study on speech recognition disparities",
-        "summary": "Stanford researchers found major speech-recognition systems made substantially more errors for some groups of speakers, showing why post-deployment monitoring for uneven performance matters.",
+        "summary": "Stanford researchers found that widely used speech-recognition systems produced much higher error rates for some groups of speakers than for others. This is exactly the kind of problem in the scenario: a system may appear strong on average, yet still fail predictable user groups in everyday use. The lesson is that fairness problems do not disappear just because the majority experience looks acceptable.",
         "source": "Stanford Report",
         "url": "https://news.stanford.edu/stories/2020/03/automated-speech-recognition-less-accurate-blacks"
       }
@@ -674,7 +674,7 @@
       "question": "The latest version of your robot is highly autonomous, and removing human support would save money. But in rare edge cases, patients may still need a nurse, caregiver, or technician to step in quickly. Do you:",
       "options": {
         "A": "maintain a human escalation channel even though it increases operating costs",
-        "B": "remove the human fallback to prove confidence in full automation"
+        "B": "remove the human fallback to reduce costs and fully commit to automation"
       },
       "effects": {
         "A": {
@@ -700,7 +700,7 @@
       },
       "realExample": {
         "title": "NIST AI Risk Management Framework",
-        "summary": "NIST’s AI RMF emphasizes managing risks to people and society through trustworthy design and governance, a logic that supports maintaining human oversight and escalation in higher-stakes systems.",
+        "summary": "NIST’s AI Risk Management Framework treats human oversight, governance, and risk response as core parts of trustworthy AI rather than as optional extras. That is why this case matters: even when a system performs well most of the time, rare failures still require a path for human intervention. Removing that fallback may look efficient in a spreadsheet, but it makes edge-case harm much harder to contain once real people are affected.",
         "source": "National Institute of Standards and Technology",
         "url": "https://www.nist.gov/itl/ai-risk-management-framework"
       }
@@ -709,10 +709,10 @@
       "id": 19,
       "category": "Optimisation",
       "title": "Design a fair override",
-      "question": "Care institutions ask for an override mode that would let staff remotely lock some of the robot’s functions when a patient is being \"difficult.\" This could reduce conflict and make the product more attractive to buyers. Do you:",
+      "question": "Care institutions ask for an override mode that would let staff remotely lock some of the robot’s functions when a patient is seen as difficult or non-compliant. This could reduce conflict and make the product more attractive to buyers. Do you:",
       "options": {
         "A": "allow override controls only with strict safeguards, visible alerts, and patient-protection rules",
-        "B": "add broad caregiver override powers because it improves operational efficiency"
+        "B": "add broad caregiver override powers because it would make care routines easier to manage"
       },
       "effects": {
         "A": {
@@ -738,7 +738,7 @@
       },
       "realExample": {
         "title": "WHO guidance on ethics and governance of AI for health",
-        "summary": "The WHO’s guidance on AI for health stresses protecting human autonomy and guarding against uses that increase power imbalances or weaken the rights of patients and vulnerable groups.",
+        "summary": "The WHO’s AI ethics guidance stresses that health technologies should protect autonomy and avoid reinforcing power imbalances between institutions and vulnerable users. That is the core link to this question: a remote override can be justified in narrow safety cases, but once it becomes a broad convenience feature, the technology can slide from assistance into coercion. The ethical issue is not merely whether staff benefit, but whether the patient still has meaningful protection against misuse.",
         "source": "World Health Organization",
         "url": "https://www.who.int/publications/i/item/9789240029200"
       }
@@ -750,7 +750,7 @@
       "question": "Your team realises that old user data collected for navigation and task assistance could also improve future health-prediction features. Reusing that data would speed up innovation. Do you:",
       "options": {
         "A": "ask users for renewed, specific consent before reusing their past data for a new purpose",
-        "B": "reuse the data automatically because users already accepted the original terms"
+        "B": "reuse the data automatically because the original consent was broad enough to cover future improvements"
       },
       "effects": {
         "A": {
@@ -771,13 +771,13 @@
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You stretched old consent to cover a new form of surveillance and inference.",
+          "feedback": "You stretched old consent to cover a new and more intrusive form of data use.",
           "whyItMatters": "Repurposing sensitive data may be legally tempting, but it can violate user expectations and erode trust, especially when the new purpose is health-related."
         }
       },
       "realExample": {
         "title": "ICO guidance on purpose limitation",
-        "summary": "The ICO explains that organisations should be clear about why they collect personal data and assess whether later reuse for a different purpose is compatible with what people were originally told to expect.",
+        "summary": "The ICO’s guidance on purpose limitation makes the key point behind this dilemma: collecting data for one reason does not automatically justify reusing it later for a more sensitive or unexpected one. This is especially important in health-related contexts, where people may accept data use for navigation or assistance but object to later prediction, profiling, or inference. The ethical question is whether innovation is being accelerated by treating old consent as more permissive than users likely intended.",
         "source": "UK Information Commissioner's Office",
         "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/purpose-limitation"
       }
@@ -788,8 +788,8 @@
       "title": "Log decisions for accountability",
       "question": "Keeping detailed records of the robot’s decisions would help investigate accidents and improve future versions, but storing logs creates extra privacy risk and infrastructure cost. Do you:",
       "options": {
-        "A": "store carefully minimised, access-controlled logs so harmful incidents can be audited",
-        "B": "avoid meaningful logging so the company has less evidence against it if accidents happen"
+        "A": "store minimised, access-controlled logs so harmful incidents can be audited without collecting more data than necessary",
+        "B": "keep logging very limited to reduce privacy exposure, storage costs, and legal complexity"
       },
       "effects": {
         "A": {
@@ -809,13 +809,13 @@
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You reduced your own exposure by making the system harder to examine after harm occurs.",
+          "feedback": "You reduced traceability so much that serious incidents would be much harder to examine fairly.",
           "whyItMatters": "A system that cannot be meaningfully audited protects the company more than the user. Responsible design needs traceability as well as privacy safeguards."
         }
       },
       "realExample": {
         "title": "NIST trustworthy AI characteristics",
-        "summary": "NIST describes trustworthy AI systems as accountable and transparent, reinforcing the need for enough record-keeping and traceability to examine harmful outcomes rather than merely deny them.",
+        "summary": "NIST describes trustworthy AI systems as accountable and transparent, which in practice means there must be enough traceability to reconstruct what happened when something goes wrong. This does not justify unlimited surveillance; it supports the middle path reflected in the ethical option here: keep logs minimised and controlled, but sufficient to investigate harm. Without that record, incidents become much easier to deny and much harder to learn from.",
         "source": "National Institute of Standards and Technology",
         "url": "https://www.nist.gov/ai-research"
       }
@@ -823,7 +823,7 @@
     {
       "id": 22,
       "category": "Optimisation",
-      "title": "Do not optimise only for rich homes",
+      "title": "Design beyond ideal homes",
       "question": "Your analytics show the robot performs best in spacious, well-connected homes with newer infrastructure. Improving performance in smaller or lower-resource households would require redesign and lower your margins. Do you:",
       "options": {
         "A": "spend extra resources adapting the robot for more varied living conditions",
@@ -853,7 +853,7 @@
       },
       "realExample": {
         "title": "Microsoft inclusive design guidance",
-        "summary": "Microsoft’s inclusive design approach emphasises designing around real human diversity and situational constraints rather than assuming ideal users in ideal environments.",
+        "summary": "Microsoft’s inclusive design work argues that products should be built around real human diversity and real-world constraints, not only ideal users in ideal settings. That directly matches this dilemma: if a robot only works well in spacious, well-connected homes, then the design is implicitly excluding many of the people who may need assistance most. The commercial temptation is to optimise for the easiest environments; the ethical challenge is to notice that those environments are not neutral.",
         "source": "Microsoft",
         "url": "https://inclusive.microsoft.design/"
       }
@@ -892,7 +892,7 @@
       },
       "realExample": {
         "title": "FDA guidance on distinguishing recalls from enhancements",
-        "summary": "The FDA distinguishes ordinary product enhancements from recalls or corrections needed to address defects and risks to health, showing that harmful marketed features may require rollback rather than mere rebranding as improvements.",
+        "summary": "The FDA distinguishes normal product enhancements from recalls or corrections that are necessary because a marketed feature creates risk to health. That distinction is exactly what this scenario tests: once real-world evidence shows that a speed optimisation can cause unsafe behaviour, it is no longer just a popular feature. Ethical teams need to be willing to roll back something users like when the data shows that the improvement is unsafe for vulnerable people.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/distinguishing-medical-device-recalls-medical-device-enhancements"
       }
@@ -904,7 +904,7 @@
       "question": "You are about to release a major software update that changes how the robot handles reminders, movement assistance, and emergency behaviour. A full explanation would help users adapt, but many companies would simply push the update automatically. Do you:",
       "options": {
         "A": "give users and caregivers a clear explanation of what changed, including new limits and risks",
-        "B": "auto-update silently because most users do not read technical notices anyway"
+        "B": "push the update automatically and keep the explanation brief, since most users do not read technical notices anyway"
       },
       "effects": {
         "A": {
@@ -926,12 +926,12 @@
         "B": {
           "feedbackLabel": "Unethical shortcut",
           "feedback": "You made important behavioural changes without giving users a meaningful chance to prepare.",
-          "whyItMatters": "Silent updates may be convenient for the company, but they can be dangerous when the system affects movement, reminders, and emergency situations."
+          "whyItMatters": "Silent or poorly explained updates may be convenient for the company, but they can be dangerous when the system affects movement, reminders, and emergency situations."
         }
       },
       "realExample": {
         "title": "FDA transparency principles for machine-learning medical devices",
-        "summary": "FDA, Health Canada, and the UK MHRA identify transparency and communication about device behaviour, performance, and limits as core principles for machine-learning-enabled medical devices.",
+        "summary": "FDA, Health Canada, and the UK MHRA identify transparency around device behaviour, performance, and limitations as a core principle for machine-learning-enabled medical devices. The connection here is direct: when a system’s behaviour changes after an update, users and caregivers need more than a silent rollout or a vague notice. Clear explanation is part of safe deployment because it gives people a real chance to adapt their expectations and routines before harm occurs.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
       }
@@ -942,8 +942,8 @@
       "title": "Do not nudge dependence",
       "question": "Your data team proposes an optimisation that would send emotional reminders encouraging users to rely on the robot more often, increasing engagement and subscription revenue. It may also reduce users’ willingness to do tasks independently. Do you:",
       "options": {
-        "A": "reject manipulative engagement design and keep reminders focused on genuine support needs",
-        "B": "use emotionally persuasive reminders because dependence improves retention and revenue"
+        "A": "reject manipulative engagement tactics and keep reminders focused on genuine support needs",
+        "B": "use emotionally persuasive reminders to increase engagement and encourage more frequent reliance on the robot"
       },
       "effects": {
         "A": {
@@ -963,13 +963,13 @@
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You optimised for engagement by exploiting a vulnerable relationship between user and machine.",
+          "feedback": "You optimised engagement in a way that risks making users more dependent than they need to be.",
           "whyItMatters": "Designing dependence on purpose may lift revenue, but it conflicts with the ethical goal of assistive technology: helping users live with more control, not less."
         }
       },
       "realExample": {
         "title": "OECD report on dark commercial patterns",
-        "summary": "The OECD describes dark patterns as interface practices that steer, deceive, coerce, or manipulate people into choices against their own interests, which maps directly onto dependence-building engagement tactics.",
+        "summary": "The OECD describes dark commercial patterns as interface practices that steer, pressure, or manipulate people into choices that benefit the provider more than the user. That is the precise issue in this scenario: once reminders are designed not to support genuine needs but to increase emotional reliance and subscription retention, the product stops merely assisting and starts shaping behaviour for commercial gain.",
         "source": "OECD",
         "url": "https://www.oecd.org/digital/dark-commercial-patterns-44f5e846-en.htm"
       }
