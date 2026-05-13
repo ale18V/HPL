@@ -135,7 +135,14 @@ main {
   line-height: 1.7;
 }
 
+.scroll-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .scroll-text {
+  margin: 0;
   color: #5f421e;
 }
 

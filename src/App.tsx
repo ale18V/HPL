@@ -3,10 +3,11 @@ import './App.css'
 import problemsJson from '../problems.json'
 
 const STORAGE_KEY = 'hpl-island-game-state'
-const MAX_LIFE = 5
+const MAX_LIFE = 7
 const MAX_MONEY = 5
 /** Lives spent to skip a snake on the physical board (Snakes & Ladders tie-in). */
 const SNAKE_PASS_LIFE_COST = 3
+const STARTING_LIFE = 3
 const UNSEEN_REFRESH_THRESHOLD = 5
 
 type Phase = 'intro' | 'game'
@@ -116,7 +117,13 @@ type RawProblemsByCategory = {
   Optimisation?: RawProblem[]
 }
 
-const INTRO_TEXT = `Welcome engineer! Your mission, should you choose to accept it, is to design a robot to assist people with motor disabilities, i.e. patients who struggle to move, with household tasks. You will be asked various questions related to ethical considerations in different parts of this design process throughout the game. For every ethical answer you choose, you will gain a life but have to pay the financial or time cost. For every unethical shortcut you take, you will lose a life but save money or time. The snakes and ladders represent the unpredictable chance which slows down or boosts real life engineering projects. You start the game with 5 lives and 5 coins. The coins represent your fixed budget for the project, once you have spent all your coins you cannot spend more. Your objective is to be the first to make it to the end of the game with at least 1 life.`
+const INTRO_PARAGRAPHS = [
+  `Welcome engineer! Your mission, should you choose to accept it, is to design a robot to assist people with motor disabilities, i.e. patients who struggle to move, with household tasks.`,
+  `You will be asked various questions related to ethical considerations in different parts of this design process throughout the game. For every ethical answer you choose, you will gain a life but have to pay the financial or time cost. For every unethical shortcut you take, you will lose a life but save money or time.`,
+  `The snakes and ladders represent the unpredictable chance which slows down or boosts real life engineering projects.`,
+  `You start the game with 3 lives and 5 coins. The snake pass costs 3 lives. You can hold up to 7 lives. Every time you cross a bridge to the next island, you gain 1 coin.`,
+  `The coins represent your fixed budget for the project, once you have spent all your coins you cannot spend more. Your objective is to be the first to make it to the end of the game with at least 1 life.`,
+]
 
 const ISLANDS: IslandKey[] = ['scope', 'plan', 'design', 'optimize']
 
@@ -232,7 +239,7 @@ const QUESTIONS: Question[] = buildQuestions(
 const defaultState: GameState = {
   phase: 'intro',
   screen: 'main',
-  life: MAX_LIFE,
+  life: STARTING_LIFE,
   money: MAX_MONEY,
   currentQuestionIndex: null,
   revealedOptionIndex: null,
@@ -287,7 +294,7 @@ function loadSavedState(): GameState | null {
         parsed.screen === 'gameover'
           ? parsed.screen
           : 'main',
-      life: clamp(Number(parsed.life ?? MAX_LIFE), 0, MAX_LIFE),
+      life: clamp(Number(parsed.life ?? STARTING_LIFE), 0, MAX_LIFE),
       money: clamp(Number(parsed.money ?? MAX_MONEY), 0, MAX_MONEY),
       currentQuestionIndex: alignedQuestionIndex,
       revealedOptionIndex:
@@ -406,7 +413,7 @@ function App() {
   const startFreshGame = () => {
     setPhase('game')
     setScreen('main')
-    setLife(MAX_LIFE)
+    setLife(STARTING_LIFE)
     setMoney(MAX_MONEY)
     setCurrentQuestionIndex(null)
     setRevealedOptionIndex(null)
@@ -607,8 +614,10 @@ function App() {
     const fromIsland = currentIsland
     const toIsland = ISLANDS[currentIslandIndex + 1]
     const answers = islandAnswers.filter((entry) => entry.island === fromIsland)
+    const updatedMoney = clamp(money + 1, 0, MAX_MONEY)
 
     setCurrentIslandIndex((index) => index + 1)
+    setMoney(updatedMoney)
     setCurrentQuestionIndex(null)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
@@ -652,7 +661,13 @@ function App() {
               <div className="scroll-body">
                 <p className="eyebrow">Island briefing</p>
                 <h1 className="title">Welcome, engineer</h1>
-                <p className="scroll-text">{INTRO_TEXT}</p>
+                <div className="scroll-copy">
+                  {INTRO_PARAGRAPHS.map((paragraph) => (
+                    <p key={paragraph} className="scroll-text">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
 
                 <div className="intro-actions">
                   <button onClick={startNewGame} className="primary-btn">
