@@ -254,12 +254,12 @@
         "A": {
           "life": -1,
           "coin": 0,
-          "skip_next_turn": false
+          "turn": 0
         },
         "B": {
           "life": 2,
           "coin": -1,
-          "skip_next_turn": true
+          "turn": -1
         }
       },
       "outcomes": {
@@ -332,12 +332,12 @@
         "A": {
           "life": 2,
           "coin": -1,
-          "skip_next_turn": true
+          "turn": -1
         },
         "B": {
           "life": -1,
           "coin": 0,
-          "skip_next_turn": false
+          "turn": 0
         }
       },
       "outcomes": {
