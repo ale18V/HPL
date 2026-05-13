@@ -470,7 +470,7 @@
       },
       "realExample": {
         "title": "FDA transparency principles for machine-learning medical devices",
-        "summary": "The FDA, Health Canada, and the UK MHRA jointly emphasized that machine-learning medical devices should communicate performance, limits, and risks in a way users can actually understand. This directly matches the dilemma here: a company may be legally tempted to disclose risks in the narrowest possible way, but regulators increasingly expect information that supports real informed consent rather than unreadable warning language.",
+        "summary": "This dilemma is reflected in the transparency principles jointly highlighted by the FDA, Health Canada, and the UK MHRA for machine-learning medical devices. These regulators have emphasized that users should be told clearly about a system’s performance, limitations, and risks in ways they can actually understand. The ethical problem is that companies may be tempted to disclose risks in the narrowest legally defensible way while still making adoption easier. But regulators increasingly expect communication that supports real informed consent, not unreadable warning language that technically discloses the danger while making it practically invisible.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
       }
@@ -508,7 +508,7 @@
       },
       "realExample": {
         "title": "UK CMA greenwashing action against ASOS, Boohoo, and George at Asda",
-        "summary": "In 2024, the UK Competition and Markets Authority secured formal undertakings from ASOS, Boohoo, and George at Asda after investigating environmental claims that were too broad or weakly supported. The connection to this question is direct: once a company knows its evidence does not justify a strong sustainability message, continuing to market that message turns environmental language into a sales tool rather than an honest description.",
+        "summary": "A similar issue appeared in the UK Competition and Markets Authority’s 2024 action against ASOS, Boohoo, and George at Asda. These companies were investigated for environmental claims that were too broad or not sufficiently supported by evidence. The lesson is that once a company knows its evidence does not justify a strong sustainability message, continuing to use that message turns environmental language into a sales tool rather than an honest description. In this dilemma, the robot may still be useful and safe, but pretending it is greener than it really is misleads users and distorts public understanding of sustainability.",
         "source": "UK Competition and Markets Authority",
         "url": "https://www.gov.uk/government/news/green-claims-cma-secures-landmark-changes-from-asos-boohoo-and-asda"
       }
@@ -546,7 +546,7 @@
       },
       "realExample": {
         "title": "Philips recall and ongoing FDA oversight",
-        "summary": "The Philips CPAP and BiPAP recall showed that when a widely used health technology creates foreseeable risk, the manufacturer cannot simply point to user warnings and move on. The company faced recalls, remediation obligations, regulatory oversight, and long-running legal consequences. That is why this question matters: ethical accountability means planning for repair and support when harm occurs, not treating a disclaimer as a substitute for responsibility.",
+        "summary": "This dilemma resembles what happened in the Philips CPAP and BiPAP recall. When risks from the product became clear, the manufacturer could not simply point to warnings and walk away. Instead, the company faced recalls, remediation obligations, long regulatory scrutiny, and significant legal consequences. The broader lesson is that in health-related technologies, ethical accountability means planning for repair, support, and compensation when foreseeable harm occurs. A disclaimer may reduce legal exposure, but it does not remove moral responsibility for the people affected.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
       }
@@ -585,7 +585,7 @@
       },
       "realExample": {
         "title": "FDA recalls, corrections, and removals guidance",
-        "summary": "FDA recall and correction guidance exists precisely because companies sometimes discover important risks only after products are already in use. The expected response is not to quietly keep shipping while hoping the issue stays contained, but to notify users, correct the product, and reduce harm. That maps directly onto this dilemma: the ethical cost comes from admitting the failure publicly rather than letting exposed users bear the risk in silence.",
+        "summary": "This dilemma mirrors the logic behind FDA recall, correction, and removal guidance. Regulators recognize that companies often discover important risks only after products are already in use. The expected response is not to keep shipping quietly and hope the issue stays limited, but to notify users, correct the product, and reduce harm. The ethical challenge here is that transparency is costly: admitting the problem publicly may damage confidence, but hiding it leaves exposed users to bear the risk without knowing it.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/recalls-corrections-and-removals-devices"
       }
@@ -623,7 +623,7 @@
       },
       "realExample": {
         "title": "FDA guidance on medical device cybersecurity",
-        "summary": "FDA cybersecurity guidance for connected medical devices emphasizes active monitoring, disclosure, and timely remediation of vulnerabilities rather than treating them as optional maintenance. The connection here is straightforward: once a manufacturer knows outsiders could access sensitive functions or data, delaying the fix in order to preserve a business milestone shifts real risk onto users for the sake of a roadmap.",
+        "summary": "This dilemma reflects FDA cybersecurity guidance for connected medical devices, which emphasizes active monitoring, disclosure, and timely remediation of vulnerabilities. Once a manufacturer knows that outsiders could access sensitive data or functions, the issue is no longer just a technical inconvenience. Delaying the fix in order to preserve a business milestone shifts real privacy and security risks onto users. In an assistive robot used inside the home, those risks affect dignity, trust, and personal safety, not just software quality.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/consumers/consumer-updates/medical-device-cybersecurity-what-you-need-know"
       }
@@ -662,7 +662,7 @@
       },
       "realExample": {
         "title": "Stanford study on speech recognition disparities",
-        "summary": "Stanford researchers found that widely used speech-recognition systems produced much higher error rates for some groups of speakers than for others. This is exactly the kind of problem in the scenario: a system may appear strong on average, yet still fail predictable user groups in everyday use. The lesson is that fairness problems do not disappear just because the majority experience looks acceptable.",
+        "summary": "A well-known example comes from Stanford research showing that speech-recognition systems often produced much higher error rates for some groups of speakers than for others. The key lesson is that a system can look strong on average while still failing predictably for certain users in everyday life. This matters especially in assistive robotics, where fairness is not an abstract principle but a practical requirement: if some users are misunderstood more often, they may be placed at greater inconvenience or risk even though the product appears successful overall.",
         "source": "Stanford Report",
         "url": "https://news.stanford.edu/stories/2020/03/automated-speech-recognition-less-accurate-blacks"
       }
@@ -700,7 +700,7 @@
       },
       "realExample": {
         "title": "NIST AI Risk Management Framework",
-        "summary": "NIST’s AI Risk Management Framework treats human oversight, governance, and risk response as core parts of trustworthy AI rather than as optional extras. That is why this case matters: even when a system performs well most of the time, rare failures still require a path for human intervention. Removing that fallback may look efficient in a spreadsheet, but it makes edge-case harm much harder to contain once real people are affected.",
+        "summary": "This dilemma reflects the principles behind the NIST AI Risk Management Framework, which treats human oversight and risk response as core parts of trustworthy AI. Even if a system performs well most of the time, rare failures still require a path for human intervention. Removing that fallback may look efficient on paper, but it makes harm much harder to contain once real people are affected. In healthcare and assistive settings, a backup human channel is often what prevents an unusual failure from becoming a serious crisis.",
         "source": "National Institute of Standards and Technology",
         "url": "https://www.nist.gov/itl/ai-risk-management-framework"
       }
@@ -738,7 +738,7 @@
       },
       "realExample": {
         "title": "WHO guidance on ethics and governance of AI for health",
-        "summary": "The WHO’s AI ethics guidance stresses that health technologies should protect autonomy and avoid reinforcing power imbalances between institutions and vulnerable users. That is the core link to this question: a remote override can be justified in narrow safety cases, but once it becomes a broad convenience feature, the technology can slide from assistance into coercion. The ethical issue is not merely whether staff benefit, but whether the patient still has meaningful protection against misuse.",
+        "summary": "This dilemma aligns closely with WHO guidance on ethics and governance of AI for health, which stresses that health technologies should protect autonomy and avoid reinforcing power imbalances between institutions and vulnerable users. A remote override can be justified in narrow safety situations, but once it becomes a broad convenience feature, the technology risks shifting from assistance into coercion. The real issue is not simply whether staff benefit, but whether the patient still has meaningful protection against misuse and control.",
         "source": "World Health Organization",
         "url": "https://www.who.int/publications/i/item/9789240029200"
       }
@@ -777,7 +777,7 @@
       },
       "realExample": {
         "title": "ICO guidance on purpose limitation",
-        "summary": "The ICO’s guidance on purpose limitation makes the key point behind this dilemma: collecting data for one reason does not automatically justify reusing it later for a more sensitive or unexpected one. This is especially important in health-related contexts, where people may accept data use for navigation or assistance but object to later prediction, profiling, or inference. The ethical question is whether innovation is being accelerated by treating old consent as more permissive than users likely intended.",
+        "summary": "This dilemma reflects the ICO’s guidance on purpose limitation. The central principle is that collecting data for one reason does not automatically justify reusing it later for a more sensitive or unexpected one. This is especially important in health-related contexts, where people may accept data use for navigation or assistance but object to later prediction, profiling, or inference. The ethical question is whether innovation is being accelerated by treating old consent as more permissive than users likely intended.",
         "source": "UK Information Commissioner's Office",
         "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/purpose-limitation"
       }
@@ -815,7 +815,7 @@
       },
       "realExample": {
         "title": "NIST trustworthy AI characteristics",
-        "summary": "NIST describes trustworthy AI systems as accountable and transparent, which in practice means there must be enough traceability to reconstruct what happened when something goes wrong. This does not justify unlimited surveillance; it supports the middle path reflected in the ethical option here: keep logs minimised and controlled, but sufficient to investigate harm. Without that record, incidents become much easier to deny and much harder to learn from.",
+        "summary": "This dilemma reflects NIST’s emphasis on trustworthy AI as accountable and transparent. In practice, that means there must be enough traceability to reconstruct what happened when something goes wrong. This does not justify unlimited data collection; rather, it supports a middle path in which logs are carefully minimised and controlled but still sufficient to investigate harm. Without that record, incidents become easier to deny and much harder to learn from, leaving users less protected after failures occur.",
         "source": "National Institute of Standards and Technology",
         "url": "https://www.nist.gov/ai-research"
       }
@@ -853,7 +853,7 @@
       },
       "realExample": {
         "title": "Microsoft inclusive design guidance",
-        "summary": "Microsoft’s inclusive design work argues that products should be built around real human diversity and real-world constraints, not only ideal users in ideal settings. That directly matches this dilemma: if a robot only works well in spacious, well-connected homes, then the design is implicitly excluding many of the people who may need assistance most. The commercial temptation is to optimise for the easiest environments; the ethical challenge is to notice that those environments are not neutral.",
+        "summary": "This dilemma reflects Microsoft’s inclusive design philosophy, which argues that products should be built around real human diversity and real-world constraints, not only ideal users in ideal settings. If an assistive robot works well only in spacious, well-connected homes, then the design is implicitly excluding many of the people who may need support most. The commercial temptation is to optimise for the easiest environments; the ethical challenge is to recognise that those environments are not neutral and that accessibility includes the conditions people actually live in.",
         "source": "Microsoft",
         "url": "https://inclusive.microsoft.design/"
       }
@@ -892,7 +892,7 @@
       },
       "realExample": {
         "title": "FDA guidance on distinguishing recalls from enhancements",
-        "summary": "The FDA distinguishes normal product enhancements from recalls or corrections that are necessary because a marketed feature creates risk to health. That distinction is exactly what this scenario tests: once real-world evidence shows that a speed optimisation can cause unsafe behaviour, it is no longer just a popular feature. Ethical teams need to be willing to roll back something users like when the data shows that the improvement is unsafe for vulnerable people.",
+        "summary": "This dilemma matches FDA guidance distinguishing ordinary product enhancements from recalls or corrections needed when a marketed feature creates a risk to health. Once real-world evidence shows that a speed optimisation can cause unsafe behaviour, it is no longer just a popular improvement. Ethical teams need to be willing to reverse features that users like when those features prove unsafe for vulnerable people. The lesson is that optimisation should be reversible: a feature is not good simply because it is fast, impressive, or commercially successful.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/distinguishing-medical-device-recalls-medical-device-enhancements"
       }
@@ -931,7 +931,7 @@
       },
       "realExample": {
         "title": "FDA transparency principles for machine-learning medical devices",
-        "summary": "FDA, Health Canada, and the UK MHRA identify transparency around device behaviour, performance, and limitations as a core principle for machine-learning-enabled medical devices. The connection here is direct: when a system’s behaviour changes after an update, users and caregivers need more than a silent rollout or a vague notice. Clear explanation is part of safe deployment because it gives people a real chance to adapt their expectations and routines before harm occurs.",
+        "summary": "This dilemma reflects the transparency principles identified by the FDA, Health Canada, and the UK MHRA for machine-learning-enabled medical devices. When a system’s behaviour changes after an update, users and caregivers need more than a silent rollout or a vague notice. Clear explanation is part of safe deployment because it gives people a real chance to adapt their expectations, supervision, and routines before harm occurs. In high-stakes settings, communication is not an optional extra; it is part of the safety system itself.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
       }
@@ -969,7 +969,7 @@
       },
       "realExample": {
         "title": "OECD report on dark commercial patterns",
-        "summary": "The OECD describes dark commercial patterns as interface practices that steer, pressure, or manipulate people into choices that benefit the provider more than the user. That is the precise issue in this scenario: once reminders are designed not to support genuine needs but to increase emotional reliance and subscription retention, the product stops merely assisting and starts shaping behaviour for commercial gain.",
+        "summary": "This dilemma is closely related to the OECD’s discussion of dark commercial patterns, which are interface practices that steer, pressure, or manipulate people into choices that benefit the provider more than the user. In this case, the issue is not whether reminders exist, but what they are designed to do. Once reminders are built primarily to increase emotional reliance and subscription retention rather than to support genuine needs, the robot stops merely assisting and starts shaping behaviour for commercial gain. The ethical concern is that assistive technology should strengthen autonomy, not strategically weaken it.",
         "source": "OECD",
         "url": "https://www.oecd.org/digital/dark-commercial-patterns-44f5e846-en.htm"
       }
