@@ -30,6 +30,7 @@ type Option = {
   text: string
   deltaLife: number
   deltaMoney: number
+  deltaTurns: number
   feedbackLabel: string
   feedback: string
   realWorldNote: string
@@ -54,6 +55,7 @@ type GameState = {
   screen: Screen
   life: number
   money: number
+  pendingSkippedTurns: number
   currentQuestionIndex: number | null
   revealedOptionIndex: number | null
   pendingGameOverReason: string
@@ -65,6 +67,7 @@ type GameState = {
 type RawEffect = {
   life: number
   coin: number
+  turn?: number
   skip_next_turn?: boolean
 }
 
@@ -99,6 +102,17 @@ type RawProblem = {
     source: string
     url?: string
   }
+}
+
+type RawProblemsByCategory = {
+  _meta?: {
+    islandCounts?: Partial<Record<'Scope' | 'Planning' | 'Development' | 'Optimisation', number>>
+    note?: string
+  }
+  Scope?: RawProblem[]
+  Planning?: RawProblem[]
+  Development?: RawProblem[]
+  Optimisation?: RawProblem[]
 }
 
 const INTRO_TEXT = `Welcome engineer! Your mission, should you choose to accept it, is to design a robot to assist people with motor disabilities, i.e. patients who struggle to move, with household tasks. You will be asked various questions related to ethical considerations in different parts of this design process throughout the game. For every ethical answer you choose, you will gain a life but have to pay the financial or time cost. For every unethical shortcut you take, you will lose a life but save money or time. The snakes and ladders represent the unpredictable chance which slows down or boosts real life engineering projects. You start the game with 5 lives and 5 coins. The coins represent your fixed budget for the project, once you have spent all your coins you cannot spend more. Your objective is to be the first to make it to the end of the game with at least 1 life.`
@@ -537,6 +551,19 @@ function mapCategoryToIsland(category: string): IslandKey {
     return 'scope'
   }
 
+function normalizeProblems(input: RawProblem[] | RawProblemsByCategory): RawProblem[] {
+  if (Array.isArray(input)) {
+    return input
+  }
+
+  return [
+    ...(input.Scope ?? []),
+    ...(input.Planning ?? []),
+    ...(input.Development ?? []),
+    ...(input.Optimisation ?? []),
+  ]
+}
+
 function buildQuestions(problems: RawProblem[]): Question[] {
     return problems.map((problem) => {
       const category = problem.category ?? 'General'
@@ -563,6 +590,7 @@ function buildQuestions(problems: RawProblem[]): Question[] {
           text: capitalizeFirstLetter(problem.options.A),
           deltaLife: problem.effects.A.life,
           deltaMoney: problem.effects.A.coin,
+          deltaTurns: problem.effects.A.turn ?? (problem.effects.A.skip_next_turn ? -1 : 0),
           feedbackLabel: problem.outcomes?.A?.feedbackLabel ?? optionAFeedback.label,
           feedback: problem.outcomes?.A?.feedback ?? optionAFeedback.feedback,
           realWorldNote: problem.outcomes?.A?.whyItMatters ?? optionAFeedback.whyItMatters,
@@ -572,6 +600,7 @@ function buildQuestions(problems: RawProblem[]): Question[] {
           text: capitalizeFirstLetter(problem.options.B),
           deltaLife: problem.effects.B.life,
           deltaMoney: problem.effects.B.coin,
+          deltaTurns: problem.effects.B.turn ?? (problem.effects.B.skip_next_turn ? -1 : 0),
           feedbackLabel: problem.outcomes?.B?.feedbackLabel ?? optionBFeedback.label,
           feedback: problem.outcomes?.B?.feedback ?? optionBFeedback.feedback,
           realWorldNote: problem.outcomes?.B?.whyItMatters ?? optionBFeedback.whyItMatters,
@@ -582,13 +611,16 @@ function buildQuestions(problems: RawProblem[]): Question[] {
   })
 }
 
-const QUESTIONS: Question[] = buildQuestions(problemsJson as RawProblem[])
+const QUESTIONS: Question[] = buildQuestions(
+  normalizeProblems(problemsJson as RawProblem[] | RawProblemsByCategory),
+)
 
 const defaultState: GameState = {
   phase: 'intro',
   screen: 'main',
   life: MAX_LIFE,
   money: MAX_MONEY,
+  pendingSkippedTurns: 0,
   currentQuestionIndex: null,
   revealedOptionIndex: null,
   pendingGameOverReason: '',
@@ -643,6 +675,7 @@ function loadSavedState(): GameState | null {
           : 'main',
       life: clamp(Number(parsed.life ?? MAX_LIFE), 0, MAX_LIFE),
       money: clamp(Number(parsed.money ?? MAX_MONEY), 0, MAX_MONEY),
+      pendingSkippedTurns: Math.max(0, Number(parsed.pendingSkippedTurns ?? 0) || 0),
       currentQuestionIndex: alignedQuestionIndex,
       revealedOptionIndex:
         typeof parsed.revealedOptionIndex === 'number' &&
@@ -691,6 +724,7 @@ function App() {
   const [screen, setScreen] = useState<Screen>(defaultState.screen)
   const [life, setLife] = useState(defaultState.life)
   const [money, setMoney] = useState(defaultState.money)
+  const [pendingSkippedTurns, setPendingSkippedTurns] = useState(defaultState.pendingSkippedTurns)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(
     defaultState.currentQuestionIndex,
   )
@@ -707,6 +741,7 @@ function App() {
   const [bridgeSummary, setBridgeSummary] = useState<BridgeSummary | null>(null)
   const [canContinue, setCanContinue] = useState(() => loadSavedState() !== null)
   const [hasStartedSession, setHasStartedSession] = useState(false)
+  const [mainNotice, setMainNotice] = useState('')
 
   const currentIsland = ISLANDS[currentIslandIndex]
   const currentIslandLabel = ISLAND_LABELS[currentIsland]
@@ -733,6 +768,7 @@ function App() {
     setScreen(savedState.screen)
     setLife(savedState.life)
     setMoney(savedState.money)
+    setPendingSkippedTurns(savedState.pendingSkippedTurns)
     setCurrentQuestionIndex(savedState.currentQuestionIndex)
     setRevealedOptionIndex(savedState.revealedOptionIndex)
     setPendingGameOverReason(savedState.pendingGameOverReason)
@@ -748,6 +784,7 @@ function App() {
     setScreen('main')
     setLife(MAX_LIFE)
     setMoney(MAX_MONEY)
+    setPendingSkippedTurns(0)
     setCurrentQuestionIndex(null)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
@@ -770,6 +807,7 @@ function App() {
         screen,
         life,
         money,
+        pendingSkippedTurns,
         currentQuestionIndex,
         revealedOptionIndex,
         pendingGameOverReason,
@@ -785,6 +823,7 @@ function App() {
     screen,
     life,
     money,
+    pendingSkippedTurns,
     currentQuestionIndex,
     revealedOptionIndex,
     pendingGameOverReason,
@@ -807,6 +846,12 @@ function App() {
   }, [screen, currentQuestionIndex, currentIsland])
 
   const openRandomQuestion = () => {
+    if (pendingSkippedTurns > 0) {
+      setPendingSkippedTurns((current) => current - 1)
+      setMainNotice('You lost this turn because your previous ethical choice required extra time.')
+      return
+    }
+
     const islandQuestionIndexes = QUESTIONS.map((question, index) => ({ question, index }))
       .filter(({ question }) => question.island === currentIsland)
       .map(({ index }) => index)
@@ -818,6 +863,7 @@ function App() {
     const randomIndex =
       islandQuestionIndexes[Math.floor(Math.random() * islandQuestionIndexes.length)]
 
+    setMainNotice('')
     setCurrentQuestionIndex(randomIndex)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
@@ -833,11 +879,14 @@ function App() {
     const option = currentQuestion.options[optionIndex]
     const updatedLife = clamp(life + option.deltaLife, 0, MAX_LIFE)
     const updatedMoney = clamp(money + option.deltaMoney, 0, MAX_MONEY)
+    const updatedSkippedTurns = Math.max(0, pendingSkippedTurns + Math.abs(Math.min(option.deltaTurns, 0)))
 
     setLife(updatedLife)
     setMoney(updatedMoney)
+    setPendingSkippedTurns(updatedSkippedTurns)
     setRevealedOptionIndex(optionIndex)
     setShowRealExamples(false)
+    setMainNotice('')
     setIslandAnswers((previous) => [
       ...previous,
       {
@@ -922,6 +971,7 @@ function App() {
     setCurrentQuestionIndex(null)
     setRevealedOptionIndex(null)
     setPendingGameOverReason('')
+    setMainNotice('')
     setScreen('main')
     setBridgeSummary({ fromIsland, toIsland, answers })
   }
@@ -1012,12 +1062,19 @@ function App() {
                     Current island: <strong>{currentIslandLabel}</strong>
                   </p>
                   <p className="island-sequence">Scope → Plan → Design → Optimize</p>
+                  {pendingSkippedTurns > 0 ? (
+                    <p className="island-current">
+                      Pending skipped turn{pendingSkippedTurns > 1 ? 's' : ''}: <strong>{pendingSkippedTurns}</strong>
+                    </p>
+                  ) : null}
                 </div>
 
                 <div className="callout-box">
                   Hidden rewards and penalties are only revealed after you answer. Ethical choices
                   usually protect lives but consume time or budget.
                 </div>
+
+                {mainNotice ? <div className="callout-box">{mainNotice}</div> : null}
 
                 <div className="main-actions">
                   <button
@@ -1099,6 +1156,13 @@ function App() {
                       <span className="impact-pill coin-pill">
                         {revealedOption.deltaMoney >= 0 ? `Coins +${revealedOption.deltaMoney}` : `Coins ${revealedOption.deltaMoney}`}
                       </span>
+                      {revealedOption.deltaTurns !== 0 ? (
+                        <span className="impact-pill coin-pill">
+                          {revealedOption.deltaTurns > 0
+                            ? `Turns +${revealedOption.deltaTurns}`
+                            : `Turns ${revealedOption.deltaTurns}`}
+                        </span>
+                      ) : null}
                     </div>
 
                     <div className="real-world-note">
