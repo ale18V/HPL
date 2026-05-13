@@ -66,6 +66,17 @@ type GameState = {
   seenQuestionIndexes: number[]
 }
 
+function shuffleQuestionOptions(question: Question): Question {
+  if (question.options.length < 2 || Math.random() < 0.5) {
+    return question
+  }
+
+  return {
+    ...question,
+    options: [question.options[1], question.options[0]],
+  }
+}
+
 type RawEffect = {
   life: number
   coin: number
@@ -382,10 +393,13 @@ function App() {
     [currentIsland],
   )
 
-  const currentQuestion = useMemo(
-    () => (currentQuestionIndex === null ? null : QUESTIONS[currentQuestionIndex]),
-    [currentQuestionIndex],
-  )
+  const currentQuestion = useMemo(() => {
+    if (currentQuestionIndex === null) {
+      return null
+    }
+
+    return shuffleQuestionOptions(QUESTIONS[currentQuestionIndex])
+  }, [currentQuestionIndex])
   const revealedOption = useMemo(
     () =>
       currentQuestion && revealedOptionIndex !== null
