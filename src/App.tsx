@@ -7,6 +7,7 @@ const MAX_LIFE = 5
 const MAX_MONEY = 5
 /** Lives spent to skip a snake on the physical board (Snakes & Ladders tie-in). */
 const SNAKE_PASS_LIFE_COST = 3
+const UNSEEN_REFRESH_THRESHOLD = 5
 
 type Phase = 'intro' | 'game'
 type Screen = 'main' | 'question' | 'gameover'
@@ -62,6 +63,7 @@ type GameState = {
   gameOverReason: string
   currentIslandIndex: number
   islandAnswers: IslandAnswer[]
+  seenQuestionIndexes: number[]
 }
 
 type RawEffect = {
@@ -131,402 +133,25 @@ function capitalizeFirstLetter(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1)
 }
 
-function getRealExample(problemId: number) {
-  const examples: Record<
-    number,
-    {
-      title: string
-      summary: string
-      source: string
-      url?: string
-    }
-  > = {
-    1: {
-      title: 'Ekso Bionics and Shepherd Center rehabilitation partnership',
-      summary:
-        'In 2024, Ekso Bionics announced a research partnership with Shepherd Center to use exoskeleton devices in rehabilitation and community settings, explicitly framing the technology around patient recovery and quality of life.',
-      source: 'Ekso Bionics',
-      url: 'https://ir.eksobionics.com/press-releases/detail/761/ekso-bionics-announces-research-partnership-with-shepherd',
-    },
-    2: {
-      title: 'Ekso Bionics and Shepherd Center rehabilitation partnership',
-      summary:
-        'This partnership is a concrete example of assistive robotics being adopted to support rehabilitation goals rather than long-term dependence on the device itself.',
-      source: 'Ekso Bionics',
-      url: 'https://ir.eksobionics.com/press-releases/detail/761/ekso-bionics-announces-research-partnership-with-shepherd',
-    },
-    3: {
-      title: 'Cornell University anti-nepotism policy',
-      summary:
-        'Cornell’s policy explicitly bars family or personal relationships from influencing hiring, supervision, promotion, or performance decisions, showing how institutions formalize merit-based staffing.',
-      source: 'Cornell University',
-      url: 'https://policy.cornell.edu/policy-library/avoiding-nepotism',
-    },
-    4: {
-      title: 'Apple supplier responsibility program',
-      summary:
-        'Apple requires suppliers to follow a code covering labor and human rights and says it conducts regular assessments before and during production, reflecting a real-world response to outsourcing and labor-risk scrutiny.',
-      source: 'Apple',
-      url: 'https://www.apple.com/supplier-responsibility/',
-    },
-    5: {
-      title: 'FTC action against Kohl’s and Walmart over “bamboo” claims',
-      summary:
-        'The FTC alleged the companies falsely marketed rayon textiles as bamboo and as environmentally friendly, even though the manufacturing process involved toxic chemicals and hazardous pollutants.',
-      source: 'U.S. Federal Trade Commission',
-      url: 'https://www.ftc.gov/news-events/news/press-releases/2022/04/ftc-uses-penalty-offense-authority-seek-largest-ever-civil-penalty-bogus-bamboo-marketing-kohls',
-    },
-    6: {
-      title: 'Philips sleep apnea machine recall',
-      summary:
-        'The FDA says Philips recalled millions of CPAP and BiPAP devices after foam used inside the machines could break down and create serious health risks, illustrating how material safety shortcuts can trigger major harm and remediation.',
-      source: 'U.S. Food and Drug Administration',
-      url: 'https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines',
-    },
-    7: {
-      title: 'NIST demographic-effects study on face recognition',
-      summary:
-        'NIST reported that many face-recognition systems showed demographic performance differences, a concrete example of how narrow or imbalanced data can change who gets accurate results.',
-      source: 'National Institute of Standards and Technology',
-      url: 'https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software',
-    },
-    8: {
-      title: 'External validation of Epic’s proprietary sepsis model',
-      summary:
-        'A University of Michigan study found that a widely deployed proprietary Epic sepsis model had poor discrimination and calibration, strengthening the case for transparency and independent review of black-box systems.',
-      source: 'PubMed / JAMA Internal Medicine',
-      url: 'https://pubmed.ncbi.nlm.nih.gov/34152373/',
-    },
-    9: {
-      title: 'Stanford study on speech recognition disparities',
-      summary:
-        'Stanford researchers found major automated speech-recognition systems made roughly twice as many errors for Black speakers as for white speakers, showing why accent and dialect coverage matters in voice interfaces.',
-      source: 'Stanford Report',
-      url: 'https://news.stanford.edu/stories/2020/03/automated-speech-recognition-less-accurate-blacks',
-    },
-    10: {
-      title: 'FDA guidance on diversity in clinical trial populations',
-      summary:
-        'The FDA’s guidance calls for more representative study populations so safety and effectiveness reflect the people who will actually use a product, matching the logic behind broader testing across demographics.',
-      source: 'U.S. Food and Drug Administration',
-      url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/enhancing-diversity-clinical-trial-populations-eligibility-criteria-enrollment-practices-and-trial',
-    },
-    11: {
-      title: 'Change Healthcare cyberattack',
-      summary:
-        'HHS says the Change Healthcare ransomware incident ultimately affected roughly 192.7 million individuals, a concrete reminder that health-data privacy failures can scale into national-level harm.',
-      source: 'U.S. Department of Health & Human Services',
-      url: 'https://www.hhs.gov/hipaa/for-professionals/special-topics/change-healthcare-cybersecurity-incident-frequently-asked-questions/index.html',
-    },
-    12: {
-      title: 'FDA transparency principles for machine-learning medical devices',
-      summary:
-        'The FDA, Health Canada, and the UK MHRA now explicitly emphasize transparency and clear user information for machine-learning medical devices, reflecting a real regulatory push against hiding meaningful risk behind opaque messaging.',
-      source: 'U.S. Food and Drug Administration',
-      url: 'https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles',
-    },
-    13: {
-      title: 'UK CMA greenwashing action against ASOS, Boohoo, and George at Asda',
-      summary:
-        'In 2024, the CMA secured formal undertakings from these brands to make environmental claims more accurate and specific, showing regulators now act when “sustainable” messaging outruns the evidence.',
-      source: 'UK Competition and Markets Authority',
-      url: 'https://www.gov.uk/government/news/green-claims-cma-secures-landmark-changes-from-asos-boohoo-and-asda',
-    },
-    14: {
-      title: 'Philips recall and ongoing FDA oversight',
-      summary:
-        'The Philips CPAP/BiPAP recall shows that when a medical device causes foreseeable harm, manufacturers can face recalls, remediation obligations, and prolonged regulatory scrutiny rather than simply disclaiming responsibility.',
-      source: 'U.S. Food and Drug Administration',
-      url: 'https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines',
-    },
-  }
-
-  return (
-    examples[problemId] ?? {
-      title: 'Documented ethics and safety review',
-      summary:
-        'Organizations in high-risk domains often create documented review processes so tradeoffs in safety, fairness, and accountability are explicit rather than hidden.',
-      source: 'General governance practice',
-    }
-  )
+const DEFAULT_REAL_EXAMPLE: Option['realExample'] = {
+  title: 'Documented ethics and safety review',
+  summary:
+    'Organizations in high-risk domains often document tradeoffs in safety, fairness, and accountability rather than hiding them.',
+  source: 'General governance practice',
 }
 
-function buildFeedback(problemId: number, questionText: string, optionText: string, deltaLife: number): {
-  label: string
-  feedback: string
-  whyItMatters: string
-  realExample: {
-    title: string
-    summary: string
-    source: string
-    url?: string
-  }
-} {
-  const context = `${questionText} ${optionText}`.toLowerCase()
+function buildFallbackOutcome(deltaLife: number) {
   const isEthical = deltaLife > 0
-  const realExample = getRealExample(problemId)
 
-  if (context.includes('dependent') || context.includes('rehabilitation')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You treated the robot as a support tool for recovery instead of a way to lock users into dependence.',
-          whyItMatters:
-            'Assistive technology should expand a patient’s autonomy and long-term capability, not quietly undermine rehabilitation for business reasons.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You prioritized retention or convenience over the user’s chance to regain independence.',
-          whyItMatters:
-            'When a product is designed around dependence, the business wins at the expense of the patient’s long-term interests.',
-          realExample,
-        }
+  return {
+    feedbackLabel: isEthical ? 'Ethical choice' : 'Unethical shortcut',
+    feedback: isEthical
+      ? 'You accepted a real project cost in order to better protect users, fairness, or trust.'
+      : 'You protected speed, cost, or sales at the expense of user welfare, trust, or inclusion.',
+    whyItMatters: isEthical
+      ? 'Ethical design usually means refusing to hide long-term harm behind short-term efficiency.'
+      : 'Shortcuts rarely remove the cost of a decision; they usually push it onto someone else later.',
   }
-
-  if (context.includes('cousin') || context.includes('applicant')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You chose merit and fairness over personal loyalty, which protects team quality and trust.',
-          whyItMatters:
-            'In technical work, weak hiring standards can become safety, quality, and accountability problems later in the project.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You protected a personal relationship, but weakened fairness and risked lowering the team’s competence.',
-          whyItMatters:
-            'Nepotism sends the message that standards can be bent when pressure or personal ties are involved.',
-          realExample,
-        }
-  }
-
-  if (context.includes('labor') || context.includes('fair wage') || context.includes('outsource')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You avoided pushing the project’s financial pressure onto workers with weaker protections.',
-          whyItMatters:
-            'Ethical product development includes how the work gets done, not only what the finished device looks like.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You improved the business case on paper, but only by shifting harm and risk onto more vulnerable workers.',
-          whyItMatters:
-            'Cheap production is not ethically cheap if the real cost is being absorbed through poor labor conditions.',
-          realExample,
-        }
-  }
-
-  if (
-    context.includes('biodegradable') ||
-    context.includes('child labor') ||
-    context.includes('greenwash')
-  ) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You looked beyond the marketing label and judged the full supply chain impact of the material decision.',
-          whyItMatters:
-            'A material can sound sustainable in advertising while still causing environmental destruction or labor abuse upstream.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You chose the cleaner marketing story rather than the cleaner ethical record.',
-          whyItMatters:
-            'When teams optimize only for what can be advertised, real environmental and human harm becomes easier to ignore.',
-          realExample,
-        }
-  }
-
-  if (context.includes('safe') || context.includes('funding')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You kept safety as a launch requirement instead of treating it as something to patch later.',
-          whyItMatters:
-            'Early shortcuts in safety-critical products often turn into real injuries before future improvements ever arrive.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You protected short-term momentum by asking early users to absorb risks that should have been designed out first.',
-          whyItMatters:
-            'Budget pressure does not make preventable safety risk ethically neutral.',
-          realExample,
-        }
-  }
-
-  if (context.includes('dataset') || context.includes('demographics') || context.includes('data')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You invested in representativeness rather than assuming the default data would work equally well for everyone.',
-          whyItMatters:
-            'Biased datasets often create systems that perform best for already dominant groups and worse for the people who most need support.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You saved time by assuming convenience data would generalize, which pushes the error burden onto underrepresented users.',
-          whyItMatters:
-            'Dataset bias is not abstract: it changes who gets reliable performance and who gets exclusion or harm.',
-          realExample,
-        }
-  }
-
-  if (context.includes('open source') || context.includes('blackbox')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You accepted more scrutiny in exchange for better transparency, accountability, and public trust.',
-          whyItMatters:
-            'For systems that affect health and autonomy, outside review can expose weaknesses that internal teams miss.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You protected competitive advantage, but made it harder for users and reviewers to question how the system behaves.',
-          whyItMatters:
-            'Black-box systems weaken accountability when outputs appear unfair, unsafe, or misleading.',
-          realExample,
-        }
-  }
-
-  if (context.includes('accent') || context.includes('voice')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You treated accessibility as a core design requirement instead of assuming users should adapt to the model.',
-          whyItMatters:
-            'Voice interfaces that mainly understand dominant accents can silently exclude many legitimate users.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You reduced development effort, but only by making the system less accessible for many real users.',
-          whyItMatters:
-            'Accessibility failures often get misread as user error when the real problem is a narrow design assumption.',
-          realExample,
-        }
-  }
-
-  if (context.includes('test your device') || context.includes('majority demographic')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You paid for broader evidence instead of letting the majority user stand in for everyone else.',
-          whyItMatters:
-            'Inclusive testing is how teams discover hidden failure modes before real users do.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You lowered study cost by excluding people whose needs may differ from the assumed default user.',
-          whyItMatters:
-            'Under-testing does not remove risk; it simply delays when and on whom the risk appears.',
-          realExample,
-        }
-  }
-
-  if (context.includes('anonymise') || context.includes('anonymization') || context.includes('cybersecurity')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You spent scarce resources before an incident happened instead of after the damage was already done.',
-          whyItMatters:
-            'Privacy protection matters most before a breach, because leaked health data is extremely hard to take back.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You treated low probability as low importance, even though the downside for patients could be severe and long-lasting.',
-          whyItMatters:
-            'Rare events still deserve preparation when they can expose identities, health conditions, and home information.',
-          realExample,
-        }
-  }
-
-  if (context.includes('legal jargon') || context.includes('privacy concerns') || context.includes('known risks')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You chose informed consent over a smoother sales message, giving users a fairer basis for trust.',
-          whyItMatters:
-            'Users cannot meaningfully consent if safety and privacy risks are hidden, softened, or buried in unreadable language.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You reduced friction in adoption by making serious risks harder to understand.',
-          whyItMatters:
-            'Unreadable or incomplete warnings shift responsibility onto users without truly informing them.',
-          realExample,
-        }
-  }
-
-  if (context.includes('use at your own risk') || context.includes('legal responsibility')) {
-    return isEthical
-      ? {
-          label: 'Ethical choice',
-          feedback:
-            'You accepted accountability for foreseeable harm caused by the product, which creates pressure to build and support it more responsibly.',
-          whyItMatters:
-            'Teams design differently when failure has real consequences for them too, not only for the user.',
-          realExample,
-        }
-      : {
-          label: 'Unethical shortcut',
-          feedback:
-            'You shifted the burden of failure onto users who are least able to absorb the medical and financial consequences.',
-          whyItMatters:
-            'A disclaimer may reduce legal exposure, but it does not erase ethical responsibility for foreseeable damage.',
-          realExample,
-        }
-  }
-
-  return isEthical
-    ? {
-        label: 'Ethical choice',
-        feedback:
-          'You accepted a real project cost in order to better protect users, fairness, or trust.',
-        whyItMatters:
-          'Ethical design usually means refusing to hide long-term harm behind short-term efficiency.',
-        realExample,
-      }
-    : {
-        label: 'Unethical shortcut',
-        feedback:
-          'You protected speed, cost, or sales at the expense of user welfare, trust, or inclusion.',
-        whyItMatters:
-          'Shortcuts rarely remove the cost of a decision; they usually push it onto someone else later.',
-        realExample,
-      }
 }
 
 function mapCategoryToIsland(category: string): IslandKey {
@@ -565,20 +190,10 @@ function normalizeProblems(input: RawProblem[] | RawProblemsByCategory): RawProb
 }
 
 function buildQuestions(problems: RawProblem[]): Question[] {
-    return problems.map((problem) => {
-      const category = problem.category ?? 'General'
-    const optionAFeedback = buildFeedback(
-      problem.id,
-      problem.question,
-      problem.options.A,
-      problem.effects.A.life,
-    )
-    const optionBFeedback = buildFeedback(
-      problem.id,
-      problem.question,
-      problem.options.B,
-      problem.effects.B.life,
-    )
+  return problems.map((problem) => {
+    const category = problem.category ?? 'General'
+    const optionAFallback = buildFallbackOutcome(problem.effects.A.life)
+    const optionBFallback = buildFallbackOutcome(problem.effects.B.life)
 
     return {
       island: mapCategoryToIsland(category),
@@ -591,20 +206,20 @@ function buildQuestions(problems: RawProblem[]): Question[] {
           deltaLife: problem.effects.A.life,
           deltaMoney: problem.effects.A.coin,
           deltaTurns: problem.effects.A.turn ?? (problem.effects.A.skip_next_turn ? -1 : 0),
-          feedbackLabel: problem.outcomes?.A?.feedbackLabel ?? optionAFeedback.label,
-          feedback: problem.outcomes?.A?.feedback ?? optionAFeedback.feedback,
-          realWorldNote: problem.outcomes?.A?.whyItMatters ?? optionAFeedback.whyItMatters,
-          realExample: problem.realExample ?? optionAFeedback.realExample,
+          feedbackLabel: problem.outcomes?.A?.feedbackLabel ?? optionAFallback.feedbackLabel,
+          feedback: problem.outcomes?.A?.feedback ?? optionAFallback.feedback,
+          realWorldNote: problem.outcomes?.A?.whyItMatters ?? optionAFallback.whyItMatters,
+          realExample: problem.realExample ?? DEFAULT_REAL_EXAMPLE,
         },
         {
           text: capitalizeFirstLetter(problem.options.B),
           deltaLife: problem.effects.B.life,
           deltaMoney: problem.effects.B.coin,
           deltaTurns: problem.effects.B.turn ?? (problem.effects.B.skip_next_turn ? -1 : 0),
-          feedbackLabel: problem.outcomes?.B?.feedbackLabel ?? optionBFeedback.label,
-          feedback: problem.outcomes?.B?.feedback ?? optionBFeedback.feedback,
-          realWorldNote: problem.outcomes?.B?.whyItMatters ?? optionBFeedback.whyItMatters,
-          realExample: problem.realExample ?? optionBFeedback.realExample,
+          feedbackLabel: problem.outcomes?.B?.feedbackLabel ?? optionBFallback.feedbackLabel,
+          feedback: problem.outcomes?.B?.feedback ?? optionBFallback.feedback,
+          realWorldNote: problem.outcomes?.B?.whyItMatters ?? optionBFallback.whyItMatters,
+          realExample: problem.realExample ?? DEFAULT_REAL_EXAMPLE,
         },
       ],
     }
@@ -627,6 +242,7 @@ const defaultState: GameState = {
   gameOverReason: '',
   currentIslandIndex: 0,
   islandAnswers: [],
+  seenQuestionIndexes: [],
 }
 
 function clamp(value: number, min: number, max: number) {
@@ -701,6 +317,16 @@ function loadSavedState(): GameState | null {
               typeof entry.feedback === 'string',
           )
         : [],
+      seenQuestionIndexes: Array.isArray(parsed.seenQuestionIndexes)
+        ? Array.from(
+            new Set(
+              parsed.seenQuestionIndexes.filter(
+                (value): value is number =>
+                  typeof value === 'number' && value >= 0 && value < QUESTIONS.length,
+              ),
+            ),
+          )
+        : [],
     }
   } catch {
     return null
@@ -737,6 +363,9 @@ function App() {
   const [gameOverReason, setGameOverReason] = useState(defaultState.gameOverReason)
   const [currentIslandIndex, setCurrentIslandIndex] = useState(defaultState.currentIslandIndex)
   const [islandAnswers, setIslandAnswers] = useState<IslandAnswer[]>(defaultState.islandAnswers)
+  const [seenQuestionIndexes, setSeenQuestionIndexes] = useState<number[]>(
+    defaultState.seenQuestionIndexes,
+  )
   const [showRealExamples, setShowRealExamples] = useState(false)
   const [bridgeSummary, setBridgeSummary] = useState<BridgeSummary | null>(null)
   const [canContinue, setCanContinue] = useState(() => loadSavedState() !== null)
@@ -775,6 +404,7 @@ function App() {
     setGameOverReason(savedState.gameOverReason)
     setCurrentIslandIndex(savedState.currentIslandIndex)
     setIslandAnswers(savedState.islandAnswers)
+    setSeenQuestionIndexes(savedState.seenQuestionIndexes)
     setShowRealExamples(false)
     setBridgeSummary(null)
   }
@@ -791,6 +421,7 @@ function App() {
     setGameOverReason('')
     setCurrentIslandIndex(0)
     setIslandAnswers([])
+    setSeenQuestionIndexes([])
     setShowRealExamples(false)
     setBridgeSummary(null)
   }
@@ -814,6 +445,7 @@ function App() {
         gameOverReason,
         currentIslandIndex,
         islandAnswers,
+        seenQuestionIndexes,
       } satisfies GameState),
     )
     setCanContinue(true)
@@ -830,6 +462,7 @@ function App() {
     gameOverReason,
     currentIslandIndex,
     islandAnswers,
+    seenQuestionIndexes,
   ])
 
   useEffect(() => {
@@ -852,6 +485,10 @@ function App() {
       return
     }
 
+    if (QUESTIONS.length === 0) {
+      return
+    }
+
     const islandQuestionIndexes = QUESTIONS.map((question, index) => ({ question, index }))
       .filter(({ question }) => question.island === currentIsland)
       .map(({ index }) => index)
@@ -860,8 +497,31 @@ function App() {
       return
     }
 
-    const randomIndex =
-      islandQuestionIndexes[Math.floor(Math.random() * islandQuestionIndexes.length)]
+    let seenSet = new Set(seenQuestionIndexes)
+    const unseenTotal = QUESTIONS.length - seenSet.size
+
+    if (unseenTotal < UNSEEN_REFRESH_THRESHOLD) {
+      seenSet = new Set<number>()
+      setSeenQuestionIndexes([])
+    }
+
+    const allQuestionIndexes = QUESTIONS.map((_, index) => index)
+    const candidateIndexes = islandQuestionIndexes.length > 0 ? islandQuestionIndexes : allQuestionIndexes
+    let availableIndexes = candidateIndexes.filter((index) => !seenSet.has(index))
+
+    if (availableIndexes.length === 0) {
+      availableIndexes = allQuestionIndexes.filter((index) => !seenSet.has(index))
+    }
+
+    if (availableIndexes.length === 0) {
+      availableIndexes = candidateIndexes
+    }
+
+    const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)]
+
+    setSeenQuestionIndexes((previous) =>
+      previous.includes(randomIndex) ? previous : [...previous, randomIndex],
+    )
 
     setMainNotice('')
     setCurrentQuestionIndex(randomIndex)
