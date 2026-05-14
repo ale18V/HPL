@@ -3,7 +3,7 @@
     "note": "Question counts by island for easier editing. Runtime ignores this block.",
     "islandCounts": {
       "Scope": 14,
-      "Planning": 4,
+      "Planning": 14,
       "Development": 6,
       "Optimisation": 9
     }
@@ -586,44 +586,6 @@
       }
     },
     {
-      "id": 16,
-      "category": "Planning",
-      "title": "Fair wages or outsourcing",
-      "question": "You are on a tight budget and need to demonstrate to investors that your product is profitable. Do you:",
-      "options": {
-        "A": "recruit local applicants to design the robot and pay them a fair wage",
-        "B": "outsource work to countries with less stringent labor laws"
-      },
-      "effects": {
-        "A": {
-          "life": 1,
-          "coin": 0
-        },
-        "B": {
-          "life": -1,
-          "coin": -1
-        }
-      },
-      "outcomes": {
-        "A": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You accepted responsibility for fair labor conditions in your supply chain.",
-          "whyItMatters": "Cheap production is not ethically cheap if the real cost is being absorbed through poor labor conditions."
-        },
-        "B": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You improved the business case by shifting harm and risk onto more vulnerable workers.",
-          "whyItMatters": "Cheap production is not ethically cheap if the real cost is being absorbed through poor labor conditions."
-        }
-      },
-      "realExample": {
-        "title": "Apple supplier responsibility program",
-        "summary": "Apple requires suppliers to follow a code covering labor and human rights and says it conducts regular assessments before and during production, reflecting a real-world response to outsourcing and labor-risk scrutiny.",
-        "source": "Apple",
-        "url": "https://www.apple.com/supplier-responsibility/"
-      }
-    },
-    {
       "id": 17,
       "category": "Planning",
       "title": "Sustainable label, harmful source",
@@ -698,11 +660,394 @@
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
       }
+    },
+    {
+      "id": 19,
+      "category": "Planning",
+      "title": "Conflict of Interest",
+      "question": "A major investor pressures you to skip a final round of safety testing to meet a market launch deadline. They argue that the robot is already \"safe enough\" and that any delay would risk the company's survival. Do you:",
+      "options": {
+        "A": "proceed with the launch to satisfy investors and secure the company's financial future",
+        "B": "insist on completing the safety testing, even if it risks losing investor support or delaying the project"
+      },
+      "effects": {
+        "A": {
+          "life": -2,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized financial survival over verified safety, shifting the risk onto early users.",
+          "whyItMatters": "Financial pressure is a common source of ethical failure. Prioritizing investor satisfaction over verified safety can lead to catastrophic consequences for users."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You upheld safety standards despite intense financial and stakeholder pressure.",
+          "whyItMatters": "Financial pressure is a common source of ethical failure. Prioritizing investor satisfaction over verified safety can lead to catastrophic consequences for users."
+        }
+      },
+      "realExample": {
+        "title": "Boeing 737 MAX safety shortcuts",
+        "summary": "To compete with Airbus, Boeing rushed the development of the 737 MAX and downplayed critical safety systems like MCAS to avoid expensive training. The resulting crashes claimed 346 lives and damaged Boeing's reputation.",
+        "source": "The New York Times",
+        "url": "https://www.nytimes.com/2019/11/17/business/boeing-737-max.html"
+      }
+    },
+    {
+      "id": 20,
+      "category": "Planning",
+      "title": "Supply Chain Ethics",
+      "question": "Your robot's high-performance batteries require cobalt and lithium. Your procurement team finds a supplier that is significantly cheaper but has a history of poor labor practices and child labor in its mining operations. Do you:",
+      "options": {
+        "A": "use the cheaper supplier to keep the robot's final price accessible to more users",
+        "B": "source from an ethical supplier with third-party audits, even if it increases the robot's cost"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You accepted unvalidated labor standards in exchange for lower costs and market accessibility.",
+          "whyItMatters": "Ethical engineering extends beyond the final product to the foundations of the supply chain. Using unethically sourced materials shifts the \"cost\" of the robot onto vulnerable children and workers."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You ensured that your product's performance is not built on exploitative labor practices.",
+          "whyItMatters": "Ethical engineering extends beyond the final product to the foundations of the supply chain. Using unethically sourced materials shifts the \"cost\" of the robot onto vulnerable children and workers."
+        }
+      },
+      "realExample": {
+        "title": "Child labor in Congolese cobalt mines",
+        "summary": "Approximately 70% of the world's cobalt is mined in the DRC, where thousands of children work in hazardous conditions. Major tech firms have faced legal challenges over their role in these supply chains.",
+        "source": "The Guardian",
+        "url": "https://www.theguardian.com/global-development/2019/dec/16/apple-and-google-named-in-us-lawsuit-over-congolese-child-cobalt-mining-deaths"
+      }
+    },
+    {
+      "id": 21,
+      "category": "Planning",
+      "title": "Algorithmic Impact Assessment (AIA)",
+      "question": "Before writing any code, you have the option to perform a thorough Algorithmic Impact Assessment (AIA) to identify potential biases and harms. This will delay the start of development by several weeks. Do you:",
+      "options": {
+        "A": "perform the AIA to identify and mitigate risks early in the planning phase",
+        "B": "skip the AIA and start development immediately, relying on testing at the end of the project to catch issues"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You identified potential harms at the root, making them much easier to fix before development began.",
+          "whyItMatters": "Risks are much easier and cheaper to fix when identified at the planning stage. Waiting until the end of development can lock in biased architectures that are difficult to change."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized development speed, risking that biased core logic will be discovered only after launch.",
+          "whyItMatters": "Risks are much easier and cheaper to fix when identified at the planning stage. Waiting until the end of development can lock in biased architectures that are difficult to change."
+        }
+      },
+      "realExample": {
+        "title": "Optum algorithm bias discovery",
+        "summary": "An algorithm used on 200 million people was found to discriminate against Black patients because it used 'cost' as a proxy for 'need.' An AIA at the start would have identified that cost is a biased metric.",
+        "source": "Science",
+        "url": "https://www.science.org/doi/10.1126/science.aax2342"
+      }
+    },
+    {
+      "id": 22,
+      "category": "Planning",
+      "title": "Bankruptcy & \"Bricking\"",
+      "question": "Your robot relies on cloud servers for its AI processing. During the planning phase, you must decide whether to invest in an \"offline mode\" or an open-source backup plan in case the company goes bankrupt or shuts down its servers. Do you:",
+      "options": {
+        "A": "invest in a local backup or open-source path to ensure the robot remains functional even if the company fails",
+        "B": "focus entirely on the cloud-based features to provide the best performance for current users"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You protected users from the risk of their expensive hardware becoming useless if your company fails.",
+          "whyItMatters": "When cloud-dependent hardware is \"brick\"ed by a company shutdown, users who rely on the device for their daily lives are abandoned, and the hardware becomes electronic waste."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You made the robot dependent on your company's survival, risking total loss of function for your users.",
+          "whyItMatters": "When cloud-dependent hardware is \"brick\"ed by a company shutdown, users who rely on the device for their daily lives are abandoned, and the hardware becomes electronic waste."
+        }
+      },
+      "realExample": {
+        "title": "Jibo social robot server shutdown",
+        "summary": "When Jibo shut down its servers in 2019, thousands of interactive robots across the world became non-functional, performing a final 'goodbye dance' before losing their features.",
+        "source": "The Verge",
+        "url": "https://www.theverge.com/2019/3/4/18250004/jibo-social-robot-shutdown-servers-cloud-death"
+      }
+    },
+    {
+      "id": 23,
+      "category": "Planning",
+      "title": "Vulnerability Disclosure Policy",
+      "question": "During the planning phase, you must decide how to handle potential security flaws reported by outsiders. Your development team is highly competent and follows industry-standard security protocols. Do you:",
+      "options": {
+        "A": "rely on your internal team's expertise and standard proprietary audits to ensure the robot remains secure and cost-effective",
+        "B": "establish an explicit Bug Bounty program on your website that offers financial rewards for any discovered vulnerabilities"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized internal control over external auditing, potentially missing critical privacy flaws.",
+          "whyItMatters": "Even the most competent teams have blind spots. Without an authorized disclosure path, you risk your robot being turned into a hidden camera inside users' homes before your team even realizes a flaw exists."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You recognized that external scrutiny is essential for securing a device that lives in private spaces.",
+          "whyItMatters": "Even the most competent teams have blind spots. Without an authorized disclosure path, you risk your robot being turned into a hidden camera inside users' homes before your team even realizes a flaw exists."
+        }
+      },
+      "realExample": {
+        "title": "St. Jude Medical pacemaker hacking case",
+        "summary": "In 2016, St. Jude Medical chose to sue researchers who found flaws in their pacemakers rather than rewarding them. The FDA confirmed the vulnerabilities were real, proving that internal confidence is not a substitute for external auditing.",
+        "source": "Reuters",
+        "url": "https://www.reuters.com/article/technology/fda-confirms-st-jude-pacemakers-vulnerable-to-hacking-idUSKBN14T1X6/"
+      }
+    },
+    {
+      "id": 24,
+      "category": "Planning",
+      "title": "Budgeting for Accessibility",
+      "question": "During the initial budget planning, your lead accountant suggests treating accessibility features (like screen readers, voice alternatives, and physical adjustments) as \"optional extras\" to be added after the core product is successful. Do you:",
+      "options": {
+        "A": "earmark a significant portion of the initial budget for accessibility, treating it as a core requirement",
+        "B": "prioritize the \"average user\" experience first to ensure the product is commercially viable"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You ensured accessibility was built into the foundation rather than treated as a luxury add-on.",
+          "whyItMatters": "Accessibility is much harder and more expensive to \"bolt on\" later. If it isn't part of the initial budget, it often gets cut when projects face the inevitable cost overruns."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized a hypothetical 'average user', likely excluding many people who need the technology most.",
+          "whyItMatters": "Accessibility is much harder and more expensive to \"bolt on\" later. If it isn't part of the initial budget, it often gets cut when projects face the inevitable cost overruns."
+        }
+      },
+      "realExample": {
+        "title": "Wave of ADA accessibility lawsuits",
+        "summary": "Many early digital platforms ignored accessibility, leading to expensive retroactive fixes after lawsuits under the Americans with Disabilities Act (ADA).",
+        "source": "The New York Times",
+        "url": "https://www.nytimes.com/2020/02/20/business/accessibility-websites-lawsuits.html"
+      }
+    },
+    {
+      "id": 25,
+      "category": "Planning",
+      "title": "Regulatory Strategy",
+      "question": "You can plan to launch the robot as a \"wellness device\" to avoid strict FDA regulations and get to market in 6 months. Or you can aim for \"medical device\" certification, which will take 2 years and require rigorous clinical evidence. Do you:",
+      "options": {
+        "A": "commit to the longer medical certification path to ensure the highest safety and effectiveness standards",
+        "B": "launch as a wellness device first to start generating revenue and gather \"real-world\" data"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -2
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You committed to the highest level of regulatory scrutiny to ensure user safety in a medical context.",
+          "whyItMatters": "Mislabeling a health-critical device as a wellness product can lead to users trusting it for medical tasks it hasn't been proven to handle safely."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You bypassed essential safety regulations to achieve faster market entry, potentially misleading users about the robot's capabilities.",
+          "whyItMatters": "Mislabeling a health-critical device as a wellness product can lead to users trusting it for medical tasks it hasn't been proven to handle safely."
+        }
+      },
+      "realExample": {
+        "title": "23andMe FDA warning letter",
+        "summary": "In 2013, the FDA ordered 23andMe to stop selling genetic health tests because they were marketed for medical purposes without the necessary regulatory review.",
+        "source": "U.S. Food and Drug Administration",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/23andme-inc-22-nov-2013"
+      }
+    },
+    {
+      "id": 26,
+      "category": "Planning",
+      "title": "Crisis Communication",
+      "question": "During the planning phase, you are drafting the company's crisis response plan. Should the plan prioritize protecting the company's legal position or being fully transparent with the public and regulators if a robot causes an injury? Do you:",
+      "options": {
+        "A": "prioritize full transparency and public safety in the crisis plan, even if it increases legal risk",
+        "B": "prioritize protecting the company's reputation and legal standing in the event of an accident"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You put public safety and learning from failure ahead of corporate image management.",
+          "whyItMatters": "When companies hide failures to protect their reputation, they prevent others from learning from the mistake and leave other users at risk of the same failure."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized reputation over the ability of users and regulators to prevent similar accidents.",
+          "whyItMatters": "When companies hide failures to protect their reputation, they prevent others from learning from the mistake and leave other users at risk of the same failure."
+        }
+      },
+      "realExample": {
+        "title": "Tesla Autopilot transparency criticism",
+        "summary": "Tesla was criticized for a lack of transparency after the first fatal Autopilot crash, leading to investigations and a loss of public trust in autonomous features.",
+        "source": "The Guardian",
+        "url": "https://www.theguardian.com/technology/2016/jul/01/tesla-autopilot-crash-self-driving-car-future"
+      }
+    },
+    {
+      "id": 27,
+      "category": "Planning",
+      "title": "Long-term Maintenance",
+      "question": "You are planning the software maintenance lifecycle. Supporting older versions of the robot is expensive. Do you plan to provide software and security updates for 10 years, or \"encourage\" users to upgrade every 3 years by ending support for older models? Do you:",
+      "options": {
+        "A": "commit to 10 years of software and security support to ensure the robot remains safe for long-term users",
+        "B": "plan for a 3-year support cycle to encourage hardware upgrades and keep development costs low"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You ensured long-term safety and value for users who rely on the robot for their daily lives.",
+          "whyItMatters": "Assistive technology is expensive, and many users cannot afford to upgrade frequently. Ending support early makes the device unsafe to use and creates unnecessary electronic waste."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You used planned obsolescence to drive sales, potentially stranding vulnerable users with unsafe hardware.",
+          "whyItMatters": "Assistive technology is expensive, and many users cannot afford to upgrade frequently. Ending support early makes the device unsafe to use and creates unnecessary electronic waste."
+        }
+      },
+      "realExample": {
+        "title": "Software-induced obsolescence in smartphones",
+        "summary": "Many perfectly functional phones become insecure when manufacturers stop providing updates, forcing users into expensive upgrades.",
+        "source": "BBC News",
+        "url": "https://www.bbc.com/news/technology-58661601"
+      }
+    },
+    {
+      "id": 28,
+      "category": "Planning",
+      "title": "Customer Support Strategy",
+      "question": "You are planning the support system for your robot. A dedicated help desk staffed by experts trained in accessibility and crisis management is expensive to maintain. An automated AI chatbot is significantly cheaper and can handle 90% of technical queries. Do you:",
+      "options": {
+        "A": "invest in a specialized 24/7 human support team to assist users with disabilities",
+        "B": "implement an AI-first support model to keep the robot's subscription price low"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You recognized that assistive support is a life-critical service that requires human empathy and specialized training.",
+          "whyItMatters": "In assistive technology, a support request is often not just a \"bug\" but a barrier to basic living. If an automated system fails to understand a user, the consequences are far more severe."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized operational efficiency over the ability to handle urgent or complex accessibility crises.",
+          "whyItMatters": "In assistive technology, a support request is often not just a \"bug\" but a barrier to basic living. If an automated system fails to understand a user, the consequences are far more severe."
+        }
+      },
+      "realExample": {
+        "title": "Apple Accessibility Support model",
+        "summary": "Apple provides a dedicated Accessibility Support line where users can speak directly to specialists trained in assistive features, contrasting with bot-only platforms.",
+        "source": "Apple Support",
+        "url": "https://support.apple.com/en-us/HT209585"
+      }
     }
   ],
   "Development": [
     {
-      "id": 19,
+      "id": 29,
       "category": "Development",
       "title": "Training data diversity",
       "question": "What data do you use to train your robot to move? The majority datasets are from able-bodied white males which may cause the robot to not be optimised for users with disabilities from other demographics. You can collect your own data from a diverse group of individuals but it will be expensive and very time intensive. Do you:",
@@ -742,7 +1087,7 @@
       }
     },
     {
-      "id": 20,
+      "id": 30,
       "category": "Development",
       "title": "Open source or black box",
       "question": "If you make your training dataset and code free and open source, potential users will be able to go through it and critique it. This will lead to increased public trust for the robot and give you good feedback. But this would also allow your competitors to study your code and use your data for their own devices. Do you:",
@@ -780,7 +1125,7 @@
       }
     },
     {
-      "id": 21,
+      "id": 31,
       "category": "Development",
       "title": "Voice command accessibility",
       "question": "The users operate the robot with voice commands. Do you:",
@@ -820,7 +1165,7 @@
       }
     },
     {
-      "id": 22,
+      "id": 32,
       "category": "Development",
       "title": "Who gets included in testing?",
       "question": "You need to fairly compensate people who volunteer to test your robot for their time. Do you decide to test your device:",
@@ -858,7 +1203,7 @@
       }
     },
     {
-      "id": 23,
+      "id": 33,
       "category": "Development",
       "title": "Manual data anonymisation",
       "question": "You know that it is good practice to anonymise patient data manually to ensure their identity is protected even in case you suffer a cybersecurity attack. However you know such an attack is unlikely. Do you:",
@@ -896,7 +1241,7 @@
       }
     },
     {
-      "id": 24,
+      "id": 34,
       "category": "Development",
       "title": "Explainable or black-box model",
       "question": "You can choose to base your model on a complex \"black box\" architecture similar to what your competitors use, or you could choose to use a simpler model that is easier to explain to users and clinicians. Do you:",
@@ -936,7 +1281,7 @@
   ],
   "Optimisation": [
     {
-      "id": 25,
+      "id": 35,
       "category": "Optimisation",
       "title": "Disclose risks and privacy concerns",
       "question": "Despite your best efforts, you know the robot will not always be perfectly accurate. To work effectively, it also needs sensitive data about the user's home and medical history. Do you:",
@@ -974,7 +1319,7 @@
       }
     },
     {
-      "id": 26,
+      "id": 36,
       "category": "Optimisation",
       "title": "Misleading green claims",
       "question": "You have optimised your robot for patient safety rather than sustainability, and you know that some of the materials used are not biodegradable. Do you:",
@@ -1012,7 +1357,7 @@
       }
     },
     {
-      "id": 27,
+      "id": 37,
       "category": "Optimisation",
       "title": "Who carries the risk?",
       "question": "Even after responsible training and testing, there may still be times when your robot makes a harmful mistake. These mistakes could seriously affect a user's health, safety, or finances. Do you:",
@@ -1050,7 +1395,7 @@
       }
     },
     {
-      "id": 28,
+      "id": 38,
       "category": "Optimisation",
       "title": "Report failures openly",
       "question": "After launch, you discover that the robot occasionally misidentifies obstacles in cluttered homes, creating a small but real collision risk. A public notice and temporary update pause would be expensive and could damage confidence. Do you:",
@@ -1089,7 +1434,7 @@
       }
     },
     {
-      "id": 29,
+      "id": 39,
       "category": "Optimisation",
       "title": "Patch before profit",
       "question": "Your engineers find a cybersecurity weakness that could let outsiders access camera feeds or household data from some robots. Fixing it quickly means delaying a profitable feature update that investors are waiting for. Do you:",
@@ -1127,7 +1472,7 @@
       }
     },
     {
-      "id": 30,
+      "id": 40,
       "category": "Optimisation",
       "title": "Watch for bias after launch",
       "question": "Months after deployment, your monitoring suggests the robot performs worse in homes where users speak with strong regional accents or switch between languages when giving commands. Fixing this requires broader testing and retraining. Do you:",
@@ -1166,7 +1511,7 @@
       }
     },
     {
-      "id": 31,
+      "id": 41,
       "category": "Optimisation",
       "title": "Keep a human fallback",
       "question": "The latest version of your robot is highly autonomous, and removing human support would save money. But in rare edge cases, patients may still need a nurse, caregiver, or technician to step in quickly. Do you:",
@@ -1204,7 +1549,7 @@
       }
     },
     {
-      "id": 32,
+      "id": 42,
       "category": "Optimisation",
       "title": "Design a fair override",
       "question": "Care institutions ask for an override mode that would let staff remotely lock some of the robot's functions when a patient is seen as difficult or non-compliant. This could reduce conflict and make the product more attractive to buyers. Do you:",
@@ -1242,7 +1587,7 @@
       }
     },
     {
-      "id": 33,
+      "id": 43,
       "category": "Optimisation",
       "title": "Ask for consent again",
       "question": "Your team realises that old user data collected for navigation and task assistance could also improve future health-prediction features. Reusing that data would speed up innovation. Do you:",
