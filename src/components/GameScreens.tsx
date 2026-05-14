@@ -196,6 +196,15 @@ export function GameScreens({
               {showRealExamples ? (
                 <div className="real-examples-box">
                   <strong>Real example:</strong>
+                  {revealedOption.realExample.imageUrl ? (
+                    <img
+                      src={revealedOption.realExample.imageUrl}
+                      alt={revealedOption.realExample.title}
+                      className="real-example-image"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : null}
                   <p className="real-example-title">{revealedOption.realExample.title}</p>
                   <p className="real-example-summary">{revealedOption.realExample.summary}</p>
                   <p className="real-example-meta">

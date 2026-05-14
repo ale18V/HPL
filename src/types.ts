@@ -29,6 +29,7 @@ export type Option = {
     summary: string
     source: string
     url?: string
+    imageUrl?: string
   }
 }
 
@@ -91,6 +92,8 @@ export type RawProblem = {
     summary: string
     source: string
     url?: string
+    imageUrl?: string
+    image?: string
   }
 }
 

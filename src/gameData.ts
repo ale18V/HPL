@@ -19,6 +19,17 @@ const DEFAULT_REAL_EXAMPLE: Option['realExample'] = {
   source: 'General governance practice',
 }
 
+function normalizeRealExample(realExample?: RawProblem['realExample']): Option['realExample'] {
+  if (!realExample) {
+    return DEFAULT_REAL_EXAMPLE
+  }
+
+  return {
+    ...realExample,
+    imageUrl: realExample.imageUrl ?? realExample.image,
+  }
+}
+
 function buildFallbackOutcome(deltaLife: number) {
   const isEthical = deltaLife > 0
 
@@ -88,7 +99,7 @@ function buildQuestions(problems: RawProblem[]): Question[] {
           feedbackLabel: problem.outcomes?.A?.feedbackLabel ?? optionAFallback.feedbackLabel,
           feedback: problem.outcomes?.A?.feedback ?? optionAFallback.feedback,
           realWorldNote: problem.outcomes?.A?.whyItMatters ?? optionAFallback.whyItMatters,
-          realExample: problem.realExample ?? DEFAULT_REAL_EXAMPLE,
+          realExample: normalizeRealExample(problem.realExample),
         },
         {
           text: capitalizeFirstLetter(problem.options.B),
@@ -98,7 +109,7 @@ function buildQuestions(problems: RawProblem[]): Question[] {
           feedbackLabel: problem.outcomes?.B?.feedbackLabel ?? optionBFallback.feedbackLabel,
           feedback: problem.outcomes?.B?.feedback ?? optionBFallback.feedback,
           realWorldNote: problem.outcomes?.B?.whyItMatters ?? optionBFallback.whyItMatters,
-          realExample: problem.realExample ?? DEFAULT_REAL_EXAMPLE,
+          realExample: normalizeRealExample(problem.realExample),
         },
       ],
     }
