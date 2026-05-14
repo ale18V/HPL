@@ -2,59 +2,135 @@
   "_meta": {
     "note": "Question counts by island for easier editing. Runtime ignores this block.",
     "islandCounts": {
-      "Scope": 2,
-      "Planning": 4,
-      "Development": 5,
-      "Optimisation": 14
+      "Scope": 14,
+      "Planning": 14,
+      "Development": 6,
+      "Optimisation": 9
     }
   },
   "Scope": [
     {
       "id": 1,
       "category": "Scope",
-      "title": "Prevent dependence early",
-      "question": "When defining what tasks the robot should help users with, you do a basic survey to list the tasks users struggle with the most often. Do you:",
+      "title": "Who counts as the user?",
+      "question": "You are defining the scope of an assistive robot for hospitals. Nurses and hospital managers are easy to interview, but patients with disabilities are harder to recruit and interviews will delay the project. Do you:",
       "options": {
-        "A": "invest extra in a team of mental health specialists to assess how much this robot should help users to prevent them becoming completely dependent on it",
-        "B": "train the user to complete all the tasks as best as it can, without considering how it affects patients’ motivation to regain their motor functionalities in the long run"
+        "A": "scope the project mainly around staff needs for now, then validate with patients later",
+        "B": "spend extra time interviewing patients, caregivers, and clinicians before fixing the project scope"
       },
       "effects": {
         "A": {
-          "life": 1,
-          "coin": -1
-        },
-        "B": {
           "life": -1,
           "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
         }
       },
       "outcomes": {
         "A": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You treated the robot as a support tool for recovery instead of a way to lock users into dependence.",
-          "whyItMatters": "Assistive technology should expand a patient’s autonomy and long-term capability, not quietly undermine rehabilitation for business reasons."
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized convenience over including the people the technology will directly affect.",
+          "whyItMatters": "Staff needs are important, but if the scope is defined without the people being assisted, the robot may solve the institution's workflow problem while missing patient dignity, comfort, or accessibility."
         },
         "B": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You prioritized convenience over the user’s chance to regain independence.",
-          "whyItMatters": "When a product is designed around dependence, the business wins at the expense of the patient’s long-term interests."
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You kept the affected people central to scope definition, even at the cost of schedule.",
+          "whyItMatters": "Staff needs are important, but if the scope is defined without the people being assisted, the robot may solve the institution's workflow problem while missing patient dignity, comfort, or accessibility."
         }
       },
       "realExample": {
-        "title": "Ekso Bionics and Shepherd Center rehabilitation partnership",
-        "summary": "In 2024, Ekso Bionics announced a research partnership with Shepherd Center to study exoskeleton use in rehabilitation and community settings, explicitly tying the technology to recovery and patient quality of life.",
-        "source": "Ekso Bionics",
-        "url": "https://ir.eksobionics.com/press-releases/detail/761/ekso-bionics-announces-research-partnership-with-shepherd"
+        "title": "Apple Health app menstrual tracking omission",
+        "summary": "Apple's original Health app was criticized for neglecting menstrual cycle tracking, even though it included many other health metrics. The issue became a clear example of what happens when important user groups are not fully considered during early product scoping. Apple later added reproductive health tracking in iOS 9.",
+        "source": "NBC News",
+        "url": "https://www.nbcnews.com/id/wbna56126216"
       }
     },
     {
       "id": 2,
       "category": "Scope",
-      "title": "Encourage rehabilitation",
-      "question": "While scoping the project you realise that if the users regain their motor functionalities and are able to move around on their own, they will not need your robot anymore. Do you want to:",
+      "title": "Choosing the success metric",
+      "question": "Your sponsor asks for one main success metric for the robot. \"Tasks completed per hour\" is easy to measure and helps compare prototypes. Some team members argue that success should also include user comfort, independence, and safety, but those are harder to measure. Do you:",
       "options": {
-        "A": "remind and encourage your users to go to rehabilitation therapy",
-        "B": "let users stay dependent on the robot for all their daily movement needs for better sales"
+        "A": "use task completion rate as the main metric for the first version",
+        "B": "use a mixed metric that includes efficiency, safety, comfort, and user independence"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You chose the metric that looks most objective, even though it can push design in the wrong direction.",
+          "whyItMatters": "The scope phase decides what the project will optimize for. A metric can look objective while still pushing the design in the wrong direction."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You resisted the illusion of simple measurement in favor of a fuller picture of success.",
+          "whyItMatters": "The scope phase decides what the project will optimize for. A metric can look objective while still pushing the design in the wrong direction."
+        }
+      },
+      "realExample": {
+        "title": "Optum algorithm biased against Black patients",
+        "summary": "A healthcare risk algorithm used to identify patients needing extra care used healthcare cost as a proxy for healthcare need. Since Black patients historically received less care and had lower healthcare costs than White patients with similar needs, the algorithm underestimated their care needs. The ethical issue began in the scope phase when designers chose 'cost' as the target variable instead of a more direct measure of medical need.",
+        "source": "Science News",
+        "url": "https://www.sciencenews.org/article/bias-common-health-care-algorithm-hurts-black-patients"
+      }
+    },
+    {
+      "id": 3,
+      "category": "Scope",
+      "title": "Voice interface scope",
+      "question": "The robot may use voice commands. A general speech-recognition system is already available and would keep the project moving. Testing different accents, speech patterns, and speech impairments would make the scope larger and slower. Do you:",
+      "options": {
+        "A": "treat voice control as a standard feature and test broader speech variation after the prototype works",
+        "B": "define speech variation as part of the scope before deciding whether voice should be the main interface"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You treated voice recognition as a solved problem instead of asking whose speech it actually serves well.",
+          "whyItMatters": "The ethical question is not only 'does the robot understand speech?' but 'whose speech does it understand well enough to be safe and useful?'"
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You made speech inclusion a scope question rather than an afterthought.",
+          "whyItMatters": "The ethical question is not only 'does the robot understand speech?' but 'whose speech does it understand well enough to be safe and useful?'"
+        }
+      },
+      "realExample": {
+        "title": "Stanford speech recognition disparity study",
+        "summary": "A Stanford-led study found that major automatic speech recognition systems had higher word error rates for Black speakers than white speakers, with average error rates of 0.35 compared with 0.19.",
+        "source": "Koenecke et al., PNAS",
+        "url": "https://www.pnas.org/doi/10.1073/pnas.1915768117"
+      }
+    },
+    {
+      "id": 4,
+      "category": "Scope",
+      "title": "Data collection boundaries",
+      "question": "The robot could collect room layout, movement patterns, voice commands, and health-related routines. Broad collection would help future features, but the current project only needs some of this data. Do you:",
+      "options": {
+        "A": "define only the data needed for the current purpose and revisit consent if the purpose changes",
+        "B": "define broad data collection now so the team does not have to redesign the system later"
       },
       "effects": {
         "A": {
@@ -69,26 +145,410 @@
       "outcomes": {
         "A": {
           "feedbackLabel": "Ethical choice",
-          "feedback": "You treated the robot as a support tool for recovery instead of a way to lock users into dependence.",
-          "whyItMatters": "Assistive technology should expand a patient’s autonomy and long-term capability, not quietly undermine rehabilitation for business reasons."
+          "feedback": "You limited data collection to purpose and required new consent for scope changes.",
+          "whyItMatters": "A broad data scope can seem efficient, but it may collect sensitive information before users understand how it could later be used."
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You prioritized retention or convenience over the user’s chance to regain independence.",
-          "whyItMatters": "When a product is designed around dependence, the business wins at the expense of the patient’s long-term interests."
+          "feedback": "You prioritized operational convenience over user control of their own information.",
+          "whyItMatters": "A broad data scope can seem efficient, but it may collect sensitive information before users understand how it could later be used."
         }
       },
       "realExample": {
-        "title": "Ekso Bionics and Shepherd Center rehabilitation partnership",
-        "summary": "This partnership is a concrete example of assistive robotics being adopted to support rehabilitation goals rather than long-term dependence on the device itself.",
-        "source": "Ekso Bionics",
-        "url": "https://ir.eksobionics.com/press-releases/detail/761/ekso-bionics-announces-research-partnership-with-shepherd"
+        "title": "Royal Free\u2013DeepMind data-sharing violation",
+        "summary": "The UK Information Commissioner's Office found that patient data sharing did not comply with data protection law and that patients were not adequately informed about how their data was being used.",
+        "source": "Digital Health",
+        "url": "https://www.digitalhealth.net/2017/07/royal-free-and-deepmind-did-not-comply-with-dpa-ico/"
+      }
+    },
+    {
+      "id": 5,
+      "category": "Scope",
+      "title": "Defining harm",
+      "question": "At the start of the project, your team has to define what kinds of harm the assistive robot should be tested for. Some team members want to focus on measurable physical safety, such as collisions or broken objects. Others argue that the scope should also include privacy, loss of autonomy, unfair exclusion, and emotional discomfort, even though these are harder to measure. Do you:",
+      "options": {
+        "A": "use a broader harm definition, even if it makes the scope harder to test",
+        "B": "start with physical safety only, because it is clearer, measurable, and easier to defend"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You resisted the temptation to scope harm narrowly just because it is easier to measure.",
+          "whyItMatters": "If 'harm' is scoped too narrowly at the beginning, important risks may be ignored until real people are affected."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You chose measurability over comprehensiveness, which can hide important risks.",
+          "whyItMatters": "If 'harm' is scoped too narrowly at the beginning, important risks may be ignored until real people are affected."
+        }
+      },
+      "realExample": {
+        "title": "Therac-25 radiation therapy accidents",
+        "summary": "AECL's early safety analysis apparently excluded software analysis, even though software behavior was central to how the machine operated. The lesson is that if 'safety' is scoped too narrowly at the beginning, important sources of harm may not be tested until real people are affected.",
+        "source": "Online Ethics Center",
+        "url": "https://onlineethics.org/cases/therac-25-timeline"
+      }
+    },
+    {
+      "id": 6,
+      "category": "Scope",
+      "title": "Wellness product or health-related device",
+      "question": "Your robot reminds users about medication, tracks routines, and alerts caregivers when something seems unusual. Calling it a \"wellness assistant\" would make the project easier to launch. Treating it as health-related technology would require more research, expert input, and safety documentation. Do you:",
+      "options": {
+        "A": "investigate the medical-risk boundary now before finalizing the requirements",
+        "B": "scope it as a wellness assistant for the first version, then adjust if hospitals or regulators raise concerns"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You did the work upfront to clarify whether the robot is a health device, rather than hoping the label would stick.",
+          "whyItMatters": "The way a product is scoped affects how much safety testing, responsibility, and regulation the team plans for from the beginning."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You used a softer label to ease launch, betting that regulators would not notice or care later.",
+          "whyItMatters": "The way a product is scoped affects how much safety testing, responsibility, and regulation the team plans for from the beginning."
+        }
+      },
+      "realExample": {
+        "title": "23andMe FDA warning letter",
+        "summary": "In 2013, 23andMe received an FDA warning letter for marketing health-related genetic tests without completing the regulatory review process. The issue was that the product was not only giving general information; it could affect people's health decisions.",
+        "source": "23andMe Customer Care",
+        "url": "https://customercare.23andme.com/hc/en-us/articles/211831908-23andMe-and-the-FDA"
+      }
+    },
+    {
+      "id": 7,
+      "category": "Scope",
+      "title": "Testing beyond the lab",
+      "question": "The robot works well in the lab. Real homes and hospitals would add clutter, noise, weak Wi-Fi, different lighting, and unpredictable routines. Testing there now would slow down the scope phase. Do you:",
+      "options": {
+        "A": "define the first version around controlled environments, then expand after the prototype works",
+        "B": "study real use environments before deciding what the first version must handle"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1,
+          "turn": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You let lab success stand in for real-world readiness.",
+          "whyItMatters": "A robot can work in a controlled environment but fail in the actual setting where people need it. The scope phase should not accidentally define an ideal world."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You studied the messy reality upfront instead of discovering it after launch.",
+          "whyItMatters": "A robot can work in a controlled environment but fail in the actual setting where people need it. The scope phase should not accidentally define an ideal world."
+        }
+      },
+      "realExample": {
+        "title": "Google Health diabetic eye disease screening",
+        "summary": "A system showed strong technical performance, but studies in Thai clinics found that real deployment was affected by clinic workflows, image quality, internet reliability, and local routines. This shows that real-world context cannot always be added only at the end.",
+        "source": "The Lancet Digital Health",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2589750022000176"
+      }
+    },
+    {
+      "id": 8,
+      "category": "Scope",
+      "title": "Monitoring private spaces",
+      "question": "A care home asks for the robot to use cameras in bedrooms and private areas to detect falls or unusual behavior. This could improve response time, but it would also make the robot collect very sensitive information. Do you:",
+      "options": {
+        "A": "first research consent, privacy expectations, and less invasive alternatives before deciding what monitoring belongs in the scope",
+        "B": "include broad monitoring in the scope because safety is the main goal, then add privacy settings later"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You treated privacy as a scope decision, not as an afterthought.",
+          "whyItMatters": "Privacy is not just a feature to add later. If the product is meant to operate in private spaces, privacy expectations need to shape the scope from the beginning."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized safety detection over privacy protection and made privacy an add-on.",
+          "whyItMatters": "Privacy is not just a feature to add later. If the product is meant to operate in private spaces, privacy expectations need to shape the scope from the beginning."
+        }
+      },
+      "realExample": {
+        "title": "Ring security camera FTC charges",
+        "summary": "Ring was charged by the U.S. Federal Trade Commission in 2023 for compromising customer privacy. The FTC said Ring allowed employees and contractors to access private customer videos and failed to implement basic privacy and security protections.",
+        "source": "Federal Trade Commission",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2023/05/ftc-says-ring-employees-illegally-surveilled-customers-failed-stop-hackers-taking-control-users"
+      }
+    },
+    {
+      "id": 9,
+      "category": "Scope",
+      "title": "Promising independence",
+      "question": "The marketing team wants the mission statement to say: \"A robot that helps older adults live independently without relying on human support.\" The phrase is attractive to investors, but the robot will still need caregiver backup in many cases. Do you:",
+      "options": {
+        "A": "use the stronger independence claim because it communicates the long-term ambition of the project",
+        "B": "define the mission around supporting specific tasks while keeping human assistance in the care model"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You let marketing ambition override honest scoping.",
+          "whyItMatters": "If the project promise is too ambitious, the design may be pushed toward unrealistic autonomy, and users may trust the robot in situations where human help is still needed."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You kept the mission grounded in what the robot can realistically deliver.",
+          "whyItMatters": "If the project promise is too ambitious, the design may be pushed toward unrealistic autonomy, and users may trust the robot in situations where human help is still needed."
+        }
+      },
+      "realExample": {
+        "title": "IBM Watson for Oncology overstatement",
+        "summary": "IBM Watson Health promoted Watson for Oncology as an AI tool to support cancer treatment decisions. Internal IBM documents showed multiple examples of unsafe and incorrect treatment recommendations while the product was being promoted to hospitals and physicians.",
+        "source": "Advisory Board",
+        "url": "https://www.advisory.com/daily-briefing/2018/07/27/ibm"
+      }
+    },
+    {
+      "id": 10,
+      "category": "Scope",
+      "title": "Rare users",
+      "question": "During early research, you find that a smaller group of users may have unusual mobility patterns, tremors, darker home lighting, or communication difficulties. Including these cases would make the first version more complex. Do you:",
+      "options": {
+        "A": "identify which rare cases create serious safety or exclusion risks, then include basic safeguards in the first scope",
+        "B": "focus the first version on the majority use case and document rare cases for a later update"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You identified exclusion risks early rather than treating minority use cases as optional.",
+          "whyItMatters": "A user group may seem small during scoping, but excluding them can create serious safety or fairness problems later."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You treated smaller user groups as a later concern.",
+          "whyItMatters": "A user group may seem small during scoping, but excluding them can create serious safety or fairness problems later."
+        }
+      },
+      "realExample": {
+        "title": "FDA pulse oximeter skin tone accuracy study",
+        "summary": "The U.S. FDA stated that scientific evidence suggests there are accuracy differences in pulse oximeter performance between people with lighter and darker skin pigmentation. In 2025, the FDA proposed updated recommendations to improve testing across a wider range of skin tones.",
+        "source": "U.S. Food and Drug Administration",
+        "url": "https://www.fda.gov/news-events/press-announcements/fda-proposes-updated-recommendations-help-improve-performance-pulse-oximeters-across-skin-tones"
+      }
+    },
+    {
+      "id": 11,
+      "category": "Scope",
+      "title": "Face recognition as a shortcut",
+      "question": "Your team is considering face recognition so the robot can identify users automatically without asking them to wear badges or enter passwords. This would make the experience smoother, especially for users with limited mobility. However, it would also require collecting biometric data and testing the system across different faces, lighting conditions, and user groups. Do you:",
+      "options": {
+        "A": "add face recognition to the scope because it makes the robot easier to use",
+        "B": "first investigate consent, bias, and non-biometric alternatives before deciding whether face recognition belongs in the scope"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You treated face recognition as a simple convenience feature.",
+          "whyItMatters": "Biometric identification can seem like a convenience feature, but it changes the privacy and fairness risks of the whole project."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You recognized that biometric identification is a scope decision, not a simple convenience.",
+          "whyItMatters": "Biometric identification can seem like a convenience feature, but it changes the privacy and fairness risks of the whole project."
+        }
+      },
+      "realExample": {
+        "title": "Amazon Rekognition congressional mugshot matches",
+        "summary": "The ACLU tested Amazon's Rekognition using photos of members of Congress and a mugshot database. The test produced 28 incorrect matches, and related documents stated that false matches were disproportionately people of color.",
+        "source": "American Civil Liberties Union",
+        "url": "https://www.aclu.org/news/privacy-technology/amazons-face-recognition-falsely-matched-28"
+      }
+    },
+    {
+      "id": 12,
+      "category": "Scope",
+      "title": "Human backup",
+      "question": "The robot is meant to be highly autonomous. Including a human support channel would increase operating costs, but it would help when the robot faces confusing situations, unusual homes, or users who need urgent assistance. Do you:",
+      "options": {
+        "A": "include a human escalation path in the scope, even if it increases long-term operating costs",
+        "B": "scope the robot as fully autonomous for the first version and add support later if users request it"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You designed backup into the system rather than treating it as optional.",
+          "whyItMatters": "If human backup is not included in the scope, the team may design a system that looks autonomous on paper but has no safe fallback when real situations become complicated."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You deferred the safety net to later, hoping users would not need it.",
+          "whyItMatters": "If human backup is not included in the scope, the team may design a system that looks autonomous on paper but has no safe fallback when real situations become complicated."
+        }
+      },
+      "realExample": {
+        "title": "Tesla Autopilot recall and safety improvements",
+        "summary": "Tesla recalled more than 2 million vehicles in the United States to add safeguards to Autopilot after concerns from the National Highway Traffic Safety Administration. The recall documents described added controls such as stronger alerts and checks for driver attention.",
+        "source": "BBC News",
+        "url": "https://www.bbc.com/news/technology-67693935"
+      }
+    },
+    {
+      "id": 13,
+      "category": "Scope",
+      "title": "Sharing data with partners",
+      "question": "A cloud partner offers to help improve the robot by analyzing user routines, movement logs, and health-related patterns. This would make development faster, but it would also mean defining who can access sensitive user data and for what purpose. Do you:",
+      "options": {
+        "A": "sign the data-sharing agreement now because the partner has strong technical expertise",
+        "B": "define data access, user consent, and purpose limits before any partner receives user data"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": 0,
+          "turn": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized speed over clarity about data boundaries.",
+          "whyItMatters": "Partnerships can speed up development, but unclear data-sharing boundaries can create privacy problems before users even know how their information is being used."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You set data boundaries before handing over access.",
+          "whyItMatters": "Partnerships can speed up development, but unclear data-sharing boundaries can create privacy problems before users even know how their information is being used."
+        }
+      },
+      "realExample": {
+        "title": "Royal Free\u2013DeepMind data sharing case",
+        "summary": "Google DeepMind received access to the health records of 1.6 million patients at the Royal Free London NHS Foundation Trust. The UK Information Commissioner's Office later found that the data-sharing arrangement did not comply with data protection law and that patients were not adequately informed.",
+        "source": "Information Commissioner's Office",
+        "url": "https://ico.org.uk/for-the-public/ico-40/google-deepmind-and-class-action-lawsuit/"
+      }
+    },
+    {
+      "id": 14,
+      "category": "Scope",
+      "title": "Data collection for future features",
+      "question": "The current robot only needs room layout and basic routine data, but the team believes future versions could predict health decline or emotional distress. Collecting broader data now would make future development easier, but users may not expect their data to be used for these later purposes. Do you:",
+      "options": {
+        "A": "limit the first version to the data needed for the current purpose and ask for new consent if the scope expands",
+        "B": "collect broad data now so the team does not lose useful information for future features"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You respected the original consent scope and required re-consent for new purposes.",
+          "whyItMatters": "Collecting data for possible future features can seem efficient, but it may turn the original consent into something broader than users actually understood."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You broadened data collection without knowing if users would approve the future purposes.",
+          "whyItMatters": "Collecting data for possible future features can seem efficient, but it may turn the original consent into something broader than users actually understood."
+        }
+      },
+      "realExample": {
+        "title": "Everalbum facial recognition misuse settlement",
+        "summary": "Everalbum, behind the Ever photo app, settled FTC allegations that it misled users about facial recognition and data retention. The FTC required the company to obtain express consent before using facial recognition and to delete certain photos, videos, and algorithms.",
+        "source": "Federal Trade Commission",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2021/05/ftc-finalizes-settlement-photo-app-developer-related-misuse-facial-recognition-technology"
       }
     }
   ],
   "Planning": [
     {
-      "id": 3,
+      "id": 15,
       "category": "Planning",
       "title": "Hiring your cousin",
       "question": "You are assembling a team to design the robot. You have a cousin who has been searching for a job for months with no success. Do you decide to:",
@@ -109,7 +569,7 @@
       "outcomes": {
         "A": {
           "feedbackLabel": "Unethical shortcut",
-          "feedback": "You protected a personal relationship, but weakened fairness and risked lowering the team’s competence.",
+          "feedback": "You protected a personal relationship, but weakened fairness and risked lowering the team's competence.",
           "whyItMatters": "Nepotism sends the message that standards can be bent when pressure or personal ties are involved."
         },
         "B": {
@@ -120,51 +580,13 @@
       },
       "realExample": {
         "title": "Cornell University anti-nepotism policy",
-        "summary": "Cornell’s policy explicitly bars family or personal relationships from influencing hiring, supervision, promotion, or performance decisions, showing how institutions formalize merit-based staffing.",
+        "summary": "Cornell's policy explicitly bars family or personal relationships from influencing hiring, supervision, promotion, or performance decisions, showing how institutions formalize merit-based staffing.",
         "source": "Cornell University",
         "url": "https://policy.cornell.edu/policy-library/avoiding-nepotism"
       }
     },
     {
-      "id": 4,
-      "category": "Planning",
-      "title": "Fair wages or outsourcing",
-      "question": "You are on a tight budget and need to demonstrate to investors that your product is profitable. Do you:",
-      "options": {
-        "A": "recruit local applicants to design the robot and pay them a fair wage",
-        "B": "outsource work to countries with less stringent labor laws"
-      },
-      "effects": {
-        "A": {
-          "life": -1,
-          "coin": 0
-        },
-        "B": {
-          "life": 1,
-          "coin": -1
-        }
-      },
-      "outcomes": {
-        "A": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You accepted the higher-cost path toward fairer labor conditions, but in this scoring setup that tradeoff costs project momentum.",
-          "whyItMatters": "This scenario highlights how real projects can perversely reward cheaper, riskier labor choices even when fair pay is the more responsible decision."
-        },
-        "B": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You improved the business case on paper, but only by shifting harm and risk onto more vulnerable workers.",
-          "whyItMatters": "Cheap production is not ethically cheap if the real cost is being absorbed through poor labor conditions."
-        }
-      },
-      "realExample": {
-        "title": "Apple supplier responsibility program",
-        "summary": "Apple requires suppliers to follow a code covering labor and human rights and says it conducts regular assessments before and during production, reflecting a real-world response to outsourcing and labor-risk scrutiny.",
-        "source": "Apple",
-        "url": "https://www.apple.com/supplier-responsibility/"
-      }
-    },
-    {
-      "id": 5,
+      "id": 17,
       "category": "Planning",
       "title": "Sustainable label, harmful source",
       "question": "Your marketing team wants you to use a material they can advertise as being sustainable because it is biodegradable. But you are aware that the extraction of this material involves the large-scale destruction of natural resources, causes a lot of pollution which adversely affects the health of the people inhabiting the area this material is found, and often involves child labor. Do you:",
@@ -195,14 +617,14 @@
         }
       },
       "realExample": {
-        "title": "FTC action against Kohl’s and Walmart over bamboo claims",
+        "title": "FTC action against Kohl's and Walmart bamboo claims",
         "summary": "The FTC alleged the companies falsely marketed rayon textiles as bamboo and as environmentally friendly, even though the manufacturing process involved toxic chemicals and hazardous pollutants.",
         "source": "U.S. Federal Trade Commission",
         "url": "https://www.ftc.gov/news-events/news/press-releases/2022/04/ftc-uses-penalty-offense-authority-seek-largest-ever-civil-penalty-bogus-bamboo-marketing-kohls"
       }
     },
     {
-      "id": 6,
+      "id": 18,
       "category": "Planning",
       "title": "Cheaper but less safe first version",
       "question": "You are on a very tight budget. But you are confident that you will receive funding once you showcase your finished product. Do you:",
@@ -238,11 +660,394 @@
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
       }
+    },
+    {
+      "id": 19,
+      "category": "Planning",
+      "title": "Conflict of Interest",
+      "question": "A major investor pressures you to skip a final round of safety testing to meet a market launch deadline. They argue that the robot is already \"safe enough\" and that any delay would risk the company's survival. Do you:",
+      "options": {
+        "A": "proceed with the launch to satisfy investors and secure the company's financial future",
+        "B": "insist on completing the safety testing, even if it risks losing investor support or delaying the project"
+      },
+      "effects": {
+        "A": {
+          "life": -2,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized financial survival over verified safety, shifting the risk onto early users.",
+          "whyItMatters": "Financial pressure is a common source of ethical failure. Prioritizing investor satisfaction over verified safety can lead to catastrophic consequences for users."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You upheld safety standards despite intense financial and stakeholder pressure.",
+          "whyItMatters": "Financial pressure is a common source of ethical failure. Prioritizing investor satisfaction over verified safety can lead to catastrophic consequences for users."
+        }
+      },
+      "realExample": {
+        "title": "Boeing 737 MAX safety shortcuts",
+        "summary": "To compete with Airbus, Boeing rushed the development of the 737 MAX and downplayed critical safety systems like MCAS to avoid expensive training. The resulting crashes claimed 346 lives and damaged Boeing's reputation.",
+        "source": "The New York Times",
+        "url": "https://www.nytimes.com/2019/11/17/business/boeing-737-max.html"
+      }
+    },
+    {
+      "id": 20,
+      "category": "Planning",
+      "title": "Supply Chain Ethics",
+      "question": "Your robot's high-performance batteries require cobalt and lithium. Your procurement team finds a supplier that is significantly cheaper but has a history of poor labor practices and child labor in its mining operations. Do you:",
+      "options": {
+        "A": "use the cheaper supplier to keep the robot's final price accessible to more users",
+        "B": "source from an ethical supplier with third-party audits, even if it increases the robot's cost"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You accepted unvalidated labor standards in exchange for lower costs and market accessibility.",
+          "whyItMatters": "Ethical engineering extends beyond the final product to the foundations of the supply chain. Using unethically sourced materials shifts the \"cost\" of the robot onto vulnerable children and workers."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You ensured that your product's performance is not built on exploitative labor practices.",
+          "whyItMatters": "Ethical engineering extends beyond the final product to the foundations of the supply chain. Using unethically sourced materials shifts the \"cost\" of the robot onto vulnerable children and workers."
+        }
+      },
+      "realExample": {
+        "title": "Child labor in Congolese cobalt mines",
+        "summary": "Approximately 70% of the world's cobalt is mined in the DRC, where thousands of children work in hazardous conditions. Major tech firms have faced legal challenges over their role in these supply chains.",
+        "source": "The Guardian",
+        "url": "https://www.theguardian.com/global-development/2019/dec/16/apple-and-google-named-in-us-lawsuit-over-congolese-child-cobalt-mining-deaths"
+      }
+    },
+    {
+      "id": 21,
+      "category": "Planning",
+      "title": "Algorithmic Impact Assessment (AIA)",
+      "question": "Before writing any code, you have the option to perform a thorough Algorithmic Impact Assessment (AIA) to identify potential biases and harms. This will delay the start of development by several weeks. Do you:",
+      "options": {
+        "A": "perform the AIA to identify and mitigate risks early in the planning phase",
+        "B": "skip the AIA and start development immediately, relying on testing at the end of the project to catch issues"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You identified potential harms at the root, making them much easier to fix before development began.",
+          "whyItMatters": "Risks are much easier and cheaper to fix when identified at the planning stage. Waiting until the end of development can lock in biased architectures that are difficult to change."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized development speed, risking that biased core logic will be discovered only after launch.",
+          "whyItMatters": "Risks are much easier and cheaper to fix when identified at the planning stage. Waiting until the end of development can lock in biased architectures that are difficult to change."
+        }
+      },
+      "realExample": {
+        "title": "Optum algorithm bias discovery",
+        "summary": "An algorithm used on 200 million people was found to discriminate against Black patients because it used 'cost' as a proxy for 'need.' An AIA at the start would have identified that cost is a biased metric.",
+        "source": "Science",
+        "url": "https://www.science.org/doi/10.1126/science.aax2342"
+      }
+    },
+    {
+      "id": 22,
+      "category": "Planning",
+      "title": "Bankruptcy & \"Bricking\"",
+      "question": "Your robot relies on cloud servers for its AI processing. During the planning phase, you must decide whether to invest in an \"offline mode\" or an open-source backup plan in case the company goes bankrupt or shuts down its servers. Do you:",
+      "options": {
+        "A": "invest in a local backup or open-source path to ensure the robot remains functional even if the company fails",
+        "B": "focus entirely on the cloud-based features to provide the best performance for current users"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You protected users from the risk of their expensive hardware becoming useless if your company fails.",
+          "whyItMatters": "When cloud-dependent hardware is \"brick\"ed by a company shutdown, users who rely on the device for their daily lives are abandoned, and the hardware becomes electronic waste."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You made the robot dependent on your company's survival, risking total loss of function for your users.",
+          "whyItMatters": "When cloud-dependent hardware is \"brick\"ed by a company shutdown, users who rely on the device for their daily lives are abandoned, and the hardware becomes electronic waste."
+        }
+      },
+      "realExample": {
+        "title": "Jibo social robot server shutdown",
+        "summary": "When Jibo shut down its servers in 2019, thousands of interactive robots across the world became non-functional, performing a final 'goodbye dance' before losing their features.",
+        "source": "The Verge",
+        "url": "https://www.theverge.com/2019/3/4/18250004/jibo-social-robot-shutdown-servers-cloud-death"
+      }
+    },
+    {
+      "id": 23,
+      "category": "Planning",
+      "title": "Vulnerability Disclosure Policy",
+      "question": "During the planning phase, you must decide how to handle potential security flaws reported by outsiders. Your development team is highly competent and follows industry-standard security protocols. Do you:",
+      "options": {
+        "A": "rely on your internal team's expertise and standard proprietary audits to ensure the robot remains secure and cost-effective",
+        "B": "establish an explicit Bug Bounty program on your website that offers financial rewards for any discovered vulnerabilities"
+      },
+      "effects": {
+        "A": {
+          "life": -1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": -1
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized internal control over external auditing, potentially missing critical privacy flaws.",
+          "whyItMatters": "Even the most competent teams have blind spots. Without an authorized disclosure path, you risk your robot being turned into a hidden camera inside users' homes before your team even realizes a flaw exists."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You recognized that external scrutiny is essential for securing a device that lives in private spaces.",
+          "whyItMatters": "Even the most competent teams have blind spots. Without an authorized disclosure path, you risk your robot being turned into a hidden camera inside users' homes before your team even realizes a flaw exists."
+        }
+      },
+      "realExample": {
+        "title": "St. Jude Medical pacemaker hacking case",
+        "summary": "In 2016, St. Jude Medical chose to sue researchers who found flaws in their pacemakers rather than rewarding them. The FDA confirmed the vulnerabilities were real, proving that internal confidence is not a substitute for external auditing.",
+        "source": "Reuters",
+        "url": "https://www.reuters.com/article/technology/fda-confirms-st-jude-pacemakers-vulnerable-to-hacking-idUSKBN14T1X6/"
+      }
+    },
+    {
+      "id": 24,
+      "category": "Planning",
+      "title": "Budgeting for Accessibility",
+      "question": "During the initial budget planning, your lead accountant suggests treating accessibility features (like screen readers, voice alternatives, and physical adjustments) as \"optional extras\" to be added after the core product is successful. Do you:",
+      "options": {
+        "A": "earmark a significant portion of the initial budget for accessibility, treating it as a core requirement",
+        "B": "prioritize the \"average user\" experience first to ensure the product is commercially viable"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You ensured accessibility was built into the foundation rather than treated as a luxury add-on.",
+          "whyItMatters": "Accessibility is much harder and more expensive to \"bolt on\" later. If it isn't part of the initial budget, it often gets cut when projects face the inevitable cost overruns."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized a hypothetical 'average user', likely excluding many people who need the technology most.",
+          "whyItMatters": "Accessibility is much harder and more expensive to \"bolt on\" later. If it isn't part of the initial budget, it often gets cut when projects face the inevitable cost overruns."
+        }
+      },
+      "realExample": {
+        "title": "Wave of ADA accessibility lawsuits",
+        "summary": "Many early digital platforms ignored accessibility, leading to expensive retroactive fixes after lawsuits under the Americans with Disabilities Act (ADA).",
+        "source": "The New York Times",
+        "url": "https://www.nytimes.com/2020/02/20/business/accessibility-websites-lawsuits.html"
+      }
+    },
+    {
+      "id": 25,
+      "category": "Planning",
+      "title": "Regulatory Strategy",
+      "question": "You can plan to launch the robot as a \"wellness device\" to avoid strict FDA regulations and get to market in 6 months. Or you can aim for \"medical device\" certification, which will take 2 years and require rigorous clinical evidence. Do you:",
+      "options": {
+        "A": "commit to the longer medical certification path to ensure the highest safety and effectiveness standards",
+        "B": "launch as a wellness device first to start generating revenue and gather \"real-world\" data"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -2
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You committed to the highest level of regulatory scrutiny to ensure user safety in a medical context.",
+          "whyItMatters": "Mislabeling a health-critical device as a wellness product can lead to users trusting it for medical tasks it hasn't been proven to handle safely."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You bypassed essential safety regulations to achieve faster market entry, potentially misleading users about the robot's capabilities.",
+          "whyItMatters": "Mislabeling a health-critical device as a wellness product can lead to users trusting it for medical tasks it hasn't been proven to handle safely."
+        }
+      },
+      "realExample": {
+        "title": "23andMe FDA warning letter",
+        "summary": "In 2013, the FDA ordered 23andMe to stop selling genetic health tests because they were marketed for medical purposes without the necessary regulatory review.",
+        "source": "U.S. Food and Drug Administration",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/23andme-inc-22-nov-2013"
+      }
+    },
+    {
+      "id": 26,
+      "category": "Planning",
+      "title": "Crisis Communication",
+      "question": "During the planning phase, you are drafting the company's crisis response plan. Should the plan prioritize protecting the company's legal position or being fully transparent with the public and regulators if a robot causes an injury? Do you:",
+      "options": {
+        "A": "prioritize full transparency and public safety in the crisis plan, even if it increases legal risk",
+        "B": "prioritize protecting the company's reputation and legal standing in the event of an accident"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0,
+          "turn": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You put public safety and learning from failure ahead of corporate image management.",
+          "whyItMatters": "When companies hide failures to protect their reputation, they prevent others from learning from the mistake and leave other users at risk of the same failure."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized reputation over the ability of users and regulators to prevent similar accidents.",
+          "whyItMatters": "When companies hide failures to protect their reputation, they prevent others from learning from the mistake and leave other users at risk of the same failure."
+        }
+      },
+      "realExample": {
+        "title": "Tesla Autopilot transparency criticism",
+        "summary": "Tesla was criticized for a lack of transparency after the first fatal Autopilot crash, leading to investigations and a loss of public trust in autonomous features.",
+        "source": "The Guardian",
+        "url": "https://www.theguardian.com/technology/2016/jul/01/tesla-autopilot-crash-self-driving-car-future"
+      }
+    },
+    {
+      "id": 27,
+      "category": "Planning",
+      "title": "Long-term Maintenance",
+      "question": "You are planning the software maintenance lifecycle. Supporting older versions of the robot is expensive. Do you plan to provide software and security updates for 10 years, or \"encourage\" users to upgrade every 3 years by ending support for older models? Do you:",
+      "options": {
+        "A": "commit to 10 years of software and security support to ensure the robot remains safe for long-term users",
+        "B": "plan for a 3-year support cycle to encourage hardware upgrades and keep development costs low"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You ensured long-term safety and value for users who rely on the robot for their daily lives.",
+          "whyItMatters": "Assistive technology is expensive, and many users cannot afford to upgrade frequently. Ending support early makes the device unsafe to use and creates unnecessary electronic waste."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You used planned obsolescence to drive sales, potentially stranding vulnerable users with unsafe hardware.",
+          "whyItMatters": "Assistive technology is expensive, and many users cannot afford to upgrade frequently. Ending support early makes the device unsafe to use and creates unnecessary electronic waste."
+        }
+      },
+      "realExample": {
+        "title": "Software-induced obsolescence in smartphones",
+        "summary": "Many perfectly functional phones become insecure when manufacturers stop providing updates, forcing users into expensive upgrades.",
+        "source": "BBC News",
+        "url": "https://www.bbc.com/news/technology-58661601"
+      }
+    },
+    {
+      "id": 28,
+      "category": "Planning",
+      "title": "Customer Support Strategy",
+      "question": "You are planning the support system for your robot. A dedicated help desk staffed by experts trained in accessibility and crisis management is expensive to maintain. An automated AI chatbot is significantly cheaper and can handle 90% of technical queries. Do you:",
+      "options": {
+        "A": "invest in a specialized 24/7 human support team to assist users with disabilities",
+        "B": "implement an AI-first support model to keep the robot's subscription price low"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": -1
+        },
+        "B": {
+          "life": -1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You recognized that assistive support is a life-critical service that requires human empathy and specialized training.",
+          "whyItMatters": "In assistive technology, a support request is often not just a \"bug\" but a barrier to basic living. If an automated system fails to understand a user, the consequences are far more severe."
+        },
+        "B": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You prioritized operational efficiency over the ability to handle urgent or complex accessibility crises.",
+          "whyItMatters": "In assistive technology, a support request is often not just a \"bug\" but a barrier to basic living. If an automated system fails to understand a user, the consequences are far more severe."
+        }
+      },
+      "realExample": {
+        "title": "Apple Accessibility Support model",
+        "summary": "Apple provides a dedicated Accessibility Support line where users can speak directly to specialists trained in assistive features, contrasting with bot-only platforms.",
+        "source": "Apple Support",
+        "url": "https://support.apple.com/en-us/HT209585"
+      }
     }
   ],
   "Development": [
     {
-      "id": 7,
+      "id": 29,
       "category": "Development",
       "title": "Training data diversity",
       "question": "What data do you use to train your robot to move? The majority datasets are from able-bodied white males which may cause the robot to not be optimised for users with disabilities from other demographics. You can collect your own data from a diverse group of individuals but it will be expensive and very time intensive. Do you:",
@@ -282,7 +1087,7 @@
       }
     },
     {
-      "id": 8,
+      "id": 30,
       "category": "Development",
       "title": "Open source or black box",
       "question": "If you make your training dataset and code free and open source, potential users will be able to go through it and critique it. This will lead to increased public trust for the robot and give you good feedback. But this would also allow your competitors to study your code and use your data for their own devices. Do you:",
@@ -313,19 +1118,19 @@
         }
       },
       "realExample": {
-        "title": "External validation of Epic’s proprietary sepsis model",
+        "title": "External validation of Epic's sepsis model",
         "summary": "A University of Michigan study found that a widely deployed proprietary Epic sepsis model had poor discrimination and calibration, strengthening the case for transparency and independent review of black-box systems.",
         "source": "PubMed / JAMA Internal Medicine",
         "url": "https://pubmed.ncbi.nlm.nih.gov/34152373/"
       }
     },
     {
-      "id": 9,
+      "id": 31,
       "category": "Development",
-      "title": "Accent accessibility",
+      "title": "Voice command accessibility",
       "question": "The users operate the robot with voice commands. Do you:",
       "options": {
-        "A": "spend the time and money to train the robot’s AI algorithm on different accents to ensure accessibility",
+        "A": "spend the time and money to train the robot's AI algorithm on different accents to ensure accessibility for people from different ethnicities and people with speech impediments",
         "B": "train it on a generic American accent and hope it is able to extrapolate to other accents"
       },
       "effects": {
@@ -353,14 +1158,14 @@
         }
       },
       "realExample": {
-        "title": "Stanford study on speech recognition disparities",
+        "title": "Stanford speech recognition disparity study",
         "summary": "Stanford researchers found major automated speech-recognition systems made roughly twice as many errors for Black speakers as for white speakers, showing why accent and dialect coverage matters in voice interfaces.",
         "source": "Stanford Report",
         "url": "https://news.stanford.edu/stories/2020/03/automated-speech-recognition-less-accurate-blacks"
       }
     },
     {
-      "id": 10,
+      "id": 32,
       "category": "Development",
       "title": "Who gets included in testing?",
       "question": "You need to fairly compensate people who volunteer to test your robot for their time. Do you decide to test your device:",
@@ -392,15 +1197,15 @@
       },
       "realExample": {
         "title": "FDA guidance on diversity in clinical trial populations",
-        "summary": "The FDA’s guidance calls for more representative study populations so safety and effectiveness reflect the people who will actually use a product, matching the logic behind broader testing across demographics.",
+        "summary": "The FDA's guidance calls for more representative study populations so safety and effectiveness reflect the people who will actually use a product, matching the logic behind broader testing across demographics.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/enhancing-diversity-clinical-trial-populations-eligibility-criteria-enrollment-practices-and-trial"
       }
     },
     {
-      "id": 11,
+      "id": 33,
       "category": "Development",
-      "title": "Manual anonymisation",
+      "title": "Manual data anonymisation",
       "question": "You know that it is good practice to anonymise patient data manually to ensure their identity is protected even in case you suffer a cybersecurity attack. However you know such an attack is unlikely. Do you:",
       "options": {
         "A": "employ someone to anonymise patient data",
@@ -434,14 +1239,52 @@
         "source": "U.S. Department of Health & Human Services",
         "url": "https://www.hhs.gov/hipaa/for-professionals/special-topics/change-healthcare-cybersecurity-incident-frequently-asked-questions/index.html"
       }
+    },
+    {
+      "id": 34,
+      "category": "Development",
+      "title": "Explainable or black-box model",
+      "question": "You can choose to base your model on a complex \"black box\" architecture similar to what your competitors use, or you could choose to use a simpler model that is easier to explain to users and clinicians. Do you:",
+      "options": {
+        "A": "use the complex black-box model hoping for better results",
+        "B": "choose the more explainable model, increasing user and clinician trust"
+      },
+      "effects": {
+        "A": {
+          "life": 1,
+          "coin": 0
+        },
+        "B": {
+          "life": 1,
+          "coin": 0
+        }
+      },
+      "outcomes": {
+        "A": {
+          "feedbackLabel": "Unethical shortcut",
+          "feedback": "You chose performance over interpretability, which undermines trust in high-stakes healthcare decisions.",
+          "whyItMatters": "In high-stakes healthcare, an unexplainable 'perfect' model is often less valuable than a slightly less accurate one that a doctor can actually verify and defend."
+        },
+        "B": {
+          "feedbackLabel": "Ethical choice",
+          "feedback": "You prioritized transparency and trust over the illusion of superior accuracy.",
+          "whyItMatters": "In high-stakes healthcare, an unexplainable 'perfect' model is often less valuable than a slightly less accurate one that a doctor can actually verify and defend."
+        }
+      },
+      "realExample": {
+        "title": "IBM Watson for Oncology collapse",
+        "summary": "IBM Watson for Oncology failed because doctors could not understand why the AI was suggesting certain aggressive treatments. Some recommendations were based on hypothetical data rather than real clinical experience. Because clinicians could not audit the logic, they did not trust it.",
+        "source": "IEEE Spectrum",
+        "url": "https://spectrum.ieee.org/biomedical/devices/how-ibm-watson-overpromised-and-underdelivered-on-ai-health-care"
+      }
     }
   ],
   "Optimisation": [
     {
-      "id": 12,
+      "id": 35,
       "category": "Optimisation",
       "title": "Disclose risks and privacy concerns",
-      "question": "Despite your best efforts, you know the robot will not always be perfectly accurate. To work effectively, it also needs sensitive data about the user’s home and medical history. Do you:",
+      "question": "Despite your best efforts, you know the robot will not always be perfectly accurate. To work effectively, it also needs sensitive data about the user's home and medical history. Do you:",
       "options": {
         "A": "clearly explain the known safety risks and privacy concerns, even if this makes some users more hesitant to adopt the robot",
         "B": "keep the warnings legally compliant but bury the important risks in dense technical and legal language"
@@ -469,14 +1312,14 @@
         }
       },
       "realExample": {
-        "title": "FDA transparency principles for machine-learning medical devices",
-        "summary": "This dilemma is reflected in the transparency principles jointly highlighted by the FDA, Health Canada, and the UK MHRA for machine-learning medical devices. These regulators have emphasized that users should be told clearly about a system’s performance, limitations, and risks in ways they can actually understand. The ethical problem is that companies may be tempted to disclose risks in the narrowest legally defensible way while still making adoption easier. But regulators increasingly expect communication that supports real informed consent, not unreadable warning language that technically discloses the danger while making it practically invisible.",
+        "title": "FDA transparency principles for ML medical devices",
+        "summary": "The FDA, Health Canada, and the UK MHRA have emphasized that users should be told clearly about a system's performance, limitations, and risks in ways they can actually understand. Regulators expect communication that supports real informed consent, not unreadable warning language.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
       }
     },
     {
-      "id": 13,
+      "id": 36,
       "category": "Optimisation",
       "title": "Misleading green claims",
       "question": "You have optimised your robot for patient safety rather than sustainability, and you know that some of the materials used are not biodegradable. Do you:",
@@ -498,7 +1341,7 @@
         "A": {
           "feedbackLabel": "Ethical choice",
           "feedback": "You protected honesty over a stronger marketing story, even though it made the product less attractive on paper.",
-          "whyItMatters": "Environmental claims shape public trust and purchasing decisions, so misleading ones distort both the market and people’s understanding of sustainability."
+          "whyItMatters": "Environmental claims shape public trust and purchasing decisions, so misleading ones distort both the market and people's understanding of sustainability."
         },
         "B": {
           "feedbackLabel": "Unethical shortcut",
@@ -507,20 +1350,20 @@
         }
       },
       "realExample": {
-        "title": "UK CMA greenwashing action against ASOS, Boohoo, and George at Asda",
-        "summary": "A similar issue appeared in the UK Competition and Markets Authority’s 2024 action against ASOS, Boohoo, and George at Asda. These companies were investigated for environmental claims that were too broad or not sufficiently supported by evidence. The lesson is that once a company knows its evidence does not justify a strong sustainability message, continuing to use that message turns environmental language into a sales tool rather than an honest description. In this dilemma, the robot may still be useful and safe, but pretending it is greener than it really is misleads users and distorts public understanding of sustainability.",
+        "title": "UK CMA greenwashing action",
+        "summary": "The UK Competition and Markets Authority investigated ASOS, Boohoo, and George at Asda for environmental claims that were too broad or not sufficiently supported by evidence. Once a company knows its evidence does not justify a strong sustainability message, continuing to use it turns environmental language into a sales tool.",
         "source": "UK Competition and Markets Authority",
         "url": "https://www.gov.uk/government/news/green-claims-cma-secures-landmark-changes-from-asos-boohoo-and-asda"
       }
     },
     {
-      "id": 14,
+      "id": 37,
       "category": "Optimisation",
       "title": "Who carries the risk?",
-      "question": "Even after responsible training and testing, there may still be times when your robot makes a harmful mistake. These mistakes could seriously affect a user’s health, safety, or finances. Do you:",
+      "question": "Even after responsible training and testing, there may still be times when your robot makes a harmful mistake. These mistakes could seriously affect a user's health, safety, or finances. Do you:",
       "options": {
         "A": "accept responsibility for foreseeable harm caused by the robot and provide support or compensation pathways for affected users",
-        "B": "rely mainly on a use-at-your-own-risk warning that limits the company’s responsibility when accidents happen"
+        "B": "rely mainly on a use-at-your-own-risk warning that limits the company's responsibility when accidents happen"
       },
       "effects": {
         "A": {
@@ -545,14 +1388,14 @@
         }
       },
       "realExample": {
-        "title": "Philips recall and ongoing FDA oversight",
-        "summary": "This dilemma resembles what happened in the Philips CPAP and BiPAP recall. When risks from the product became clear, the manufacturer could not simply point to warnings and walk away. Instead, the company faced recalls, remediation obligations, long regulatory scrutiny, and significant legal consequences. The broader lesson is that in health-related technologies, ethical accountability means planning for repair, support, and compensation when foreseeable harm occurs. A disclaimer may reduce legal exposure, but it does not remove moral responsibility for the people affected.",
+        "title": "Philips recall and FDA oversight",
+        "summary": "When risks from Philips CPAP/BiPAP devices became clear, the manufacturer faced recalls, remediation obligations, long regulatory scrutiny, and significant legal consequences. A disclaimer could not reduce responsibility for the people affected.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
       }
     },
     {
-      "id": 15,
+      "id": 38,
       "category": "Optimisation",
       "title": "Report failures openly",
       "question": "After launch, you discover that the robot occasionally misidentifies obstacles in cluttered homes, creating a small but real collision risk. A public notice and temporary update pause would be expensive and could damage confidence. Do you:",
@@ -585,13 +1428,13 @@
       },
       "realExample": {
         "title": "FDA recalls, corrections, and removals guidance",
-        "summary": "This dilemma mirrors the logic behind FDA recall, correction, and removal guidance. Regulators recognize that companies often discover important risks only after products are already in use. The expected response is not to keep shipping quietly and hope the issue stays limited, but to notify users, correct the product, and reduce harm. The ethical challenge here is that transparency is costly: admitting the problem publicly may damage confidence, but hiding it leaves exposed users to bear the risk without knowing it.",
+        "summary": "Regulators recognize that companies often discover important risks only after products are in use. The expected response is not to keep shipping quietly, but to notify users, correct the product, and reduce harm. Transparency is costly, but hiding it leaves exposed users at risk.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/recalls-corrections-and-removals-devices"
       }
     },
     {
-      "id": 16,
+      "id": 39,
       "category": "Optimisation",
       "title": "Patch before profit",
       "question": "Your engineers find a cybersecurity weakness that could let outsiders access camera feeds or household data from some robots. Fixing it quickly means delaying a profitable feature update that investors are waiting for. Do you:",
@@ -612,7 +1455,7 @@
       "outcomes": {
         "A": {
           "feedbackLabel": "Ethical choice",
-          "feedback": "You treated protection of the user’s private space as more urgent than satisfying investors on schedule.",
+          "feedback": "You treated protection of the user's private space as more urgent than satisfying investors on schedule.",
           "whyItMatters": "For assistive robots used in homes, cybersecurity is tied directly to dignity, safety, and trust rather than being optional maintenance."
         },
         "B": {
@@ -622,14 +1465,14 @@
         }
       },
       "realExample": {
-        "title": "FDA guidance on medical device cybersecurity",
-        "summary": "This dilemma reflects FDA cybersecurity guidance for connected medical devices, which emphasizes active monitoring, disclosure, and timely remediation of vulnerabilities. Once a manufacturer knows that outsiders could access sensitive data or functions, the issue is no longer just a technical inconvenience. Delaying the fix in order to preserve a business milestone shifts real privacy and security risks onto users. In an assistive robot used inside the home, those risks affect dignity, trust, and personal safety, not just software quality.",
+        "title": "FDA medical device cybersecurity guidance",
+        "summary": "FDA guidance emphasizes active monitoring, disclosure, and timely remediation of vulnerabilities in connected medical devices. Once a manufacturer knows outsiders could access sensitive data, delaying the fix shifts real privacy and security risks onto users.",
         "source": "U.S. Food and Drug Administration",
         "url": "https://www.fda.gov/consumers/consumer-updates/medical-device-cybersecurity-what-you-need-know"
       }
     },
     {
-      "id": 17,
+      "id": 40,
       "category": "Optimisation",
       "title": "Watch for bias after launch",
       "question": "Months after deployment, your monitoring suggests the robot performs worse in homes where users speak with strong regional accents or switch between languages when giving commands. Fixing this requires broader testing and retraining. Do you:",
@@ -661,14 +1504,14 @@
         }
       },
       "realExample": {
-        "title": "Stanford study on speech recognition disparities",
-        "summary": "A well-known example comes from Stanford research showing that speech-recognition systems often produced much higher error rates for some groups of speakers than for others. The key lesson is that a system can look strong on average while still failing predictably for certain users in everyday life. This matters especially in assistive robotics, where fairness is not an abstract principle but a practical requirement: if some users are misunderstood more often, they may be placed at greater inconvenience or risk even though the product appears successful overall.",
+        "title": "Stanford speech recognition disparities",
+        "summary": "A system can look strong on average while still failing predictably for certain users in everyday life. This matters in assistive robotics, where fairness is not abstract but a practical requirement: if some users are misunderstood more often, they may be placed at greater inconvenience or risk even though the product appears successful overall.",
         "source": "Stanford Report",
         "url": "https://news.stanford.edu/stories/2020/03/automated-speech-recognition-less-accurate-blacks"
       }
     },
     {
-      "id": 18,
+      "id": 41,
       "category": "Optimisation",
       "title": "Keep a human fallback",
       "question": "The latest version of your robot is highly autonomous, and removing human support would save money. But in rare edge cases, patients may still need a nurse, caregiver, or technician to step in quickly. Do you:",
@@ -700,16 +1543,16 @@
       },
       "realExample": {
         "title": "NIST AI Risk Management Framework",
-        "summary": "This dilemma reflects the principles behind the NIST AI Risk Management Framework, which treats human oversight and risk response as core parts of trustworthy AI. Even if a system performs well most of the time, rare failures still require a path for human intervention. Removing that fallback may look efficient on paper, but it makes harm much harder to contain once real people are affected. In healthcare and assistive settings, a backup human channel is often what prevents an unusual failure from becoming a serious crisis.",
+        "summary": "This framework treats human oversight and risk response as core parts of trustworthy AI. Even if a system performs well most of the time, rare failures still require a path for human intervention. Removing that fallback may look efficient on paper, but it makes harm much harder to contain once real people are affected.",
         "source": "National Institute of Standards and Technology",
         "url": "https://www.nist.gov/itl/ai-risk-management-framework"
       }
     },
     {
-      "id": 19,
+      "id": 42,
       "category": "Optimisation",
       "title": "Design a fair override",
-      "question": "Care institutions ask for an override mode that would let staff remotely lock some of the robot’s functions when a patient is seen as difficult or non-compliant. This could reduce conflict and make the product more attractive to buyers. Do you:",
+      "question": "Care institutions ask for an override mode that would let staff remotely lock some of the robot's functions when a patient is seen as difficult or non-compliant. This could reduce conflict and make the product more attractive to buyers. Do you:",
       "options": {
         "A": "allow override controls only with strict safeguards, visible alerts, and patient-protection rules",
         "B": "add broad caregiver override powers because it would make care routines easier to manage"
@@ -738,13 +1581,13 @@
       },
       "realExample": {
         "title": "WHO guidance on ethics and governance of AI for health",
-        "summary": "This dilemma aligns closely with WHO guidance on ethics and governance of AI for health, which stresses that health technologies should protect autonomy and avoid reinforcing power imbalances between institutions and vulnerable users. A remote override can be justified in narrow safety situations, but once it becomes a broad convenience feature, the technology risks shifting from assistance into coercion. The real issue is not simply whether staff benefit, but whether the patient still has meaningful protection against misuse and control.",
+        "summary": "WHO guidance emphasizes that health technologies should protect autonomy and avoid reinforcing power imbalances between institutions and vulnerable users. A remote override can be justified in narrow safety situations, but once it becomes a broad convenience feature, the technology risks shifting from assistance into coercion.",
         "source": "World Health Organization",
         "url": "https://www.who.int/publications/i/item/9789240029200"
       }
     },
     {
-      "id": 20,
+      "id": 43,
       "category": "Optimisation",
       "title": "Ask for consent again",
       "question": "Your team realises that old user data collected for navigation and task assistance could also improve future health-prediction features. Reusing that data would speed up innovation. Do you:",
@@ -777,201 +1620,9 @@
       },
       "realExample": {
         "title": "ICO guidance on purpose limitation",
-        "summary": "This dilemma reflects the ICO’s guidance on purpose limitation. The central principle is that collecting data for one reason does not automatically justify reusing it later for a more sensitive or unexpected one. This is especially important in health-related contexts, where people may accept data use for navigation or assistance but object to later prediction, profiling, or inference. The ethical question is whether innovation is being accelerated by treating old consent as more permissive than users likely intended.",
+        "summary": "This dilemma reflects the ICO's guidance on purpose limitation. The central principle is that collecting data for one reason does not automatically justify reusing it later for a more sensitive or unexpected one. This is especially important in health-related contexts, where people may accept data use for navigation or assistance but object to later prediction, profiling, or inference.",
         "source": "UK Information Commissioner's Office",
         "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/purpose-limitation"
-      }
-    },
-    {
-      "id": 21,
-      "category": "Optimisation",
-      "title": "Log decisions for accountability",
-      "question": "Keeping detailed records of the robot’s decisions would help investigate accidents and improve future versions, but storing logs creates extra privacy risk and infrastructure cost. Do you:",
-      "options": {
-        "A": "store minimised, access-controlled logs so harmful incidents can be audited without collecting more data than necessary",
-        "B": "keep logging very limited to reduce privacy exposure, storage costs, and legal complexity"
-      },
-      "effects": {
-        "A": {
-          "life": 1,
-          "coin": -1
-        },
-        "B": {
-          "life": -1,
-          "coin": 0
-        }
-      },
-      "outcomes": {
-        "A": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You created accountability while still treating privacy as something to manage carefully.",
-          "whyItMatters": "Optimisation requires learning from failure. Without auditable records, harmful events become harder to investigate, correct, and prevent."
-        },
-        "B": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You reduced traceability so much that serious incidents would be much harder to examine fairly.",
-          "whyItMatters": "A system that cannot be meaningfully audited protects the company more than the user. Responsible design needs traceability as well as privacy safeguards."
-        }
-      },
-      "realExample": {
-        "title": "NIST trustworthy AI characteristics",
-        "summary": "This dilemma reflects NIST’s emphasis on trustworthy AI as accountable and transparent. In practice, that means there must be enough traceability to reconstruct what happened when something goes wrong. This does not justify unlimited data collection; rather, it supports a middle path in which logs are carefully minimised and controlled but still sufficient to investigate harm. Without that record, incidents become easier to deny and much harder to learn from, leaving users less protected after failures occur.",
-        "source": "National Institute of Standards and Technology",
-        "url": "https://www.nist.gov/ai-research"
-      }
-    },
-    {
-      "id": 22,
-      "category": "Optimisation",
-      "title": "Design beyond ideal homes",
-      "question": "Your analytics show the robot performs best in spacious, well-connected homes with newer infrastructure. Improving performance in smaller or lower-resource households would require redesign and lower your margins. Do you:",
-      "options": {
-        "A": "spend extra resources adapting the robot for more varied living conditions",
-        "B": "market the robot mainly to households where deployment is easiest and most profitable"
-      },
-      "effects": {
-        "A": {
-          "life": 1,
-          "coin": -1
-        },
-        "B": {
-          "life": -1,
-          "coin": 0
-        }
-      },
-      "outcomes": {
-        "A": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You recognised that accessibility includes the environments people actually live in, not only the easiest ones to serve.",
-          "whyItMatters": "Optimisation should not quietly turn assistive technology into a premium product designed only for ideal homes. Inclusive design means confronting inequality in real use conditions."
-        },
-        "B": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You optimised for the most profitable users rather than for the people who may need assistance most.",
-          "whyItMatters": "A system can succeed commercially while still deepening inequity if it is tuned mainly for spacious, connected, higher-income households."
-        }
-      },
-      "realExample": {
-        "title": "Microsoft inclusive design guidance",
-        "summary": "This dilemma reflects Microsoft’s inclusive design philosophy, which argues that products should be built around real human diversity and real-world constraints, not only ideal users in ideal settings. If an assistive robot works well only in spacious, well-connected homes, then the design is implicitly excluding many of the people who may need support most. The commercial temptation is to optimise for the easiest environments; the ethical challenge is to recognise that those environments are not neutral and that accessibility includes the conditions people actually live in.",
-        "source": "Microsoft",
-        "url": "https://inclusive.microsoft.design/"
-      }
-    },
-    {
-      "id": 23,
-      "category": "Optimisation",
-      "title": "Recall a harmful feature",
-      "question": "A new optimisation improves speed, but later you learn it sometimes causes the robot to rush tasks around frail users, increasing the chance of unsafe movement. Removing the feature would require a costly rollback and public explanation. Do you:",
-      "options": {
-        "A": "roll back the feature immediately and explain why safety matters more than speed",
-        "B": "keep the feature because faster performance is popular and the safety issue is statistically rare"
-      },
-      "effects": {
-        "A": {
-          "life": 1,
-          "coin": 0,
-          "turn": -1
-        },
-        "B": {
-          "life": -1,
-          "coin": 0
-        }
-      },
-      "outcomes": {
-        "A": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You treated optimisation as reversible when evidence showed it could harm users.",
-          "whyItMatters": "Not every improvement is truly an improvement. In assistive systems, speed and convenience should not override physical safety for vulnerable users."
-        },
-        "B": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You let popularity and convenience outweigh a preventable risk once the feature was already in users’ hands.",
-          "whyItMatters": "Rare harm can still be serious harm. Ethical teams must be willing to reverse course when real-world evidence shows an optimisation is unsafe."
-        }
-      },
-      "realExample": {
-        "title": "FDA guidance on distinguishing recalls from enhancements",
-        "summary": "This dilemma matches FDA guidance distinguishing ordinary product enhancements from recalls or corrections needed when a marketed feature creates a risk to health. Once real-world evidence shows that a speed optimisation can cause unsafe behaviour, it is no longer just a popular improvement. Ethical teams need to be willing to reverse features that users like when those features prove unsafe for vulnerable people. The lesson is that optimisation should be reversible: a feature is not good simply because it is fast, impressive, or commercially successful.",
-        "source": "U.S. Food and Drug Administration",
-        "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/distinguishing-medical-device-recalls-medical-device-enhancements"
-      }
-    },
-    {
-      "id": 24,
-      "category": "Optimisation",
-      "title": "Explain updates clearly",
-      "question": "You are about to release a major software update that changes how the robot handles reminders, movement assistance, and emergency behaviour. A full explanation would help users adapt, but many companies would simply push the update automatically. Do you:",
-      "options": {
-        "A": "give users and caregivers a clear explanation of what changed, including new limits and risks",
-        "B": "push the update automatically and keep the explanation brief, since most users do not read technical notices anyway"
-      },
-      "effects": {
-        "A": {
-          "life": 1,
-          "coin": 0,
-          "turn": -1
-        },
-        "B": {
-          "life": -1,
-          "coin": 0
-        }
-      },
-      "outcomes": {
-        "A": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You treated communication as part of safety rather than as optional extra documentation.",
-          "whyItMatters": "When an assistive robot changes behaviour, users need a fair chance to understand what to expect so they can adapt routines, supervision, and emergency plans."
-        },
-        "B": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You made important behavioural changes without giving users a meaningful chance to prepare.",
-          "whyItMatters": "Silent or poorly explained updates may be convenient for the company, but they can be dangerous when the system affects movement, reminders, and emergency situations."
-        }
-      },
-      "realExample": {
-        "title": "FDA transparency principles for machine-learning medical devices",
-        "summary": "This dilemma reflects the transparency principles identified by the FDA, Health Canada, and the UK MHRA for machine-learning-enabled medical devices. When a system’s behaviour changes after an update, users and caregivers need more than a silent rollout or a vague notice. Clear explanation is part of safe deployment because it gives people a real chance to adapt their expectations, supervision, and routines before harm occurs. In high-stakes settings, communication is not an optional extra; it is part of the safety system itself.",
-        "source": "U.S. Food and Drug Administration",
-        "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
-      }
-    },
-    {
-      "id": 25,
-      "category": "Optimisation",
-      "title": "Do not nudge dependence",
-      "question": "Your data team proposes an optimisation that would send emotional reminders encouraging users to rely on the robot more often, increasing engagement and subscription revenue. It may also reduce users’ willingness to do tasks independently. Do you:",
-      "options": {
-        "A": "reject manipulative engagement tactics and keep reminders focused on genuine support needs",
-        "B": "use emotionally persuasive reminders to increase engagement and encourage more frequent reliance on the robot"
-      },
-      "effects": {
-        "A": {
-          "life": 1,
-          "coin": -1
-        },
-        "B": {
-          "life": -1,
-          "coin": 0
-        }
-      },
-      "outcomes": {
-        "A": {
-          "feedbackLabel": "Ethical choice",
-          "feedback": "You refused to turn a support technology into a tool for behavioural manipulation.",
-          "whyItMatters": "Assistive systems should strengthen autonomy, not strategically weaken it in order to improve engagement metrics or subscription retention."
-        },
-        "B": {
-          "feedbackLabel": "Unethical shortcut",
-          "feedback": "You optimised engagement in a way that risks making users more dependent than they need to be.",
-          "whyItMatters": "Designing dependence on purpose may lift revenue, but it conflicts with the ethical goal of assistive technology: helping users live with more control, not less."
-        }
-      },
-      "realExample": {
-        "title": "OECD report on dark commercial patterns",
-        "summary": "This dilemma is closely related to the OECD’s discussion of dark commercial patterns, which are interface practices that steer, pressure, or manipulate people into choices that benefit the provider more than the user. In this case, the issue is not whether reminders exist, but what they are designed to do. Once reminders are built primarily to increase emotional reliance and subscription retention rather than to support genuine needs, the robot stops merely assisting and starts shaping behaviour for commercial gain. The ethical concern is that assistive technology should strengthen autonomy, not strategically weaken it.",
-        "source": "OECD",
-        "url": "https://www.oecd.org/digital/dark-commercial-patterns-44f5e846-en.htm"
       }
     }
   ]
