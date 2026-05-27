@@ -25,6 +25,9 @@ export function IntroScreen({
                 {paragraph}
               </p>
             ))}
+            <p className="scroll-text manual-note">
+              Need more details? <a href="/manual.pdf" target="_blank" rel="noopener noreferrer" className="manual-link">Click here for the manual</a>.
+            </p>
           </div>
 
           <div className="intro-actions">

@@ -146,6 +146,22 @@ main {
   color: #5f421e;
 }
 
+.manual-note {
+  margin-top: 12px;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.manual-link {
+  color: #8a5a21;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.manual-link:hover {
+  color: #5f421e;
+}
+
 .subtitle {
   color: #44616f;
   margin-bottom: 22px;

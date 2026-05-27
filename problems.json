@@ -82,7 +82,8 @@
         "title": "Optum algorithm biased against Black patients",
         "summary": "A healthcare risk algorithm used to identify patients needing extra care used healthcare cost as a proxy for healthcare need. Since Black patients historically received less care and had lower healthcare costs than White patients with similar needs, the algorithm underestimated their care needs. The ethical issue began in the scope phase when designers chose 'cost' as the target variable instead of a more direct measure of medical need.",
         "source": "Science News",
-        "url": "https://www.sciencenews.org/article/bias-common-health-care-algorithm-hurts-black-patients"
+        "url": "https://www.sciencenews.org/article/bias-common-health-care-algorithm-hurts-black-patients",
+        "image": "https://www.sciencenews.org/wp-content/uploads/sites/2/2019/10/102319_sg_health-care-algorithm-bias_feat.jpg"
       }
     },
     {
@@ -235,7 +236,8 @@
         "title": "23andMe FDA warning letter",
         "summary": "In 2013, 23andMe received an FDA warning letter for marketing health-related genetic tests without completing the regulatory review process. The issue was that the product was not only giving general information; it could affect people's health decisions.",
         "source": "23andMe Customer Care",
-        "url": "https://customercare.23andme.com/hc/en-us/articles/211831908-23andMe-and-the-FDA"
+        "url": "https://customercare.23andme.com/hc/en-us/articles/211831908-23andMe-and-the-FDA",
+        "image": "https://customercare.23andme.com/hc/theming_assets/01HZPGH0KD47E3F8VXKJP3RR60"
       }
     },
     {
@@ -313,7 +315,8 @@
         "title": "Ring security camera FTC charges",
         "summary": "Ring was charged by the U.S. Federal Trade Commission in 2023 for compromising customer privacy. The FTC said Ring allowed employees and contractors to access private customer videos and failed to implement basic privacy and security protections.",
         "source": "Federal Trade Commission",
-        "url": "https://www.ftc.gov/news-events/news/press-releases/2023/05/ftc-says-ring-employees-illegally-surveilled-customers-failed-stop-hackers-taking-control-users"
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2023/05/ftc-says-ring-employees-illegally-surveilled-customers-failed-stop-hackers-taking-control-users",
+        "image": "https://www.ftc.gov/themes/custom/ftc_uswds/img/ftc_social_share_default_en.jpg"
       }
     },
     {
@@ -427,7 +430,8 @@
         "title": "Amazon Rekognition congressional mugshot matches",
         "summary": "The ACLU tested Amazon's Rekognition using photos of members of Congress and a mugshot database. The test produced 28 incorrect matches, and related documents stated that false matches were disproportionately people of color.",
         "source": "American Civil Liberties Union",
-        "url": "https://www.aclu.org/news/privacy-technology/amazons-face-recognition-falsely-matched-28"
+        "url": "https://www.aclu.org/news/privacy-technology/amazons-face-recognition-falsely-matched-28",
+        "image": "https://assets.aclu.org/live/uploads/2019/09/featured_image.jpg"
       }
     },
     {
@@ -504,7 +508,8 @@
         "title": "Royal Free\u2013DeepMind data sharing case",
         "summary": "Google DeepMind received access to the health records of 1.6 million patients at the Royal Free London NHS Foundation Trust. The UK Information Commissioner's Office later found that the data-sharing arrangement did not comply with data protection law and that patients were not adequately informed.",
         "source": "Information Commissioner's Office",
-        "url": "https://ico.org.uk/for-the-public/ico-40/google-deepmind-and-class-action-lawsuit/"
+        "url": "https://ico.org.uk/for-the-public/ico-40/google-deepmind-and-class-action-lawsuit/",
+        "image": "https://ico.org.uk/media2/da4kz2qp/ico40_medical-records_resized.jpg"
       }
     },
     {
@@ -542,7 +547,8 @@
         "title": "Everalbum facial recognition misuse settlement",
         "summary": "Everalbum, behind the Ever photo app, settled FTC allegations that it misled users about facial recognition and data retention. The FTC required the company to obtain express consent before using facial recognition and to delete certain photos, videos, and algorithms.",
         "source": "Federal Trade Commission",
-        "url": "https://www.ftc.gov/news-events/news/press-releases/2021/05/ftc-finalizes-settlement-photo-app-developer-related-misuse-facial-recognition-technology"
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2021/05/ftc-finalizes-settlement-photo-app-developer-related-misuse-facial-recognition-technology",
+        "image": "https://www.ftc.gov/sites/default/files/ftc_gov/images/ftc_social_share_default_en.jpg"
       }
     }
   ],
@@ -620,7 +626,8 @@
         "title": "FTC action against Kohl's and Walmart bamboo claims",
         "summary": "The FTC alleged the companies falsely marketed rayon textiles as bamboo and as environmentally friendly, even though the manufacturing process involved toxic chemicals and hazardous pollutants.",
         "source": "U.S. Federal Trade Commission",
-        "url": "https://www.ftc.gov/news-events/news/press-releases/2022/04/ftc-uses-penalty-offense-authority-seek-largest-ever-civil-penalty-bogus-bamboo-marketing-kohls"
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2022/04/ftc-uses-penalty-offense-authority-seek-largest-ever-civil-penalty-bogus-bamboo-marketing-kohls",
+        "image": "https://consumer.ftc.gov/themes/custom/cfg_uswds/img/ftc_social_share_default_en.jpg"
       }
     },
     {
@@ -658,7 +665,8 @@
         "title": "Philips sleep apnea machine recall",
         "summary": "The FDA says Philips recalled millions of CPAP and BiPAP devices after foam used inside the machines could break down and create serious health risks, illustrating how material safety shortcuts can trigger major harm and remediation.",
         "source": "U.S. Food and Drug Administration",
-        "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines"
+        "url": "https://www.fda.gov/medical-devices/recalled-philips-ventilators-bipap-machines-and-cpap-machines/recommendations-recalled-philips-ventilators-bipap-machines-and-cpap-machines",
+        "image": "https://www.fda.gov/themes/custom/preview/img/FDA-Social-Graphic.png"
       }
     },
     {
@@ -1353,7 +1361,8 @@
         "title": "UK CMA greenwashing action",
         "summary": "The UK Competition and Markets Authority investigated ASOS, Boohoo, and George at Asda for environmental claims that were too broad or not sufficiently supported by evidence. Once a company knows its evidence does not justify a strong sustainability message, continuing to use it turns environmental language into a sales tool.",
         "source": "UK Competition and Markets Authority",
-        "url": "https://www.gov.uk/government/news/green-claims-cma-secures-landmark-changes-from-asos-boohoo-and-asda"
+        "url": "https://www.gov.uk/government/news/green-claims-cma-secures-landmark-changes-from-asos-boohoo-and-asda",
+        "image": "https://assets.publishing.service.gov.uk/media/6602f67165ca2fa78e7da94e/s300_Press_release_image_-_recycle.jpg"
       }
     },
     {
@@ -1468,7 +1477,9 @@
         "title": "FDA medical device cybersecurity guidance",
         "summary": "FDA guidance emphasizes active monitoring, disclosure, and timely remediation of vulnerabilities in connected medical devices. Once a manufacturer knows outsiders could access sensitive data, delaying the fix shifts real privacy and security risks onto users.",
         "source": "U.S. Food and Drug Administration",
-        "url": "https://www.fda.gov/consumers/consumer-updates/medical-device-cybersecurity-what-you-need-know"
+        "url": "https://www.fda.gov/consumers/consumer-updates/medical-device-cybersecurity-what-you-need-know",
+        "image": "https://www.fda.gov/files/styles/main_image_1/public/Cyber-Security-CU-1600x900_0.jpg?itok=eVEWwbAY"
+      
       }
     },
     {
