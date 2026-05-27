@@ -26,7 +26,7 @@ export function IntroScreen({
               </p>
             ))}
             <p className="scroll-text manual-note">
-              Need more details? <a href="/manual.pdf" target="_blank" rel="noopener noreferrer" className="manual-link">Click here for the manual</a>.
+              Need more details? <a href={`${import.meta.env.BASE_URL}manual.pdf`} target="_blank" rel="noopener noreferrer" className="manual-link">Click here for the manual</a>.
             </p>
           </div>
 
